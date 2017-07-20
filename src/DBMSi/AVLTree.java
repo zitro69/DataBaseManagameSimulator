@@ -4,77 +4,145 @@ package DBMSi;
  * Created by jorti on 20/07/2017.
  */
 public class AVLTree extends TableDataStructure {
-    //TODO: implementar distintos metodos de la clase heredada
-    protected String index;
-
-    public AVLTree(){}
 
     /**
-     * @return El nom de l'índex.
+     * Tabla a la que pertenecen las filas que almacena esta estructura
      */
-    protected String getIndex() {
+    private Table table;
 
-        return index;
+    /**
+     * Cantidad de filas almacenadas en esta estructura de datos
+     */
+    private int size;
+
+    /**
+     * Raíz del árbol AVL
+     */
+    private AVLNode root;
+
+    /**
+     * Tipo de dato de la columna índice de la tabla
+     */
+    private DataType indexType;
+
+    /**
+     * Construye un arbol binario AVL para registros de una tabla
+     */
+    public AVLTree(){
+        this.size = 0;
     }
 
     /**
-     * Estableix el nom del camp pel qual s'organitza l'estructura.
-     *
-     * @param field El nom del camp que serà l'índex.
+     * Metodo que indica a la tabla de hash a qué Tabla de la base de datos pertenece.
+     * Solo podra asignarse una vez.
+     * @param table Tabla a la que pertenece esta estructura de datos
      */
-    protected void setIndex(String field) {
-
-        this.index = field;
+    public void setTable(Table table){
+        this.table = this.table == null? table : this.table;
     }
 
-    /**
-     * Afegeix una nova fila dins de l'estructura utilitzada per una taula.
-     *
-     * @param tableRow La nova fila a afegir.
-     *
-     * @return true si s'ha pogut afegir, false en cas contrari.
-     */
+    @Override
     protected boolean add(TableRow tableRow){
         return true;
     }
 
-    /**
-     * Visualitza el contingut de l'estructura de dades.
-     *
-     * @param restrictions  Restriccions per tal de filtrar files en la visualització.
-     */
+    @Override
     protected void select(TableRowRestriction restrictions){
+
     }
 
-    /**
-     * Permet actualitzar una fila de l'estructura de dades.
-     *
-     * @param field El camp pel qual cercar la fila existent.
-     * @param row   El contingut actualitzat de la fila.
-     *
-     * @return      true si s'ha actualitzat, false si no s'ha trobat el valor previ de la fila en l'estructura.
-     */
+    @Override
     protected boolean update(String field, TableRow row){
         return true;
     }
 
-    /**
-     * Si existeix el valor en l'estructura, en la columna especificada, llavors
-     * elimina la primera coincidència de l'estructura. És a dir, la fila sencera.
-     *
-     * @param field El nom del camp o columna.
-     * @param value El valor que ha de tenir el camp.
-     *
-     * @return true si s'ha pogut eliminar la fila, false en cas contrari.
-     */
+    @Override
     protected boolean remove(String field, Object value){
         return true;
     }
 
-    /**
-     * @return El total d'elements que hi ha guardats en l'estructura.
-     */
+    @Override
     protected long size(){
-        return 10;
+        return this.size;
+    }
+
+    /**
+     * Comprueba si la tabla contiene una fila con el indice especificado
+     * @param index Indice a buscar
+     * @return true si existe
+     */
+    private boolean indexExists(Object index){return false;}
+
+    /**
+     * @param node Nodo AVL
+     * @return altura del nodo arbol
+     */
+    private int height(AVLNode node){
+        return node == null? 0 : node.height;
+    }
+
+    /**
+     * @param node NodoAVL
+     * @return Factor de balance del nodo arbol
+     */
+    private int balanceFactor(AVLNode node){
+        return node == null? 0 : height(node.leftChild)-height(node.rightChild);
+    }
+
+    /**
+     * Realiza una rotacion tipo L
+     * @param root Nodo arbol sobre el que realizar la rotacion
+     * @return arbol rotado
+     */
+    private AVLNode rotateLeft(AVLNode root){
+
+        AVLNode rightChild = root.rightChild,
+                leftChild = rightChild.leftChild;
+
+        rightChild.leftChild = root;
+        root.rightChild = leftChild;
+
+        root.height = Math.max(height(root.leftChild), height(root.rightChild)) + 1;
+        rightChild.height = Math.max(height(rightChild.leftChild), height(rightChild.rightChild)) + 1;
+
+        return rightChild;
+    }
+
+    /**
+     * Realiza una rotacion tipo L
+     * @param root Nodo arbol sobre el que realizar la rotacion
+     * @return arbol rotado
+     */
+    private AVLNode rotateRight(AVLNode root){
+
+        AVLNode leftChild = root.leftChild,
+                rightChild = leftChild.rightChild;
+
+        leftChild.rightChild = root;
+        root.leftChild = rightChild;
+
+        root.height = Math.max(height(root.leftChild), height(root.rightChild)) + 1;
+        leftChild.height = Math.max(height(leftChild.leftChild), height(leftChild.rightChild)) + 1;
+
+        return leftChild;
+    }
+
+    /**
+     * Clase que representa el arbol propiamente dicho
+     */
+    private static class AVLNode{
+        TableRow element;
+
+        AVLNode leftChild;
+        AVLNode rightChild;
+        int height;
+
+        AVLNode(TableRow e){
+            element = e;
+            height = 1;
+
+            leftChild = null;
+            rightChild = null;
+        }
     }
 }
