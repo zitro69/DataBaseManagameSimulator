@@ -44,12 +44,9 @@ public class HashTable extends TableDataStructure {
 
     /**
      * Construye una tabla de hash para registros de una tabla
-     * @param index Nombre de la columna indice
-     * @param indexType Tipo de la columna indice
+     * @param hashVersion Version de funcion de hash a utilizar
      */
-    public HashTable(String index, DataType indexType, int hashVersion){
-        this.index = index;
-        this.indexType = indexType;
+    public HashTable(int hashVersion){
         this.hashVersion = hashVersion;
 
         rows = new ArrayList<>(INITIAL_CAPACITY);
@@ -103,6 +100,13 @@ public class HashTable extends TableDataStructure {
     @Override
     protected void select(TableRowRestriction restrictions) {
 
+        for(TableRow row : rows){
+            if(restrictions.test(row)){
+                System.out.println(row.toString());
+            }
+        }
+
+
     }
 
     @Override
@@ -154,14 +158,16 @@ public class HashTable extends TableDataStructure {
                 return true;
             }
         }else{
-            for(int i = 0; i< capacity; i++){
+            int position;
+            for(TableRow e : rows){
 
-                if(rows.get(i) == null) continue;
+                if(e.getContent().get(field).equals(row.getContent().get(field))){
+                    position = rows.indexOf(e);
+                    if(updates.get(position).oldData == null)
+                        updates.get(position).oldData = new ArrayList<>();
 
-                if(rows.get(i).getContent().get(field).equals(row.getContent().get(field))){
-                    if(updates.get(i).oldData == null) updates.get(i).oldData = new ArrayList<>();
-                    updates.get(i).oldData.add(rows.get(i));
-                    rows.set(i, row);
+                    updates.get(position).oldData.add(e);
+                    rows.set(position, row);
                     return true;
                 }
 
@@ -218,12 +224,10 @@ public class HashTable extends TableDataStructure {
             }
 
         }else{ // La columna field no es el indice de la tabla
-            for(int i = 0; i< capacity; i++){
+            for(TableRow row : rows){
 
-                if(rows.get(i) == null) continue;
-
-                if(rows.get(i).getContent().get(field).equals(value)){
-                    rows.set(i, null);
+                if(row.getContent().get(field).equals(value)){
+                    rows.set(rows.indexOf(row), null);
                     return true;
                 }
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59ae71c4-5479-4cdd-a26f-fe9e90410e49" name="Default" comment="Se ha creado las clases: Menu, Screen, DataBaseMagamentSimulator">
+    <list default="true" id="59ae71c4-5479-4cdd-a26f-fe9e90410e49" name="Default" comment="Update de Tabla de Hash terminado">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBMSi/HashTable.java" afterPath="$PROJECT_DIR$/src/DBMSi/HashTable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBMSi/Table.java" afterPath="$PROJECT_DIR$/src/DBMSi/Table.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,27 +43,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HashTable.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HashTable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DBMSi/HashTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="174" column="57" lean-forward="false" selection-start-line="174" selection-start-column="57" selection-end-line="174" selection-end-column="57" />
+            <state relative-caret-position="345">
+              <caret line="104" column="49" lean-forward="false" selection-start-line="104" selection-start-column="49" selection-end-line="104" selection-end-column="49" />
               <folding>
+                <element signature="method#HashTable#0;class#HashTable#0" expanded="false" />
                 <element signature="method#add#0;class#HashTable#0" expanded="false" />
                 <element signature="method#update#0;class#HashTable#0" expanded="false" />
                 <element signature="method#remove#0;class#HashTable#0" expanded="false" />
                 <element signature="method#hashi#0;class#HashTable#0" expanded="false" />
                 <element signature="method#hashi#1;class#HashTable#0" expanded="false" />
+                <element signature="method#hashi1#1;class#HashTable#0" expanded="false" />
+                <element signature="method#hashi2#1;class#HashTable#0" expanded="false" />
+                <element signature="method#checkCapacity#0;class#HashTable#0" expanded="false" />
+                <element signature="class#UpdateNode#0;class#HashTable#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Table.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TableRowRestriction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DBMSi/TableRowRestriction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1188">
+              <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Table.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DBMSi/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1566">
-              <caret line="183" column="16" lean-forward="false" selection-start-line="183" selection-start-column="16" selection-end-line="183" selection-end-column="16" />
+            <state relative-caret-position="378">
+              <caret line="218" column="8" lean-forward="false" selection-start-line="218" selection-start-column="8" selection-end-line="218" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -71,8 +87,8 @@
       <file leaf-file-name="TableRow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DBMSi/TableRow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="193">
+              <caret line="133" column="60" lean-forward="false" selection-start-line="133" selection-start-column="60" selection-end-line="133" selection-end-column="60" />
               <folding>
                 <element signature="e#1123#1124#0" expanded="true" />
                 <element signature="e#1165#1166#0" expanded="true" />
@@ -114,6 +130,7 @@
         <option value="$PROJECT_DIR$/src/DataBaseManagamentSimulator.java" />
         <option value="$PROJECT_DIR$/src/Menu/Screen.java" />
         <option value="$PROJECT_DIR$/src/DBMSi/HashTable.java" />
+        <option value="$PROJECT_DIR$/src/DBMSi/Table.java" />
       </list>
     </option>
   </component>
@@ -773,7 +790,7 @@
       <workItem from="1500455570979" duration="110000" />
       <workItem from="1500456130903" duration="2372000" />
       <workItem from="1500535364158" duration="102000" />
-      <workItem from="1500535988567" duration="12042000" />
+      <workItem from="1500535988567" duration="14891000" />
     </task>
     <task id="LOCAL-00001" summary="Tabla de Hash: funciones `add`, `remove` y `size` implementadas.">
       <created>1500544517271</created>
@@ -782,11 +799,25 @@
       <option name="project" value="LOCAL" />
       <updated>1500544517271</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update de Tabla de Hash terminado">
+      <created>1500548370597</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1500548370597</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Funciones de hash implementadas">
+      <created>1500550045957</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1500550045957</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14626000" />
+    <option name="totallyTimeSpent" value="17475000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -831,7 +862,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Tabla de Hash: funciones `add`, `remove` y `size` implementadas." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tabla de Hash: funciones `add`, `remove` y `size` implementadas." />
+    <MESSAGE value="Update de Tabla de Hash terminado" />
+    <MESSAGE value="Funciones de hash implementadas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Funciones de hash implementadas" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -929,14 +962,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DBMSi/TableRowRestriction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1171">
-          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Menu/Screen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -961,17 +986,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DBMSi/TableRow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding>
-            <element signature="e#1123#1124#0" expanded="true" />
-            <element signature="e#1165#1166#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -984,14 +998,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-66">
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DBMSi/Table.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1566">
-          <caret line="183" column="16" lean-forward="false" selection-start-line="183" selection-start-column="16" selection-end-line="183" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1015,17 +1021,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/DBMSi/TableRowRestriction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1188">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/DBMSi/HashTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="174" column="57" lean-forward="false" selection-start-line="174" selection-start-column="57" selection-end-line="174" selection-end-column="57" />
+        <state relative-caret-position="345">
+          <caret line="104" column="49" lean-forward="false" selection-start-line="104" selection-start-column="49" selection-end-line="104" selection-end-column="49" />
           <folding>
+            <element signature="method#HashTable#0;class#HashTable#0" expanded="false" />
             <element signature="method#add#0;class#HashTable#0" expanded="false" />
             <element signature="method#update#0;class#HashTable#0" expanded="false" />
             <element signature="method#remove#0;class#HashTable#0" expanded="false" />
             <element signature="method#hashi#0;class#HashTable#0" expanded="false" />
             <element signature="method#hashi#1;class#HashTable#0" expanded="false" />
+            <element signature="method#hashi1#1;class#HashTable#0" expanded="false" />
+            <element signature="method#hashi2#1;class#HashTable#0" expanded="false" />
+            <element signature="method#checkCapacity#0;class#HashTable#0" expanded="false" />
+            <element signature="class#UpdateNode#0;class#HashTable#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DBMSi/TableRow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="133" column="60" lean-forward="false" selection-start-line="133" selection-start-column="60" selection-end-line="133" selection-end-column="60" />
+          <folding>
+            <element signature="e#1123#1124#0" expanded="true" />
+            <element signature="e#1165#1166#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DBMSi/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="218" column="8" lean-forward="false" selection-start-line="218" selection-start-column="8" selection-end-line="218" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>

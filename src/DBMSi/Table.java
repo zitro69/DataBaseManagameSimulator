@@ -217,7 +217,6 @@ public class Table {
     @Override
     public String toString() {
 
-        // TODO: Per l'alumne
         return "";
     }
 
