@@ -37,7 +37,8 @@ public class DataBaseManagamentSimulator {
             }
             sc.nextLine();
             switch (value){
-                case 1: //Creacion de las tablas
+                case 1:
+                    dbmsi.add(menu.createTable(dbmsi));
                     break;
                 case 2: //Tratar las Tablas
                     break;

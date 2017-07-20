@@ -46,7 +46,6 @@ public class TableRow {
      * @param value     El seu valor associat.
      */
     public void addColumn(String column, Object value) {
-
         content.put(column, value);
     }
 
