@@ -271,8 +271,7 @@ public class HashTable extends TableDataStructure {
      * @return posicion en el vector
      */
     private int hashi1(int key, int i){
-
-        return 0;
+        return (key + (int)Math.pow(i, 2))%capacity;
     }
 
     /**
@@ -282,8 +281,7 @@ public class HashTable extends TableDataStructure {
      * @return posicion en el vector
      */
     private int hashi2(int key, int i){
-
-        return 0;
+        return (key +(i*(8681-(key/8681))))%capacity;
     }
 
     /**
@@ -293,8 +291,12 @@ public class HashTable extends TableDataStructure {
      * @return posicion en el vector
      */
     private int hashi1(String key, int i){
+        int hash = 0;
 
-        return 0;
+        for(int j = 0; 2-j >= 0; j++)
+            hash += (int)key.charAt(j) * Math.pow(27, 2-j);
+
+        return (hash * (int)Math.pow(i, 2))%capacity;
     }
 
     /**
@@ -304,8 +306,12 @@ public class HashTable extends TableDataStructure {
      * @return posicion en el vector
      */
     private int hashi2(String key, int i){
+        int hash = 0;
 
-        return 0;
+        for(int j = 0; 2-j >= 0; j++)
+            hash += (int)key.charAt(j) * Math.pow(27, 2-j);
+
+        return (hash +(i*(8681-(hash/8681))))%capacity;
     }
 
     /**
