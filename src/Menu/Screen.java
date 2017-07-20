@@ -17,6 +17,7 @@ public interface Screen {
         System.out.println("\t3. Visualize tables");
         System.out.println("\t4. Visualize historical data");
         System.out.println("\t5. Shut down");
+        System.out.print("Select an option: ");
     }
 
     /**

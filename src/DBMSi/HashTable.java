@@ -28,6 +28,11 @@ public class HashTable extends TableDataStructure {
     private int capacity;
 
     /**
+     * Numero de filas almacenadas en la tabla
+     */
+    private int size;
+
+    /**
      * Version de la funcion de hash a utilizar
      */
     private int hashVersion;
@@ -54,6 +59,7 @@ public class HashTable extends TableDataStructure {
      */
     public HashTable(int hashVersion){
         this.hashVersion = hashVersion;
+        this.size = 0;
 
         rows = new ArrayList<>(INITIAL_CAPACITY);
         updates = new ArrayList<>(INITIAL_CAPACITY);
@@ -82,6 +88,14 @@ public class HashTable extends TableDataStructure {
             indexType = table.getColumnType(index);
         }
 
+        // Comprobacion de que el indice no exista ya en la tabla
+        if(indexExists(tableRow.getContent().get(index))){
+            System.err.println("No se puede inserir. Ya existe una fila con el indice "+tableRow.getContent().get(index).toString());
+            return false;
+        }
+
+
+        // Insercion de la fila en la tabla
         if(indexType == DataType.INT){
             int key = (int) tableRow.getContent().get(index);
             int position = hashi(hashVersion, key, i);
@@ -118,6 +132,7 @@ public class HashTable extends TableDataStructure {
             return false;
         }
 
+        size++;
         return true;
     }
 
@@ -138,8 +153,8 @@ public class HashTable extends TableDataStructure {
     @Override
     protected boolean update(String field, TableRow row) {
 
-        if(rows.size() == 0){
-            System.err.println("Tabla vacía. No puede actualizarse.");
+        if(size == 0){
+            System.err.println("Tabla \""+table.getName()+"\" vacía. No puede actualizarse ninguna fila.");
             return false;
         }
 
@@ -225,8 +240,8 @@ public class HashTable extends TableDataStructure {
     @Override
     protected boolean remove(String field, Object value) {
 
-        if(rows.size() == 0){
-            System.err.println("Tabla vacía. No puede eliminarse ningun elemento.");
+        if(size == 0){
+            System.err.println("Tabla \""+table.getName()+"\" vacía. No puede eliminarse ningun elemento.");
             return false;
         }
 
@@ -251,6 +266,7 @@ public class HashTable extends TableDataStructure {
                 }
 
                 rows.set(position, null);
+                size--;
                 return true;
             }else{
 
@@ -266,11 +282,12 @@ public class HashTable extends TableDataStructure {
                     }
                 }
 
-                if(i == capacity-1 && rows.get(position).getContent().get(field).equals(value)) {
+                if(i == capacity-1 && !rows.get(position).getContent().get(field).equals(value)) {
                     return false;
                 }
 
                 rows.set(position, null);
+                size--;
                 return true;
             }
 
@@ -281,6 +298,7 @@ public class HashTable extends TableDataStructure {
 
                 if(row.getContent().get(field).equals(value)){
                     rows.set(rows.indexOf(row), null);
+                    size--;
                     return true;
                 }
 
@@ -292,7 +310,25 @@ public class HashTable extends TableDataStructure {
 
     @Override
     protected long size() {
-        return rows.size();
+        return size;
+    }
+
+    /**
+     * Comprueba si la tabla contiene una fila con el indice especificado
+     * @param index Indice a buscar
+     * @return true si existe
+     */
+    private boolean indexExists(Object index){
+        TableRowRestriction restriction = new TableRowRestriction();
+        restriction.addRestriction(this.index, index, TableRowRestriction.RESTRICTION_EQUALS);
+
+        for(TableRow row : rows){
+            if(row != null && restriction.test(row)){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -414,18 +450,17 @@ public class HashTable extends TableDataStructure {
         people.addColumn("name", DataType.TEXT);
         people.addColumn("online", DataType.BOOLEAN);
 
+
         TableRow row = new TableRow();
         row.addColumn("id", 123);
         row.addColumn("name", "alex");
         row.addColumn("online", true);
 
         people.setIndex("id");
-        if(!people.addRow(row)) System.out.println("No se añade");
+        people.addRow(row);
+        people.addRow(row);
 
         people.selectRows(null);
 
-
-        people.removeRow(123);
-        people.selectRows(null);
     }
 }
