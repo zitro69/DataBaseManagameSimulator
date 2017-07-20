@@ -85,4 +85,15 @@ public interface Screen {
     static void tablesStorage() {
         System.out.println("We have the next tables in the storage:");
     }
+
+    static void managementOptions() {
+        System.out.println("\t1. Insert");
+        System.out.println("\t2. Show row by index");
+        System.out.println("\t3. Select");
+        System.out.println("\t4. Update row");
+        System.out.println("\t5. Remove row by index");
+        System.out.println("\t6. Import from .csv");
+        System.out.println("\t7. Export to .csv");
+        System.out.println("\t8. Main menu.");
+    }
 }

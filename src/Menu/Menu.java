@@ -176,13 +176,46 @@ public class Menu {
     }
 
         //Funciones necesaria para la opcion manage table
+
     public void manageTable(ArrayList<Table> dbmsi) {
-        //Selecionar la tabla con que trabajar
+        //Selecionar la tabla con la que se trabajara
         Table table;
         if (listTables(dbmsi)){
             Screen.tableToWork();
             while ((table = checkTables(sc.nextLine(), dbmsi)) == null){
                 Screen.tableToWork();
+            }
+            //Mostramos el menú del manage table
+            int option = 0;
+            while (option != 8){
+                Screen.managementOptions();
+                try {
+                    option = sc.nextInt();
+                } catch (InputMismatchException ime){
+                    option = 0;
+                }
+                switch (option){
+                    case 1: //Insert
+                        if (!insert(table)) Screen.error("Can't insert the value in the table");
+                        break;
+                    case 2: //Show row by index
+                        break;
+                    case 3: //Select
+                        break;
+                    case 4: //Update row
+                        break;
+                    case 5: //Remove row by index
+                        break;
+                    case 6: //Import from csv
+                        break;
+                    case 7: //export to csv
+                        break;
+                    case 8: //Main menu
+                        break;
+                    default:
+                        Screen.error("Not valid option.");
+                        break;
+                }
             }
         }
     }
@@ -232,4 +265,18 @@ public class Menu {
     }
 
 
+    private boolean insert (Table t){
+        TableRow tr = new TableRow();
+        setInfo(t, tr);
+        return t.addRow(tr);
+    }
+
+
+    public void setInfo(Table t, TableRow tr) {
+        for (int i = 0; i < t.getColumnNames().size(); i++){
+            tr.addColumn(t.getColumnNames().get(i), DatabaseInput.readColumnValue(t.getColumnType(
+                    t.getColumnNames().get(i)), t.getColumnNames().get(i)
+            ));
+        }
+    }
 }
