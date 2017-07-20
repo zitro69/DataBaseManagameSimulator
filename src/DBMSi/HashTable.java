@@ -1,6 +1,7 @@
 package DBMSi;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Tabla de hash de redispersion que implementa el almacenamiento de
@@ -9,6 +10,11 @@ import java.util.ArrayList;
  *
  */
 public class HashTable extends TableDataStructure {
+
+    /**
+     * Tabla a la que pertenecen las filas almacenadas por esta tabla de hash
+     */
+    private Table table;
 
     /**
      * Capacidad inicial de almacenamiento de la tabla
@@ -51,12 +57,30 @@ public class HashTable extends TableDataStructure {
 
         rows = new ArrayList<>(INITIAL_CAPACITY);
         updates = new ArrayList<>(INITIAL_CAPACITY);
+        for(int i = 0; i < INITIAL_CAPACITY; i++){
+            rows.add(i, null);
+            updates.add(i, null);
+        }
+
         capacity = INITIAL_CAPACITY;
+    }
+
+    /**
+     * Metodo que indica a la tabla de hash a qué Tabla de la base de datos pertenece.
+     * Solo podra asignarse una vez.
+     * @param table Tabla a la que pertenece esta estructura de datos
+     */
+    public void setTable(Table table){
+        this.table = this.table == null? table : this.table;
     }
 
     @Override
     protected boolean add(TableRow tableRow) {
         int i = 0;
+
+        if(indexType == null){
+            indexType = table.getColumnType(index);
+        }
 
         if(indexType == DataType.INT){
             int key = (int) tableRow.getContent().get(index);
@@ -100,8 +124,10 @@ public class HashTable extends TableDataStructure {
     @Override
     protected void select(TableRowRestriction restrictions) {
 
+        System.out.println(table.toString());
+
         for(TableRow row : rows){
-            if(restrictions.test(row)){
+            if(row != null && (restrictions == null || restrictions.test(row))){
                 System.out.println(row.toString());
             }
         }
@@ -112,47 +138,61 @@ public class HashTable extends TableDataStructure {
     @Override
     protected boolean update(String field, TableRow row) {
 
+        if(rows.size() == 0){
+            System.err.println("Tabla vacía. No puede actualizarse.");
+            return false;
+        }
+
         if(field.equals(index)){
-            int i = 0;
+            int i;
             if(indexType == DataType.INT){
                 int key = (int) row.getContent().get(field);
-                int position = hashi(hashVersion, key, i);
-                if(position == -1) return false;
-                while(rows.get(position).getContent().get(field) != row.getContent().get(field)
-                        && i < capacity){
-                    i++;
+                int position = -1;
+
+                for(i = 0; i < capacity; i++){
                     position = hashi(hashVersion, key, i);
                     if(position == -1) return false;
+                    if(rows.get(position) == null) continue;
+                    if(rows.get(position).getContent().get(field) == row.getContent().get(field)){
+                        break;
+                    }
                 }
 
-                if(i == capacity-1
-                        && rows.get(position).getContent().get(field) != row.getContent().get(field)) {
+                if(i == capacity-1 && rows.get(position).getContent().get(field) != row.getContent().get(field)) {
                     return false;
                 }
 
-                if(updates.get(position).oldData == null) updates.get(position).oldData = new ArrayList<>();
+                if(updates.get(position) == null) {
+                    updates.set(position, new UpdateNode());
+                    updates.get(position).oldData = new ArrayList<>();
+                }
+
                 updates.get(position).oldData.add(rows.get(position));
                 rows.set(position, row);
                 return true;
             }else{
 
                 String key = (String) row.getContent().get(field);
-                int position = hashi(hashVersion, key, i);
-                if(position == -1) return false;
-                while(!rows.get(position).getContent().get(field).equals(row.getContent().get(field))
-                        && i < capacity){
-                    i++;
+                int position = -1;
+
+                for(i = 0; i < capacity; i++){
                     position = hashi(hashVersion, key, i);
                     if(position == -1) return false;
+                    if(rows.get(position) == null) continue;
+                    if(rows.get(position).getContent().get(field).equals(row.getContent().get(field))){
+                        break;
+                    }
                 }
 
-                if(i == capacity-1
-                        && !rows.get(position)
-                        .getContent().get(field).equals(row.getContent().get(field))) {
+                if(i == capacity-1 && !rows.get(position).getContent().get(field).equals(row.getContent().get(field))) {
                     return false;
                 }
 
-                if(updates.get(position).oldData == null) updates.get(position).oldData = new ArrayList<>();
+                if(updates.get(position) == null) {
+                    updates.set(position, new UpdateNode());
+                    updates.get(position).oldData = new ArrayList<>();
+                }
+
                 updates.get(position).oldData.add(rows.get(position));
                 rows.set(position, row);
                 return true;
@@ -161,10 +201,15 @@ public class HashTable extends TableDataStructure {
             int position;
             for(TableRow e : rows){
 
+                if(e == null) continue;
+
                 if(e.getContent().get(field).equals(row.getContent().get(field))){
                     position = rows.indexOf(e);
-                    if(updates.get(position).oldData == null)
+
+                    if(updates.get(position) == null) {
+                        updates.set(position, new UpdateNode());
                         updates.get(position).oldData = new ArrayList<>();
+                    }
 
                     updates.get(position).oldData.add(e);
                     rows.set(position, row);
@@ -180,22 +225,28 @@ public class HashTable extends TableDataStructure {
     @Override
     protected boolean remove(String field, Object value) {
 
+        if(rows.size() == 0){
+            System.err.println("Tabla vacía. No puede eliminarse ningun elemento.");
+            return false;
+        }
+
         if(field.equals(index)){ //Columna field es el indice de la tabla
-            int i = 0;
+            int i;
+
             if(indexType == DataType.INT){
                 int key = (int) value;
-                int position = hashi(hashVersion, key, i);
-                if(position == -1) return false;
-                while(rows.get(position).getContent().get(field) != value
-                        && i < capacity){
-                    i++;
+                int position = -1;
+
+                for(i = 0; i < capacity; i++){
                     position = hashi(hashVersion, key, i);
                     if(position == -1) return false;
+                    if(rows.get(position) == null) continue;
+                    if(rows.get(position).getContent().get(field) == value){
+                        break;
+                    }
                 }
 
-                if(i == capacity-1
-                        && rows.get(position)
-                            .getContent().get(field) != value) {
+                if(i == capacity-1 && rows.get(position).getContent().get(field) != value) {
                     return false;
                 }
 
@@ -204,18 +255,18 @@ public class HashTable extends TableDataStructure {
             }else{
 
                 String key = (String) value;
-                int position = hashi(hashVersion, key, i);
-                if(position == -1) return false;
-                while(!rows.get(position).getContent().get(field).equals(value)
-                        && i < capacity){
-                    i++;
+                int position = -1;
+
+                for(i = 0; i < capacity; i++){
                     position = hashi(hashVersion, key, i);
                     if(position == -1) return false;
+                    if(rows.get(position) == null) continue;
+                    if(rows.get(position).getContent().get(field).equals(value)){
+                        break;
+                    }
                 }
 
-                if(i == capacity-1
-                        && rows.get(position)
-                        .getContent().get(field).equals(value)) {
+                if(i == capacity-1 && rows.get(position).getContent().get(field).equals(value)) {
                     return false;
                 }
 
@@ -225,6 +276,8 @@ public class HashTable extends TableDataStructure {
 
         }else{ // La columna field no es el indice de la tabla
             for(TableRow row : rows){
+
+                if(row == null) continue;
 
                 if(row.getContent().get(field).equals(value)){
                     rows.set(rows.indexOf(row), null);
@@ -323,21 +376,56 @@ public class HashTable extends TableDataStructure {
      * y redimensiona el vector en caso de ser necesario
      */
     private void checkCapacity(){
-        if(rows.size()/capacity > 0.6){
-            ArrayList<TableRow> auxRows = new ArrayList<>(capacity+8693);
-            ArrayList<UpdateNode> auxUpdates = new ArrayList<>(capacity+8693);
+        int qRows = 0;
+
+        for(int i = 0; i < rows.size(); i++)
+            qRows += rows.get(i) != null ? 1 : 0;
+
+        if(qRows/capacity > 0.6){
+            int newCapacity = capacity+8693;
+            ArrayList<TableRow> auxRows = new ArrayList<>(newCapacity);
+            ArrayList<UpdateNode> auxUpdates = new ArrayList<>(newCapacity);
 
             for(int i = 0; i < capacity; i++){
                 auxRows.set(i, rows.get(i));
                 auxUpdates.set(i, updates.get(i));
             }
+            for(int i = capacity; i < newCapacity; i++){
+                auxRows.add(i, null);
+                auxUpdates.add(i, null);
+            }
 
             rows = auxRows;
             updates = auxUpdates;
+            capacity = newCapacity;
         }
     }
 
     private static class UpdateNode{
         ArrayList<TableRow> oldData;
+    }
+
+    public static void main(String[] args) {
+        HashTable htable = new HashTable(1);
+        Table people = new Table("People", htable);
+        htable.setTable(people);
+
+        people.addColumn("id", DataType.INT);
+        people.addColumn("name", DataType.TEXT);
+        people.addColumn("online", DataType.BOOLEAN);
+
+        TableRow row = new TableRow();
+        row.addColumn("id", 123);
+        row.addColumn("name", "alex");
+        row.addColumn("online", true);
+
+        people.setIndex("id");
+        if(!people.addRow(row)) System.out.println("No se añade");
+
+        people.selectRows(null);
+
+
+        people.removeRow(123);
+        people.selectRows(null);
     }
 }

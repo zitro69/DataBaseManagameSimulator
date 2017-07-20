@@ -216,8 +216,25 @@ public class Table {
 
     @Override
     public String toString() {
+        String barraGuiones = new String(new char[46]).replace("\0", "-");
+        StringBuilder sb = new StringBuilder(barraGuiones);
+        sb.append("\n");
 
-        return "";
+        for (Map.Entry<String, Object> entry : columns.entrySet()) {
+
+            Object key = entry.getKey();
+            Object value = entry.getValue();
+
+            if (value == DataType.TEXT)
+                sb.append(String.format("%-20s ", key));
+
+            else sb.append(String.format("%-10s ", key));
+        }
+
+        sb.append("\n");
+        sb.append(barraGuiones);
+
+        return sb.toString();
     }
 
 }
