@@ -21,12 +21,22 @@ public interface Screen {
 
     /**
      * Remarca un error.
-     * @param s     Error a mostrar por pantalla.
+     * @param s     Error a mostrar por pantalla
      */
     static void error (String s){
         s = s.toUpperCase();
-        System.out.println("Error: " + s + ".");
+        System.out.println("Error: " + s);
     }
+
+    /**
+     * Muestra una string por pantalla.
+     * @param s     String a mostrar
+     */
+    static void string(String s) {
+        System.out.println(s);
+    }
+
+    //Funciones que muestra cosas por pantalla
 
     static void name() {
         System.out.println("Enter name for the table: ");
@@ -36,7 +46,8 @@ public interface Screen {
         System.out.println("Select a data structure for the table:");
         System.out.println("\t1. 2-3 tree");
         System.out.println("\t2. AVL tree");
-        System.out.println("\t3. Hash table");
+        System.out.println("\t3. Hash table I");
+        System.out.println("\t4. Hash table II");
     }
 
     static void newColumn (){
@@ -61,5 +72,17 @@ public interface Screen {
 
     static void selectIndex (){
         System.out.println("Select a column from the list to use it as index:");
+    }
+
+    static void tableToWork() {
+        System.out.println("What table do you want to work?");
+    }
+
+    static void notTableStorage() {
+        System.out.println("Not tables in the storage.");
+    }
+
+    static void tablesStorage() {
+        System.out.println("We have the next tables in the storage:");
     }
 }

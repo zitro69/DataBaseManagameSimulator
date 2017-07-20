@@ -24,7 +24,8 @@ public class DataBaseManagamentSimulator {
     //Funciones
 
     /**
-     * Inicializa el programa. Carga el menú principal.
+     * Inicializa el programa. Genera el menú principal y llama a las funciones utiles.
+     *
      */
     public void init (){
         int value = 0;
@@ -37,10 +38,11 @@ public class DataBaseManagamentSimulator {
             }
             sc.nextLine();
             switch (value){
-                case 1:
+                case 1: //Creacion de las Tablas
                     dbmsi.add(menu.createTable(dbmsi));
                     break;
                 case 2: //Tratar las Tablas
+                    menu.manageTable(dbmsi);
                     break;
                 case 3: //Visualizar Tablas
                     break;

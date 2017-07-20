@@ -3,6 +3,7 @@ package Menu;
 import DBMSi.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,10 +12,16 @@ import java.util.Scanner;
  * Trata la información.
  */
 public class Menu {
+    private Scanner sc;
 
     //Constructor
-    public Menu (){}
+    public Menu (){
+        sc = new Scanner (System.in);
+    }
 
+    //Funciones
+
+        //Funciones necesaria para la opcion create table
     /**
      * Crea una tabla, comprobando todas las restricciones impuestas. No se deben repetir nombres entre distintas
      * tablas, y debe crearse un indice válido (debe ser formato INT o TEXT).
@@ -22,7 +29,6 @@ public class Menu {
      * @return          La table creada.
      */
     public Table createTable(ArrayList<Table> dbmsi) {
-        Scanner sc = new Scanner(System.in);
         TableDataStructure tds = null;
         String nom = null;
         //Introducción del nombre
@@ -32,7 +38,7 @@ public class Menu {
         }
         //Introducción de daatos en la estructura
         int value = 0;
-        while (value <= 1 || value >= 3){
+        while (value < 1 || value > 3){
             Screen.structureOptions();
             try {
                 value = sc.nextInt();
@@ -49,8 +55,12 @@ public class Menu {
             case 2:
                 tds = new AVLTree();
                 break;
-            case 3:
+            case 3://HASH_1
                 //TODO: clase de tabla de hash
+                break;
+            case 4://HASH_2
+                //TODO: constructor tabla segundo hash
+                break;
         }
         //Creación de la tabla
         Table t = new Table (nom, tds);
@@ -65,7 +75,7 @@ public class Menu {
             yn = sc.nextLine();
             yn = yn.toLowerCase();
             if (yn.equals("y")){
-                newColumn(t, indexs, names);
+                newColumn(t, names, indexs);
             } else if (yn.equals("n")){
                 finish = true;
             } else {
@@ -74,6 +84,7 @@ public class Menu {
         }
         //Selección del index
         selectIndex(t, indexs, names);
+
         Screen.newTable(t);
 
         return t;
@@ -87,7 +98,6 @@ public class Menu {
      * @param indexs    Array donde se guardan los indicenes.
      */
     private void newColumn(Table t, ArrayList<String> names, ArrayList<String> indexs) {
-        Scanner sc = new Scanner (System.in);
         boolean correct = false;
         String name = "";
         while (!correct) {
@@ -112,6 +122,7 @@ public class Menu {
         }
         t.addColumn(name, DataType.toDataType(datatype));
         if (DataType.toDataType(datatype) == DataType.INT || DataType.toDataType(datatype) == DataType.TEXT){
+            System.out.println("added");
             indexs.add(name);
         }
     }
@@ -150,7 +161,7 @@ public class Menu {
             } else {
                 Screen.selectIndex();
                 for (int i = 0; i < indexs.size(); i++) {
-                    System.out.println(indexs.get(i));
+                    Screen.string(indexs.get(i));
                 }
                 String column = DatabaseInput.readIndexColumnName();
                 for (int i = 0; i < indexs.size(); i++) {
@@ -163,4 +174,62 @@ public class Menu {
             }
         }
     }
+
+        //Funciones necesaria para la opcion manage table
+    public void manageTable(ArrayList<Table> dbmsi) {
+        //Selecionar la tabla con que trabajar
+        Table table;
+        if (listTables(dbmsi)){
+            Screen.tableToWork();
+            while ((table = checkTables(sc.nextLine(), dbmsi)) == null){
+                Screen.tableToWork();
+            }
+        }
+    }
+
+    /**
+     * Lista las tablas con las que se podría trabajar.
+     * @param dbmsi     ArrayList con todas las tablas
+     * @return          true: si exiten tablas
+     *                  false: si no exiten tablas
+     */
+    private boolean listTables(ArrayList<Table> dbmsi) {
+        //Ordena la tabla por orden alfabetico
+        Collections.sort(dbmsi, (Table t1, Table t2) -> {
+            char a = Character.toLowerCase(t1.getName().charAt(0));
+            char b = Character.toLowerCase(t2.getName().charAt(0));
+            return a-b;
+        });
+        if (dbmsi.size() == 0){
+            Screen.notTableStorage();
+            return false;
+        } else {
+            Screen.tablesStorage();
+            for (int i = 0; i < dbmsi.size(); i++){
+                Screen.string("\t" + dbmsi.get(i).getName());
+            }
+            return true;
+        }
+    }
+
+    /**
+     * Comprueba si la tabla existe en la base de datos.
+     * @param name      Nombre de la tabla a comprobar.
+     * @param dbmsi     ArrayList con todas las tablas.
+     * @return          Tabla con el nombre introduccido. Si la tabla no existe en la base de datos devuelve un NULL.
+     */
+    private Table checkTables (String name, ArrayList<Table> dbmsi){
+        Table t = null;
+        for (int i = 0;i < dbmsi.size(); i++){
+            if (name.equals(dbmsi.get(i).getName())) t = dbmsi.get(i);
+        }
+        if (t == null){
+           Screen.error("The table doesn't exist.");
+            return null;
+        } else {
+            return t;
+        }
+    }
+
+
 }
