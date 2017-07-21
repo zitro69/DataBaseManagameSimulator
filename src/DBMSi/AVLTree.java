@@ -58,10 +58,35 @@ public class AVLTree extends TableDataStructure {
     @Override
     protected void select(TableRowRestriction restrictions){
 
+        System.out.println(table.toString());
+
+        selectPreorder(root, restrictions);
+
     }
 
     @Override
     protected boolean update(String field, TableRow row){
+
+        if(size == 0){
+            System.err.println("Tabla \""+table.getName()+"\" vacía. No puede actualizarse ninguna fila.");
+            return false;
+        }
+
+        AVLNode aux;
+
+        if(field.equals(index)){
+            aux = searchNodeByIndex(root, row.getContent().get(index));
+
+        }else{
+            aux = searchNode(root, field, row.getContent().get(field));
+        }
+
+        if(aux == null){
+            return false;
+        }
+
+        aux.element = row;
+        aux.indexKey = row.getContent().get(index);
         return true;
     }
 
@@ -145,6 +170,24 @@ public class AVLTree extends TableDataStructure {
         }
 
         return balanceTree(root, index);
+    }
+
+    /**
+     * Muestra la seleccion de todas aquellas filas que cumplan las restricciones mediante
+     * preorden
+     * @param root AVL raiz
+     * @param res restricciones de seleccion
+     */
+    private void selectPreorder(AVLNode root, TableRowRestriction res){
+
+        if(root != null){
+            if(res == null || res.test(root.element)) {
+                System.out.println(root.element.toString());
+            }
+            selectPreorder(root.leftChild, res);
+            selectPreorder(root.rightChild, res);
+        }
+
     }
 
     /**
@@ -271,6 +314,39 @@ public class AVLTree extends TableDataStructure {
 
         return aux == null? searchNode(root.rightChild, field, value) : aux;
 
+    }
+
+    /**
+     * Busca en el arbol un nodo cuyo indice de fila sea el indicado
+     * @param root AVL raiz
+     * @param value Valor de la columna índice
+     * @return
+     */
+    private AVLNode searchNodeByIndex(AVLNode root, Object value){
+
+        if(root == null)
+            return null;
+
+        if(root.indexKey.equals(value))
+            return root;
+
+        AVLNode aux;
+
+        if(indexType == DataType.INT){
+            if((int)value < (int)root.indexKey){
+                aux = searchNodeByIndex(root.leftChild, value);
+            } else {
+                aux = searchNodeByIndex(root.rightChild, value);
+            }
+        } else {
+            if(((String) value).compareToIgnoreCase((String)root.indexKey) > 0){
+                aux = searchNodeByIndex(root.leftChild, value);
+            } else{
+                aux = searchNodeByIndex(root.rightChild, value);
+            }
+        }
+
+        return aux;
     }
 
     /**
@@ -431,5 +507,39 @@ public class AVLTree extends TableDataStructure {
             leftChild = null;
             rightChild = null;
         }
+    }
+
+    public static void main(String[] args) {
+
+        AVLTree tree = new AVLTree();
+        Table people = new Table("People", tree);
+        tree.setTable(people);
+
+        people.addColumn("id", DataType.INT);
+        people.addColumn("name", DataType.TEXT);
+        people.addColumn("online", DataType.BOOLEAN);
+
+        people.setIndex("id");
+
+        TableRow row = new TableRow();
+        row.addColumn("id", 123);
+        row.addColumn("name", "alex");
+        row.addColumn("online", true);
+
+        people.addRow(row);
+
+        row = new TableRow();
+        row.addColumn("id", 132);
+        row.addColumn("name", "javi");
+        row.addColumn("online", false);
+
+        people.addRow(row);
+        people.selectRows(null);
+
+        System.out.println();
+        System.out.println();
+
+        people.removeRow(132);
+        people.selectRows(null);
     }
 }

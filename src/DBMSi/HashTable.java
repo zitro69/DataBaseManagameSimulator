@@ -457,7 +457,14 @@ public class HashTable extends TableDataStructure {
         row.addColumn("online", true);
 
         people.setIndex("id");
+
         people.addRow(row);
+
+        row = new TableRow();
+        row.addColumn("id", 132);
+        row.addColumn("name", "javi");
+        row.addColumn("online", false);
+
         people.addRow(row);
 
         people.selectRows(null);
