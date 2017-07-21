@@ -13,7 +13,7 @@ public class AVLTree extends TableDataStructure {
     /**
      * Cantidad de filas almacenadas en esta estructura de datos
      */
-    private int size;
+    private long size;
 
     /**
      * Raíz del árbol AVL
@@ -47,13 +47,7 @@ public class AVLTree extends TableDataStructure {
             indexType = table.getColumnType(index);
         }
 
-        // Comprobacion de que el indice no exista ya en la tabla
-        if(indexExists(tableRow.getContent().get(index))){
-            System.err.println("No se puede inserir. Ya existe una fila con el indice "+tableRow.getContent().get(index).toString());
-            return false;
-        }
-
-        int oldSize = size;
+        long oldSize = size;
 
         //Insercion  de la fila en el arbol
         root = insert(root, tableRow, tableRow.getContent().get(index));
@@ -73,7 +67,22 @@ public class AVLTree extends TableDataStructure {
 
     @Override
     protected boolean remove(String field, Object value){
-        return true;
+
+        if(size == 0){
+            System.err.println("Tabla \""+table.getName()+"\" vacía. No puede eliminarse ningun elemento.");
+            return false;
+        }
+
+        long oldSize = size;
+
+        if(field.equals(index))
+            root = delete(root, value);
+        else
+            root = delete(root, field, value);
+
+        size = nodeCount(root);
+
+        return oldSize > size;
     }
 
     @Override
@@ -82,18 +91,16 @@ public class AVLTree extends TableDataStructure {
     }
 
     /**
-     * Comprueba si la tabla contiene una fila con el indice especificado
-     * @param index Indice a buscar
-     * @return true si existe
+     * @param root AVL tree
+     * @return Cantidad de nodos en el arbol
      */
-    private boolean indexExists(Object index){return false;}
+    private long nodeCount(AVLNode root){
 
-    /**
-     * @param node Nodo AVL
-     * @return altura del nodo arbol
-     */
-    private int height(AVLNode node){
-        return node == null? 0 : node.height;
+        if(root == null){
+            return 0;
+        }
+
+        return 1 + nodeCount(root.rightChild) + nodeCount(root.leftChild);
     }
 
     /**
@@ -101,15 +108,17 @@ public class AVLTree extends TableDataStructure {
      * @param root Nodo AVL raiz
      * @param row Fila a inserir
      * @param index indice de la fila a inserir
-     * @return true si se ha inserido con exito
+     * @return la raiz del arbol
      */
     private AVLNode insert(AVLNode root, TableRow row, Object index){
 
+        //Caso trivial: retornamos un nuevo nodo
         if (root == null){
             size++;
             return new AVLNode(row, index);
         }
 
+        //Caso general: Descendemos por el arbol hasta encontrar donde inserir
         if(indexType == DataType.INT){
 
             if((int)index < (int)root.indexKey){
@@ -122,57 +131,154 @@ public class AVLTree extends TableDataStructure {
             }
 
         }else if(indexType == DataType.TEXT){
-
+            if(((String) index).compareToIgnoreCase((String)root.indexKey) > 0){
+                root.leftChild = insert(root.leftChild, row, index);
+            } else if(((String) index).compareToIgnoreCase((String)root.indexKey) < 0){
+                root.rightChild = insert(root.rightChild, row, index);
+            }else{
+                System.err.println("No se puede inserir. Ya existe una fila con el indice "+row.getContent().get(index).toString());
+                return root;
+            }
         }else{
             System.err.println("ERROR: el indice no es de tipo int o text");
             return root;
         }
 
-        //Actualizamos la altura del arbol
-        root.height = Math.max(height(root.leftChild), height(root.rightChild)) + 1;
+        return balanceTree(root, index);
+    }
 
-        //Comprobacion de necesidad de rotaciones
-        int bf = balanceFactor(root);
+    /**
+     * Elimina una fila de la tabla en el arbol mediante el valor de indice
+     * @param root Nodo AVL raiz
+     * @return la raiz del arbol
+     */
+    private AVLNode delete(AVLNode root, Object index){
 
-        if(bf > 1){
-            if(indexType == DataType.INT){
-                if((int)index < (int)root.leftChild.indexKey){
-                    //LL
-                    return rotateRight(root);
-                }
-                if((int)index > (int)root.leftChild.indexKey){
-                    //LR
-                    root.leftChild = rotateLeft(root.leftChild);
-                    return rotateRight(root);
-                }
-            }else if(indexType == DataType.TEXT){
-
-            }else{
-                System.err.println("ERROR: el indice no es de tipo int o text");
-                return root;
-            }
+        //Caso trivial, hemos llegado a una hoja
+        if(root == null){
+            return root;
         }
 
-        if(bf < -1){
-            if(indexType == DataType.INT){
-                if((int)index > (int)root.rightChild.indexKey){
-                    //RR
-                    return rotateLeft(root);
-                }
-                if((int)index < (int)root.rightChild.indexKey) {
-                    //RL
-                    root.rightChild = rotateRight(root.rightChild);
-                    return rotateLeft(root);
-                }
-            }else if(indexType == DataType.TEXT){
+        //Caso general: descendemos por el arbol hasta encontrar el nodo a eliminar
+        if(indexType == DataType.INT){
 
-            }else{
-                System.err.println("ERROR: el indice no es de tipo int o text");
-                return root;
+            if((int)index < (int)root.indexKey){
+                root.leftChild = delete(root.leftChild, index);
+            } else if((int)index > (int)root.indexKey){
+                root.rightChild = delete(root.rightChild, index);
+            } else{
+                //Nodo actual es el nodo a eliminar
+                root = killNode(root);
             }
+
+        }else if(indexType == DataType.TEXT){
+            if(((String) index).compareToIgnoreCase((String)root.indexKey) > 0){
+                root.leftChild = delete(root.leftChild, index);
+            } else if(((String) index).compareToIgnoreCase((String)root.indexKey) < 0){
+                root.rightChild = delete(root.rightChild, index);
+            }else{
+                //Nodo actual es el nodo a eliminar
+                root = killNode(root);
+            }
+        }else{
+            System.err.println("ERROR: el indice no es de tipo int o text");
+            return root;
+        }
+
+        //No hace falta balancear, root era un arbol de un solo nodo
+        if(root == null)
+            return root;
+
+        return balanceTree(root, index);
+    }
+
+    /**
+     * Elimina la primera coincidencia de fila en la que coincida el valor de busqueda.
+     * Realiza dicha busqueda mediante un pre-orden.
+     * @param root Nodo AVL raiz
+     * @param searchField Campo por el cual buscar la fila
+     * @param value Valor del campo por el que buscar
+     * @return la raiz del arbol
+     */
+    private AVLNode delete(AVLNode root, String searchField, Object value){
+        AVLNode aux;
+
+        aux = searchNode(root, searchField, value);
+
+        if(aux == null)
+            return root;
+
+        return delete(root, aux.indexKey);
+    }
+
+    /**
+     * Elimina el nodo del arbol especificado
+     * @param root Nodo a eliminar
+     * @return arbol resultante, null en caso de que no tuviese hijos
+     */
+    private AVLNode killNode(AVLNode root){
+        AVLNode aux;
+
+        // Arbol con 1 o ningun hijo
+        if(root.rightChild == null || root.leftChild == null){
+
+            if(root.leftChild == null){
+                aux = root.rightChild;
+            }else{
+                aux = root.leftChild;
+            }
+
+            if(aux == null){
+                aux = root;
+                root = null;
+            }else{
+                root = aux;
+            }
+
+        // Arbol con 2 hijos: ascender al sucesor por inorden del subarbol derecho
+        }else{
+
+            aux = minNode(root.rightChild);
+
+            root.indexKey = aux.indexKey;
+            root.element = aux.element;
+
+            root.rightChild = delete(root.rightChild, aux.indexKey);
         }
 
         return root;
+    }
+
+    /**
+     * Busqueda la primera coincidencia de un nodo por valor de una columna (recomendado para usar con columnas no indice)
+     * @param field Nombre de la columna
+     * @param value Valor que debe tener
+     * @return null si no ha encontrado ninguno. La primera coincidencia nodo si ha encontrado uno.
+     */
+    private AVLNode searchNode(AVLNode root, String field, Object value){
+
+        if(root == null){
+            return root;
+        }
+
+        if(root.element.getContent().get(field).equals(value)) {
+
+            return root;
+
+        }
+
+        AVLNode aux = searchNode(root.leftChild, field, value);
+
+        return aux == null? searchNode(root.rightChild, field, value) : aux;
+
+    }
+
+    /**
+     * @param node Nodo AVL
+     * @return altura del nodo arbol
+     */
+    private int height(AVLNode node){
+        return node == null? 0 : node.height;
     }
 
     /**
@@ -181,6 +287,20 @@ public class AVLTree extends TableDataStructure {
      */
     private int balanceFactor(AVLNode node){
         return node == null? 0 : height(node.leftChild)-height(node.rightChild);
+    }
+
+    /**
+     * @param root AVL raiz
+     * @return el nodo de menor valor del arbol
+     */
+    private AVLNode minNode(AVLNode root){
+
+        AVLNode aux = root;
+
+        while(aux.leftChild != null)
+            aux = aux.leftChild;
+
+        return aux;
     }
 
     /**
@@ -219,6 +339,77 @@ public class AVLTree extends TableDataStructure {
         leftChild.height = Math.max(height(leftChild.leftChild), height(leftChild.rightChild)) + 1;
 
         return leftChild;
+    }
+
+    /**
+     * Balancea el arbol mediante rotaciones
+     * @param root Raiz nodo
+     * @param index Indice del nodo
+     * @return Arbol balanceado
+     */
+    private AVLNode balanceTree(AVLNode root, Object index){
+        //Actualizamos la altura del arbol
+        root.height = Math.max(height(root.leftChild), height(root.rightChild)) + 1;
+
+        //Comprobacion de necesidad de rotaciones
+        int bf = balanceFactor(root);
+
+        if(bf > 1){
+            if(indexType == DataType.INT){
+                if((int)index < (int)root.leftChild.indexKey){
+                    //LL enteros
+                    return rotateRight(root);
+                }
+                if((int)index > (int)root.leftChild.indexKey){
+                    //LR enteros
+                    root.leftChild = rotateLeft(root.leftChild);
+                    return rotateRight(root);
+                }
+            }else if(indexType == DataType.TEXT){
+                if(((String) index).compareToIgnoreCase((String)root.leftChild.indexKey) > 0){
+                    //LL strings
+                    return rotateRight(root);
+                }
+                if(((String) index).compareToIgnoreCase((String)root.leftChild.indexKey) < 0){
+                    //LR strings
+                    root.leftChild = rotateLeft(root.leftChild);
+                    return rotateRight(root);
+                }
+
+            }else{
+                System.err.println("ERROR: el indice no es de tipo int o text");
+                return root;
+            }
+        }
+
+        if(bf < -1){
+            if(indexType == DataType.INT){
+                if((int)index > (int)root.rightChild.indexKey){
+                    //RR enteros
+                    return rotateLeft(root);
+                }
+                if((int)index < (int)root.rightChild.indexKey) {
+                    //RL enteros
+                    root.rightChild = rotateRight(root.rightChild);
+                    return rotateLeft(root);
+                }
+            }else if(indexType == DataType.TEXT){
+                if(((String) index).compareToIgnoreCase((String)root.rightChild.indexKey) < 0){
+                    //RR strings
+                    return rotateLeft(root);
+                }
+                if(((String) index).compareToIgnoreCase((String)root.rightChild.indexKey) > 0){
+                    //RL strings
+                    root.rightChild = rotateRight(root.rightChild);
+                    return rotateLeft(root);
+                }
+            }else{
+                System.err.println("ERROR: el indice no es de tipo int o text");
+                return root;
+            }
+        }
+
+        return root;
     }
 
     /**
