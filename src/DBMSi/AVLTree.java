@@ -43,7 +43,22 @@ public class AVLTree extends TableDataStructure {
 
     @Override
     protected boolean add(TableRow tableRow){
-        return true;
+        if(indexType == null){
+            indexType = table.getColumnType(index);
+        }
+
+        // Comprobacion de que el indice no exista ya en la tabla
+        if(indexExists(tableRow.getContent().get(index))){
+            System.err.println("No se puede inserir. Ya existe una fila con el indice "+tableRow.getContent().get(index).toString());
+            return false;
+        }
+
+        int oldSize = size;
+
+        //Insercion  de la fila en el arbol
+        root = insert(root, tableRow, tableRow.getContent().get(index));
+
+        return oldSize < size;
     }
 
     @Override
@@ -79,6 +94,85 @@ public class AVLTree extends TableDataStructure {
      */
     private int height(AVLNode node){
         return node == null? 0 : node.height;
+    }
+
+    /**
+     * Introduce una nueva fila de la tabla en el arbol
+     * @param root Nodo AVL raiz
+     * @param row Fila a inserir
+     * @param index indice de la fila a inserir
+     * @return true si se ha inserido con exito
+     */
+    private AVLNode insert(AVLNode root, TableRow row, Object index){
+
+        if (root == null){
+            size++;
+            return new AVLNode(row, index);
+        }
+
+        if(indexType == DataType.INT){
+
+            if((int)index < (int)root.indexKey){
+                root.leftChild = insert(root.leftChild, row, index);
+            } else if((int)index > (int)root.indexKey){
+                root.rightChild = insert(root.rightChild, row, index);
+            } else{
+                System.err.println("No se puede inserir. Ya existe una fila con el indice "+row.getContent().get(index).toString());
+                return root;
+            }
+
+        }else if(indexType == DataType.TEXT){
+
+        }else{
+            System.err.println("ERROR: el indice no es de tipo int o text");
+            return root;
+        }
+
+        //Actualizamos la altura del arbol
+        root.height = Math.max(height(root.leftChild), height(root.rightChild)) + 1;
+
+        //Comprobacion de necesidad de rotaciones
+        int bf = balanceFactor(root);
+
+        if(bf > 1){
+            if(indexType == DataType.INT){
+                if((int)index < (int)root.leftChild.indexKey){
+                    //LL
+                    return rotateRight(root);
+                }
+                if((int)index > (int)root.leftChild.indexKey){
+                    //LR
+                    root.leftChild = rotateLeft(root.leftChild);
+                    return rotateRight(root);
+                }
+            }else if(indexType == DataType.TEXT){
+
+            }else{
+                System.err.println("ERROR: el indice no es de tipo int o text");
+                return root;
+            }
+        }
+
+        if(bf < -1){
+            if(indexType == DataType.INT){
+                if((int)index > (int)root.rightChild.indexKey){
+                    //RR
+                    return rotateLeft(root);
+                }
+                if((int)index < (int)root.rightChild.indexKey) {
+                    //RL
+                    root.rightChild = rotateRight(root.rightChild);
+                    return rotateLeft(root);
+                }
+            }else if(indexType == DataType.TEXT){
+
+            }else{
+                System.err.println("ERROR: el indice no es de tipo int o text");
+                return root;
+            }
+        }
+
+        return root;
     }
 
     /**
@@ -132,13 +226,15 @@ public class AVLTree extends TableDataStructure {
      */
     private static class AVLNode{
         TableRow element;
+        Object indexKey;
 
         AVLNode leftChild;
         AVLNode rightChild;
         int height;
 
-        AVLNode(TableRow e){
+        AVLNode(TableRow e, Object index){
             element = e;
+            indexKey = index;
             height = 1;
 
             leftChild = null;
