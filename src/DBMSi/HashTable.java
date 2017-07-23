@@ -1,6 +1,9 @@
 package DBMSi;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Vector;
 
 /**
  * Tabla de hash de redispersion que implementa el almacenamiento de
@@ -312,6 +315,51 @@ public class HashTable extends TableDataStructure {
         return size;
     }
 
+    @Override
+    public boolean toCSV(File outputFile){
+        if(outputFile == null){
+            return false;
+        }
+
+        //if(outputFile.canWrite()){
+
+            try{
+
+                PrintWriter pw = new PrintWriter(outputFile);
+                StringBuilder sb = new StringBuilder();
+                String auxString = "";
+
+                for(String cName : table.getColumnNames()){
+                    auxString += cName + ",";
+                }
+
+                sb.append(auxString.replaceAll(",$", "\n"));
+
+                for(TableRow row : rows){
+                    if(row == null) continue;
+
+                    auxString = row.toString();
+                    auxString = auxString.replaceAll(" +", ",");
+                    auxString += "\n";
+
+                    sb.append(auxString);
+                }
+
+                pw.write(sb.toString());
+                pw.close();
+
+                System.out.println(outputFile.getName()+" file created successfully with a total of "+size+" rows.");
+
+            }catch(IOException e){
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        //}
+
+        //return false;
+    }
+
     /**
      * Comprueba si la tabla contiene una fila con el indice especificado
      * @param index Indice a buscar
@@ -440,38 +488,24 @@ public class HashTable extends TableDataStructure {
         ArrayList<TableRow> oldData;
     }
 
-    @Override
-    protected ArrayList<TableRow> getData() {
-        return null;
-    }
-
     public static void main(String[] args) {
-        HashTable htable = new HashTable(1);
-        Table people = new Table("People", htable);
-        htable.setTable(people);
+        HashTable table = new HashTable(1);
+        Table people = new Table("People", table);
+        table.setTable(people);
 
         people.addColumn("id", DataType.INT);
         people.addColumn("name", DataType.TEXT);
         people.addColumn("online", DataType.BOOLEAN);
 
+        people.setIndex("name");
 
-        TableRow row = new TableRow();
-        row.addColumn("id", 123);
-        row.addColumn("name", "alex");
-        row.addColumn("online", true);
+        System.out.println();
+        System.out.println();
 
-        people.setIndex("id");
+        people.addColumn("test", DataType.TEXT);
 
-        people.addRow(row);
-
-        row = new TableRow();
-        row.addColumn("id", 132);
-        row.addColumn("name", "javi");
-        row.addColumn("online", false);
-
-        people.addRow(row);
+        people.importCSV("People.csv");
 
         people.selectRows(null);
-
     }
 }

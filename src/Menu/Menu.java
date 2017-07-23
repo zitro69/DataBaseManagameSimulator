@@ -57,14 +57,20 @@ public class Menu {
                 tds = new AVLTree();
                 break;
             case 3://HASH_1
-                //TODO: clase de tabla de hash
+                tds = new HashTable(1);
                 break;
             case 4://HASH_2
-                //TODO: constructor tabla segundo hash
+                tds = new HashTable(2);
                 break;
         }
         //Creación de la tabla
         Table t = new Table (nom, tds);
+        if(tds instanceof AVLTree ){
+            ((AVLTree)tds).setTable(t);
+        }
+        if(tds instanceof HashTable){
+            ((HashTable)tds).setTable(t);
+        }
         //Introducción de la celdas de la tabla
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> indexs = new ArrayList<>();

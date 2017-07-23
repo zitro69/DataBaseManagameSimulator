@@ -1,6 +1,11 @@
 package DBMSi;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by jorti on 20/07/2017.
@@ -84,9 +89,11 @@ public class AVLTree extends TableDataStructure {
         }
 
         if(aux == null){
+            System.err.println("No existe ninguna fila con "+field+"="+row.getContent().get(field));
             return false;
         }
 
+        aux.oldData.add(aux.element);
         aux.element = row;
         aux.indexKey = row.getContent().get(index);
         return true;
@@ -115,6 +122,56 @@ public class AVLTree extends TableDataStructure {
     @Override
     protected long size(){
         return this.size;
+    }
+
+    @Override
+    protected boolean toCSV(File outputFile) {
+
+        if(outputFile == null) {
+            return false;
+        }
+
+        try{
+            PrintWriter pw = new PrintWriter(outputFile);
+            StringBuilder sb = new StringBuilder();
+            String auxString = "";
+
+            for(String cName : table.getColumnNames()){
+                auxString += cName + ",";
+            }
+
+            sb.append(auxString.replaceAll(",$", "\n"));
+
+            rowsToCSV(sb, root);
+
+            pw.write(sb.toString());
+            pw.close();
+
+            System.out.println(outputFile.getName()+" file created successfully with a total of "+size+" rows.");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Concatena las filas almacenadas en el arbol, añadiendolas una por una
+     * mediante exploracion por preorden
+     * @param sb StringBuilder CSV
+     * @param root raiz AVL
+     */
+    private void rowsToCSV(StringBuilder sb, AVLNode root){
+
+        if(root == null)
+            return;
+
+        String auxString = root.element.toString().replaceAll(" +", ",") + "\n";
+        sb.append(auxString);
+
+        rowsToCSV(sb, root.leftChild);
+        rowsToCSV(sb, root.rightChild);
     }
 
     /**
@@ -287,6 +344,7 @@ public class AVLTree extends TableDataStructure {
 
             root.indexKey = aux.indexKey;
             root.element = aux.element;
+            root.oldData = aux.oldData;
 
             root.rightChild = delete(root.rightChild, aux.indexKey);
         }
@@ -419,11 +477,6 @@ public class AVLTree extends TableDataStructure {
         return leftChild;
     }
 
-    @Override
-    protected ArrayList<TableRow> getData() {
-        return null;
-    }
-
     /**
      * Balancea el arbol mediante rotaciones
      * @param root Raiz nodo
@@ -500,6 +553,8 @@ public class AVLTree extends TableDataStructure {
      */
     private static class AVLNode{
         TableRow element;
+        ArrayList<TableRow> oldData;
+
         Object indexKey;
 
         AVLNode leftChild;
@@ -510,6 +565,7 @@ public class AVLTree extends TableDataStructure {
             element = e;
             indexKey = index;
             height = 1;
+            oldData = new ArrayList<>();
 
             leftChild = null;
             rightChild = null;
@@ -526,7 +582,7 @@ public class AVLTree extends TableDataStructure {
         people.addColumn("name", DataType.TEXT);
         people.addColumn("online", DataType.BOOLEAN);
 
-        people.setIndex("id");
+        people.setIndex("name");
 
         TableRow row = new TableRow();
         row.addColumn("id", 123);
@@ -546,7 +602,23 @@ public class AVLTree extends TableDataStructure {
         System.out.println();
         System.out.println();
 
-        people.removeRow(132);
+        people.removeRow("javi");
         people.selectRows(null);
+
+        row = new TableRow();
+        row.addColumn("id", 321);
+        row.addColumn("name", "alex");
+        row.addColumn("online", true);
+
+        System.out.println();
+        System.out.println();
+
+        people.updateRow(row);
+
+        people.addColumn("test", DataType.TEXT);
+
+        people.selectRows(null);
+
+        people.exportCSV();
     }
 }

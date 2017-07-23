@@ -1,5 +1,7 @@
 package DBMSi;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -212,6 +214,64 @@ public class Table {
     public long getRowsNumber() {
 
         return dataStructure.size();
+    }
+
+    /**
+     * Exporta la tabla a un archivo CSV
+     * @return true si se ha exportado correctamente la informacion
+     */
+    public boolean exportCSV(){
+
+        File f = new File(name+".csv");
+        f.setWritable(true);
+        return dataStructure.toCSV(f);
+
+    }
+
+    /**
+     * Importa filas a una tabla a partir de un archivo CommaSeparatedValues
+     * @param fileName nombre del archivo fuente de filas
+     * @return falso si se ha producido algun error que haya impedido importar los datos
+     */
+    public boolean importCSV(String fileName){
+        File inputFile = new File(fileName);
+
+        System.out.println("Loading file data...");
+
+        try {
+            int rowsInserted = 0;
+            Scanner sc = new Scanner(inputFile);
+            String auxLine;
+            String[] columns, values;
+
+            TableRow auxRow;
+
+            auxLine = sc.nextLine();
+            columns = auxLine.trim().split(",");
+
+            while(sc.hasNextLine()){
+                auxLine = sc.nextLine();
+                values = auxLine.split(",");
+
+                if(values.length != columns.length)
+                    continue;
+
+                auxRow = new TableRow();
+                for(int i = 0; i < values.length; i++){
+                    auxRow.addColumn(columns[i], values[i]);
+                }
+
+                if(addRow(auxRow))
+                    rowsInserted++;
+            }
+            System.out.println("Data loaded successfully. A total of "+rowsInserted+" new rows have been insterted into "+name);
+            sc.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
