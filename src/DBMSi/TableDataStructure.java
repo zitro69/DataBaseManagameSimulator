@@ -86,11 +86,4 @@ public abstract class TableDataStructure {
      * @return falso si se ha producido algun error al exportar
      */
     protected abstract boolean toCSV(File outputFile);
-
-    /**
-     * Importa filas a una tabla a partir de un archivo CommaSeparatedValues
-     * @param inputFile archivo fuente de filas
-     * @return falso si se ha producido algun error que haya impedido importar los datos
-     */
-    protected abstract boolean fromCSV(File inputFile);
 }

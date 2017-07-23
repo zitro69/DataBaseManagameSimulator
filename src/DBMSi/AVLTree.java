@@ -1,7 +1,11 @@
 package DBMSi;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by jorti on 20/07/2017.
@@ -122,12 +126,52 @@ public class AVLTree extends TableDataStructure {
 
     @Override
     protected boolean toCSV(File outputFile) {
-        return false;
+
+        if(outputFile == null) {
+            return false;
+        }
+
+        try{
+            PrintWriter pw = new PrintWriter(outputFile);
+            StringBuilder sb = new StringBuilder();
+            String auxString = "";
+
+            for(String cName : table.getColumnNames()){
+                auxString += cName + ",";
+            }
+
+            sb.append(auxString.replaceAll(",$", "\n"));
+
+            rowsToCSV(sb, root);
+
+            pw.write(sb.toString());
+            pw.close();
+
+            System.out.println(outputFile.getName()+" file created successfully with a total of "+size+" rows.");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
-    @Override
-    protected boolean fromCSV(File inputFile) {
-        return false;
+    /**
+     * Concatena las filas almacenadas en el arbol, añadiendolas una por una
+     * mediante exploracion por preorden
+     * @param sb StringBuilder CSV
+     * @param root raiz AVL
+     */
+    private void rowsToCSV(StringBuilder sb, AVLNode root){
+
+        if(root == null)
+            return;
+
+        String auxString = root.element.toString().replaceAll(" +", ",") + "\n";
+        sb.append(auxString);
+
+        rowsToCSV(sb, root.leftChild);
+        rowsToCSV(sb, root.rightChild);
     }
 
     /**

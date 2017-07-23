@@ -360,55 +360,6 @@ public class HashTable extends TableDataStructure {
         //return false;
     }
 
-    @Override
-    public boolean fromCSV(File inputFile){
-        if(inputFile == null){
-            return false;
-        }
-
-        //if(inputFile.canRead()){
-
-            System.out.println("Loading file data...");
-
-            try {
-                int rowsInserted = 0;
-                Scanner sc = new Scanner(inputFile);
-                String auxLine;
-                String[] columns, values;
-
-                TableRow auxRow;
-
-                auxLine = sc.nextLine();
-                columns = auxLine.trim().split(",");
-
-                while(sc.hasNextLine()){
-                    auxLine = sc.nextLine();
-                    values = auxLine.split(",");
-
-                    if(values.length != columns.length)
-                        continue;
-
-                    auxRow = new TableRow();
-                    for(int i = 0; i < values.length; i++){
-                        auxRow.addColumn(columns[i], values[i]);
-                    }
-
-                    if(table.addRow(auxRow))
-                        rowsInserted++;
-                }
-                System.out.println("Data loaded successfully. A total of "+rowsInserted+" new rows have been insterted into "+table.getName());
-                sc.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-            return true;
-        //}
-
-        //return false;
-    }
-
     /**
      * Comprueba si la tabla contiene una fila con el indice especificado
      * @param index Indice a buscar
