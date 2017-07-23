@@ -18,31 +18,20 @@ public class TwoThreeTree extends TableDataStructure{
         raiz = new Nodo();
         size = 0;
     }
-    /**
-     * @return El nom de l'índex.
-     */
+
+    @Override
     protected String getIndex() {
 
         return index;
     }
 
-    /**
-     * Estableix el nom del camp pel qual s'organitza l'estructura.
-     *
-     * @param field El nom del camp que serà l'índex.
-     */
+    @Override
     protected void setIndex(String field) {
 
         this.index = field;
     }
 
-    /**
-     * Afegeix una nova fila dins de l'estructura utilitzada per una taula.
-     *
-     * @param tableRow La nova fila a afegir.
-     *
-     * @return true si s'ha pogut afegir, false en cas contrari.
-     */
+    @Override
     protected boolean add(TableRow tableRow){
         gotoRaiz();
         while (raiz.hadSons()){
@@ -65,6 +54,12 @@ public class TwoThreeTree extends TableDataStructure{
         return true;
     }
 
+    /**
+     * Hace un split entre los valores de hijo y padre. Devuelve el nodo con el split hecho señalando a sus hijos.
+     * @param hijo      Nodo con el que se hace el split
+     * @param padre     Nodo con el que se hace el split
+     * @return          Nodo resultado del split
+     */
     private Nodo split(Nodo hijo, Nodo padre) {
         //Guardamos los hijos
         ArrayList<Nodo> hijos = guardarHijos(hijo, padre);
@@ -87,6 +82,12 @@ public class TwoThreeTree extends TableDataStructure{
         return next;
     }
 
+    /**
+     * Averigua que valor es mayor y reasigna los valores.
+     * @param hijo      Nodo a estudiar.
+     * @param padre     Nodo a estudiar
+     * @return          Nodo con los valores reasignados.
+     */
     private Nodo reasignarBV (Nodo hijo, Nodo padre){
         if (padre.getLv().compareTo(index, hijo.getLv()) >= 1) {
             padre.setBv(padre.getLv(), padre.getHlv());
@@ -107,6 +108,12 @@ public class TwoThreeTree extends TableDataStructure{
         return padre;
     }
 
+    /**
+     * Averigua que nodo de hijos es mayor y reasigna los valores.
+     * @param hijo      Nodo a estudiar.
+     * @param hijos     Nodos a reasignar
+     * @return          Nodo con los valores reasignados.
+     */
     private Nodo reasignar (Nodo hijo, ArrayList<Nodo> hijos){
         try {
             Collections.sort(hijos, (Nodo n1, Nodo n2) -> {
@@ -137,6 +144,12 @@ public class TwoThreeTree extends TableDataStructure{
         return hijo;
     }
 
+    /**
+     * Guarda los hijos antes de empezar hacer el split.
+     * @param hijo      Nodo padre del que guardar los hijos.
+     * @param padre     Nodo padre del que gurdar los hijos.
+     * @return          Los diferentes hijos @param hijo y @param padre.
+     */
     private ArrayList<Nodo> guardarHijos (Nodo hijo, Nodo padre){
         ArrayList<Nodo> hijos = new ArrayList<>();
         hijos.add(hijo.getLn());
@@ -148,6 +161,12 @@ public class TwoThreeTree extends TableDataStructure{
         return hijos;
     }
 
+    /**
+     * Averigua que valor es mayor y reasigna los valores.
+     * @param hijo      Nodo a estudiar.
+     * @param padre     Nodo a estudiar
+     * @return          Nodo con los valores reasignados.
+     */
     private Nodo ordenarNodos (Nodo hijo, Nodo padre){
         Nodo next;
         Nodo auxpadre = new Nodo();
@@ -184,6 +203,11 @@ public class TwoThreeTree extends TableDataStructure{
         return next;
     }
 
+    /**
+     * Comprueba si el valor esta en el nodo raiz.
+     * @param tr        valor a estudiar
+     * @return          cierto si tr esta en el nodo raiz.
+     */
     private boolean hadValue (TableRow tr){
         if (raiz.getLv() != null && raiz.getLv().compareTo(index, tr) == 0){
             return true;
@@ -194,21 +218,25 @@ public class TwoThreeTree extends TableDataStructure{
         }
     }
 
+    /**
+     * Va a arriba del arbol.
+     */
     private void gotoRaiz () {
         while (raiz.getFather() != null){
             raiz = raiz.getFather();
         }
     }
 
-    /**
-     * Visualitza el contingut de l'estructura de dades.
-     *
-     * @param restrictions  Restriccions per tal de filtrar files en la visualització.
-     */
+    @Override
     protected void select(TableRowRestriction restrictions){
         select (restrictions, raiz);
     }
 
+    /**
+     * Comprueba si el nodo de entrada cuple les restricciones.
+     * @param res       restriciones a cumplir
+     * @param raiz      nodo en el cual se miran los valores.
+     */
     private void select (TableRowRestriction res, Nodo raiz){
         if (raiz != null){
             if (raiz.getLv() != null) {
@@ -228,14 +256,7 @@ public class TwoThreeTree extends TableDataStructure{
     }
 
 
-    /**
-     * Permet actualitzar una fila de l'estructura de dades.
-     *
-     * @param field El camp pel qual cercar la fila existent.
-     * @param row   El contingut actualitzat de la fila.
-     *
-     * @return      true si s'ha actualitzat, false si no s'ha trobat el valor previ de la fila en l'estructura.
-     */
+    @Override
     protected boolean update(String field, TableRow row){
         gotoRaiz();
         Nodo toupdate = encontrado(raiz, field, row);
@@ -256,15 +277,7 @@ public class TwoThreeTree extends TableDataStructure{
         return true;
     }
 
-    /**
-     * Si existeix el valor en l'estructura, en la columna especificada, llavors
-     * elimina la primera coincidència de l'estructura. És a dir, la fila sencera.
-     *
-     * @param field El nom del camp o columna.
-     * @param value El valor que ha de tenir el camp.
-     *
-     * @return true si s'ha pogut eliminar la fila, false en cas contrari.
-     */
+    @Override
     protected boolean remove(String field, Object value){
         gotoRaiz();
         if (size == 0){
@@ -305,6 +318,10 @@ public class TwoThreeTree extends TableDataStructure{
         return true;
     }
 
+    /**
+     * Reasigna los valores si el nodo es 3 nodo
+     * @param delete    Nodo al cual se reasignan los valores.
+     */
     private void delete3nodo(Nodo delete) {
         if (delete.getFather().getLn() == delete){
             if (delete.getFather().getMn().getBv() != null){
@@ -364,6 +381,10 @@ public class TwoThreeTree extends TableDataStructure{
         }
     }
 
+    /**
+     * Reasigna los valores si el nodo es 2 nodo
+     * @param delete    Nodo al cual se reasignan los valores.
+     */
     private void delete2nodo(Nodo delete) {
         if (delete.getFather().getLn() == delete){
             if (delete.getFather().getMn().getBv() == null){
@@ -388,6 +409,12 @@ public class TwoThreeTree extends TableDataStructure{
         }
     }
 
+    /**
+     * Baja el nodo hasta que haya hojas.
+     * @param delete    Nodo el cual se esta bajando.
+     * @param valuetr   Segun
+     * @return          Nodo una vez que esta abajo
+     */
     private Nodo goDown(Nodo delete, TableRow valuetr) {
         TableRow aux;
         if (delete.getLv().compareTo(index,valuetr) == 0){
@@ -413,6 +440,13 @@ public class TwoThreeTree extends TableDataStructure{
         }
     }
 
+    /**
+     * Devuele el nodo en el que esta value
+     * @param raiz      raiz nodo a estudiar
+     * @param field     indice (index)
+     * @param value     value a comprobar si esta en el nodo
+     * @return          Devuelve el nodo en el que esta la partida.
+     */
     private Nodo encontrado(Nodo raiz, String field, TableRow value) {
         if (raiz == null){
             return null;
@@ -436,9 +470,7 @@ public class TwoThreeTree extends TableDataStructure{
         }
     }
 
-    /**
-     * @return El total d'elements que hi ha guardats en l'estructura.
-     */
+    @Override
     protected long size(){
         return size;
     }
@@ -455,6 +487,11 @@ public class TwoThreeTree extends TableDataStructure{
         return data;
     }
 
+    /**
+     * Hace un inorder de los nodos y guarda en una array list
+     * @param n     nodo a mirar
+     * @return      donde se guardan los nodos.
+     */
     private ArrayList<TableRow> getData (Nodo n) {
         ArrayList<TableRow> data = new ArrayList<>();
         boolean visita = false;
@@ -471,7 +508,7 @@ public class TwoThreeTree extends TableDataStructure{
         }
         return data;
     }
-
+    @Override
     public ArrayList<TableRow> getHistoricalRow (TableRow tr){
         gotoRaiz();
         Nodo encontrado = encontrado(raiz, index, tr);

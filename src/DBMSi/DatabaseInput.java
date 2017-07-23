@@ -68,6 +68,16 @@ public class DatabaseInput {
         }
     }
 
+    /**
+     * Permet la introducció d'un valor del tipus de la columna.
+     *
+     * @param dataType      El tipus de la columna.
+     * @param value         El string que se lee.
+     *
+     * @return              El valor introduït per teclat.
+     *
+     * @throws NumberFormatException    Si es dóna un error de format amb les dades introduïdes per teclat.
+     */
     public static Object readValue(DataType dataType, String value) throws NumberFormatException {
 
         switch (dataType) {

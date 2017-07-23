@@ -28,7 +28,6 @@ public interface Screen {
         System.out.println(s);
     }
 
-
     static void name() {
         System.out.println("Enter name for the table: ");
     }

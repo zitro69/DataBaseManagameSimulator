@@ -185,6 +185,10 @@ public class Menu {
 
         //Funciones necesaria para la opcion manage table
 
+    /**
+     * Hace seleccionar al usuario una tabla y la trata.
+     * @param dbmsi     Array con las tablas del programa
+     */
     public void manageTable(ArrayList<Table> dbmsi) {
         //Selecionar la tabla con la que se trabajara
         Table table;
@@ -273,6 +277,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Actualiza un fila de una table.
+     * @param table     table a la que pertenece la casilla.
+     */
     private void updateRow(Table table) {
         TableRow tr = new TableRow();
         Object o = DatabaseInput.readColumnValue(table.getColumnType(table.getIndex()),
@@ -353,13 +361,22 @@ public class Menu {
         }
     }
 
-
+    /**
+     * Permite al usuario insertar un valor en la talba
+     * @param t         Tabla en la que se inserta el valor
+     * @return          true: si se ha insertado correctamente;
+     */
     private boolean insert (Table t){
         TableRow tr = new TableRow();
         setInfo(t, tr);
         return t.addRow(tr);
     }
 
+    /**
+     * Completa la infromación de una fila segun los parametro de la tabla.
+     * @param t         Tabla de donde se saca la información.
+     * @param tr        Fila a completar.
+     */
     private void setInfo(Table t, TableRow tr) {
         for (int i = 0; i < t.getColumnNames().size(); i++){
             tr.addColumn(t.getColumnNames().get(i), DatabaseInput.readColumnValue(t.getColumnType(
@@ -368,6 +385,11 @@ public class Menu {
         }
     }
 
+    /**
+     * Muestra por pantalla el valor de una casiila.
+     * @param t         Tabla a la que pertenece la casilla.
+     * @return          El objeto indice que se ha mostrado.
+     */
     private Object showRow (Table t){
         TableRowRestriction trr = new TableRowRestriction();
         Object o = DatabaseInput.readColumnValue(t.getColumnType(t.getIndex()), t.getIndex());
@@ -377,6 +399,11 @@ public class Menu {
         return o;
     }
 
+    /**
+     * Muestra y selección el menú de selec de una tabla.
+     * @param t         tabla
+     * @return          opción del menú
+     */
     private int selectMenu (Table t){
         Screen.selectMenu(t);
         int value = sc.nextInt();
@@ -385,6 +412,11 @@ public class Menu {
 
     }
 
+    /**
+     * Pone una restricción a la tabla.
+     * @param trr       Restricciones
+     * @param t         tabla
+     */
     private void newCondition(TableRowRestriction trr, Table t) {
         Screen.whatColumn();
         String column = sc.nextLine();
@@ -402,6 +434,11 @@ public class Menu {
         }
     }
 
+    /**
+     * Importa los datos de una archivo a la tabla
+     * @param table     tabla que recibira los datos
+     * @param archivo   path del archivo
+     */
     private void importData(Table table, String archivo) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(archivo));
@@ -436,6 +473,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Exporta los datos de una tabla a un archivo.
+     * @param table     tabla a exportar.
+     */
     private void exportData (Table table){
         Screen.generateCSV(table);
         ArrayList<TableRow> data = table.getData();
@@ -457,6 +498,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Visualiza las distintas tablas de Database
+     * @param dbmsi     database
+     */
     public void visualitzeTable(ArrayList<Table> dbmsi) {
         if (dbmsi.size() == 0){
             Screen.error("No tables in the program.");
@@ -476,6 +521,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Visualiza el historico de una tabla del database
+     * @param dbmsi     database con las diversas tablas
+     */
     public void visualitzeHistoricalTable(ArrayList<Table> dbmsi) {
         if (dbmsi.size() == 0){
             Screen.error("No tables in the program.");
@@ -514,6 +563,11 @@ public class Menu {
             return;
         }
     }
+
+    /**
+     * Ordena las tablas del database por orden alfabetico y las muestra por pantalla.
+     * @param dbmsi     database con las tablas
+     */
     private void showTables (ArrayList<Table> dbmsi){
         Collections.sort(dbmsi, (Table t1, Table t2)->{
             if (t1.getName().charAt(0) > t2.getName().charAt(0)) return 1;

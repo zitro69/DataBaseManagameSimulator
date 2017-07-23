@@ -97,7 +97,15 @@ public abstract class TableDataStructure {
      */
     protected abstract long size();
 
+    /**
+     * @return Devuelve todos los datos de la estructura de datos
+     */
     protected abstract ArrayList<TableRow> getData();
 
+    /**
+     * Devuelve todos los datos historicos de una fila
+     * @param tr        valor que tiene la fila
+     * @return          datos historicos de la fila
+     */
     public abstract ArrayList<TableRow> getHistoricalRow(TableRow tr);
 }
