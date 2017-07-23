@@ -239,6 +239,9 @@ public class TwoThreeTree extends TableDataStructure{
     protected boolean update(String field, TableRow row){
         gotoRaiz();
         Nodo toupdate = encontrado(raiz, field, row);
+        if (toupdate == null){
+            return false;
+        }
         if (toupdate.getLv().compareTo(field, row) == 0){
             ArrayList<TableRow> aux = toupdate.getHlv();
             aux.add(row);
@@ -264,13 +267,17 @@ public class TwoThreeTree extends TableDataStructure{
      */
     protected boolean remove(String field, Object value){
         gotoRaiz();
-        if (raiz.getLv() == null){
+        if (size == 0){
             Screen.error("The table is empty.");
             return false;
         }
         TableRow valuetr = new TableRow();
         valuetr.addColumn(field, value);
         Nodo delete = encontrado(raiz, field, valuetr);
+        if (delete == null){
+            Screen.error("The index doesn't exist. Impossible remove row.");
+            return false;
+        }
         while (delete.hadSons()){
             delete = goDown(delete, valuetr);
         }
@@ -407,6 +414,9 @@ public class TwoThreeTree extends TableDataStructure{
     }
 
     private Nodo encontrado(Nodo raiz, String field, TableRow value) {
+        if (raiz == null){
+            return null;
+        }
         if (raiz.getLv().compareTo(field, value) == 0) {
             return raiz;
         } else {
@@ -465,6 +475,9 @@ public class TwoThreeTree extends TableDataStructure{
     public ArrayList<TableRow> getHistoricalRow (TableRow tr){
         gotoRaiz();
         Nodo encontrado = encontrado(raiz, index, tr);
+        if (encontrado == null){
+            return null;
+        }
         if (encontrado.getLv().compareTo(index, tr) == 0){
             return encontrado.getHlv();
         } else {

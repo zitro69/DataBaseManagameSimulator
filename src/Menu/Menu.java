@@ -236,13 +236,15 @@ public class Menu {
                         boolean correct = true;
                         while (correct) {
                             Screen.sureDelete();
-                            sc.nextLine();
                             String conf = sc.nextLine();
                             conf = conf.toUpperCase();
                             if (conf.equals("Y")) {
                                 correct = false;
-                                table.removeRow(o);
-                                Screen.deleted();
+                                if (table.removeRow(o)) {
+                                    Screen.deleted();
+                                } else {
+                                    break;
+                                }
                             } else if (conf.equals("N")) {
                                 correct = false;
                                 Screen.notDeleted();
@@ -299,8 +301,12 @@ public class Menu {
                 }
             }
         }
-        table.updateRow(tr);
-        Screen.rowModified(table);
+        if (table.updateRow(tr)){
+            Screen.rowModified(table);
+        } else {
+            Screen.error("The index doesn't exist. We can't update the row.");
+        }
+
     }
 
     /**
@@ -487,13 +493,17 @@ public class Menu {
             tr.addColumn(dbmsi.get(table).getIndex(), DatabaseInput.readValue(dbmsi.get(table).getColumnType(
                     dbmsi.get(table).getIndex()), row));
            values = dbmsi.get(table).getHistoricalRow(tr);
+           if (values == null){
+               Screen.error("the row with this index don't exist");
+               return;
+           }
            Screen.guiones();
            for (int i = 0; i < dbmsi.get(table).getColumnNames().size(); i++){
                System.out.print(dbmsi.get(table).getColumnNames().get(i) + "\t");
            }
            System.out.println();
            Screen.guiones();
-           for (int i = values.size(); i > 0; i--){
+           for (int i = values.size()-1; i >= 0; i--){
                for (int j = 0; j < dbmsi.get(table).getColumnNames().size(); j++){
                    System.out.print(values.get(i).getContent().get(dbmsi.get(table).getColumnNames().get(j)) + "\t");
                }

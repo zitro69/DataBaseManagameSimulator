@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59ae71c4-5479-4cdd-a26f-fe9e90410e49" name="Default" comment="Todo lo mio">
+    <list default="true" id="59ae71c4-5479-4cdd-a26f-fe9e90410e49" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBMSi/AVLTree.java" afterPath="$PROJECT_DIR$/src/DBMSi/AVLTree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBMSi/HashTable.java" afterPath="$PROJECT_DIR$/src/DBMSi/HashTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBMSi/Table.java" afterPath="$PROJECT_DIR$/src/DBMSi/Table.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBMSi/TableDataStructure.java" afterPath="$PROJECT_DIR$/src/DBMSi/TableDataStructure.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DBMSi/TwoThreeTree.java" afterPath="$PROJECT_DIR$/src/DBMSi/TwoThreeTree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DataBaseManagamentSimulator.java" afterPath="$PROJECT_DIR$/src/DataBaseManagamentSimulator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Menu/Menu.java" afterPath="$PROJECT_DIR$/src/Menu/Menu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Menu/Screen.java" afterPath="$PROJECT_DIR$/src/Menu/Screen.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,15 +26,14 @@
       <file leaf-file-name="Menu.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Menu/Menu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="495" column="49" lean-forward="false" selection-start-line="495" selection-start-column="49" selection-end-line="495" selection-end-column="49" />
+            <state relative-caret-position="406">
+              <caret line="505" column="45" lean-forward="false" selection-start-line="505" selection-start-column="45" selection-end-line="505" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#createTable#0;class#Menu#0" expanded="false" />
                 <element signature="method#newColumn#0;class#Menu#0" expanded="false" />
                 <element signature="method#checkName#0;class#Menu#0" expanded="false" />
                 <element signature="method#selectIndex#0;class#Menu#0" expanded="false" />
-                <element signature="method#manageTable#0;class#Menu#0" expanded="false" />
                 <element signature="method#updateRow#0;class#Menu#0" expanded="false" />
                 <element signature="method#listTables#0;class#Menu#0" expanded="false" />
                 <element signature="method#checkTables#0;class#Menu#0" expanded="false" />
@@ -52,7 +45,281 @@
                 <element signature="method#importData#0;class#Menu#0" expanded="false" />
                 <element signature="method#exportData#0;class#Menu#0" expanded="false" />
                 <element signature="method#visualitzeTable#0;class#Menu#0" expanded="false" />
+                <element signature="method#showTables#0;class#Menu#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JAVA/" pinned="false" current-in-tab="false">
+        <entry file="uml://JAVA/">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement />
+              <nodes>
+                <node x="1259.0" y="2861.0">com</node>
+                <node x="506.0" y="2861.0">netscape</node>
+                <node x="1440.0000000000002" y="995.5">DBMSi.DataType</node>
+                <node x="1456.916666666667" y="1646.0">DBMSi.AVLTree</node>
+                <node x="520.0000000000002" y="833.5">DBMSi.Table</node>
+                <node x="1773.0" y="2861.0">sun</node>
+                <node x="2223.6675595238094" y="1673.0">DBMSi.TwoThreeTree</node>
+                <node x="149.58333333333348" y="0.0">DBMSi.TableRowRestriction.RestrictionType</node>
+                <node x="1433.0" y="2861.0">java</node>
+                <node x="1080.0" y="2861.0">javax</node>
+                <node x="0.0" y="1036.0">DBMSi.TableRowRestriction</node>
+                <node x="1378.416666666667" y="2472.0">Menu</node>
+                <node x="896.0" y="2861.0">javafx</node>
+                <node x="1189.575595238095" y="167.0">DBMSi.TableDataStructure</node>
+                <node x="710.0" y="2861.0">oracle</node>
+                <node x="1605.0" y="2861.0">org</node>
+                <node x="0.0" y="2861.0">DBMSi.DatabaseInput</node>
+                <node x="778.916666666667" y="1646.0">DBMSi.HashTable</node>
+                <node x="2093.5833333333335" y="712.0">DBMSi.TwoThreeTree.Nodo</node>
+                <node x="294.0" y="2861.0">META-INF</node>
+                <node x="1940.0" y="2861.0">jdk</node>
+                <node x="1156.0000000000002" y="1117.5">DBMSi.HashTable.UpdateNode</node>
+                <node x="1284.666666666667" y="2558.0">DataBaseManagamentSimulator</node>
+                <node x="1765.5833333333335" y="1036.0">DBMSi.AVLTree.AVLNode</node>
+                <node x="1781.575595238095" y="248.0">DBMSi.TableRow</node>
+                <node x="1318.666666666667" y="2753.0">Main</node>
+                <node x="191.33333333333348" y="316.0">DBMSi.TableRowRestriction.Restriction</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="DBMSi.TableRowRestriction.Restriction" target="DBMSi.TableRowRestriction">
+                  <point x="58.66666666666674" y="58.5" />
+                  <point x="338.0000000000002" y="692.0" />
+                  <point x="437.5" y="692.0" />
+                  <point x="187.5" y="-113.0" />
+                </edge>
+                <edge source="DBMSi.AVLTree" target="DBMSi.Table">
+                  <point x="-274.16666666666674" y="-383.0" />
+                  <point x="1511.7500000000002" y="1616.0" />
+                  <point x="1026.7" y="1616.0" />
+                  <point x="225.19999999999982" y="315.5" />
+                </edge>
+                <edge source="Menu" target="DBMSi.TableRowRestriction">
+                  <point x="-57.083333333333314" y="-18.0" />
+                  <point x="1389.8333333333335" y="2452.0" />
+                  <point x="186.00803571428605" y="2452.0" />
+                  <point x="186.00803571428605" y="1616.0" />
+                  <point x="125.0" y="1616.0" />
+                  <point x="-125.0" y="113.0" />
+                </edge>
+                <edge source="DBMSi.TwoThreeTree.Nodo" target="DBMSi.TwoThreeTree">
+                  <point x="258.66666666666674" y="437.0" />
+                  <point x="2740.25" y="1626.0" />
+                  <point x="2659.0675595238095" y="1626.0" />
+                  <point x="124.40000000000009" y="-356.0" />
+                </edge>
+                <edge source="DBMSi.HashTable" target="DBMSi.HashTable.UpdateNode">
+                  <point x="73.11111111111109" y="-383.0" />
+                  <point x="1181.027777777778" y="1626.0" />
+                  <point x="1200.0000000000002" y="1626.0" />
+                  <point x="-88.0" y="31.5" />
+                </edge>
+                <edge source="DBMSi.HashTable" target="DBMSi.TableRowRestriction">
+                  <point x="-292.44444444444434" y="-383.0" />
+                  <point x="815.4722222222226" y="1616.0" />
+                  <point x="375.0" y="1616.0" />
+                  <point x="125.0" y="113.0" />
+                </edge>
+                <edge source="DBMSi.AVLTree" target="DBMSi.DataType">
+                  <point x="-164.50000000000006" y="-383.0" />
+                  <point x="1621.416666666667" y="1626.0" />
+                  <point x="1658.2500000000002" y="1626.0" />
+                  <point x="72.75" y="153.5" />
+                </edge>
+                <edge source="Menu" target="DBMSi.Table">
+                  <point x="-34.25" y="-18.0" />
+                  <point x="1412.666666666667" y="2442.0" />
+                  <point x="627.5442460317461" y="2442.0" />
+                  <point x="627.5442460317461" y="1626.0" />
+                  <point x="688.9000000000003" y="1626.0" />
+                  <point x="-112.59999999999991" y="315.5" />
+                </edge>
+                <edge source="Menu" target="DBMSi.TwoThreeTree">
+                  <point x="34.25" y="-18.0" />
+                  <point x="1481.166666666667" y="2442.0" />
+                  <point x="2534.6675595238094" y="2442.0" />
+                  <point x="0.0" y="356.0" />
+                </edge>
+                <edge source="DBMSi.AVLTree" target="DBMSi.AVLTree.AVLNode">
+                  <point x="54.833333333333314" y="-383.0" />
+                  <point x="1840.7500000000002" y="1626.0" />
+                  <point x="1816.7500000000002" y="1626.0" />
+                  <point x="-102.33333333333331" y="113.0" />
+                </edge>
+                <edge source="DBMSi.HashTable.UpdateNode" target="DBMSi.TableRow">
+                  <point x="0.0" y="-31.5" />
+                  <point x="1288.0000000000002" y="682.0" />
+                  <point x="1912.9644841269842" y="682.0" />
+                  <point x="-105.11111111111109" y="126.5" />
+                </edge>
+                <edge source="DBMSi.TwoThreeTree.Nodo" target="DBMSi.TableRow">
+                  <point x="-194.0" y="-437.0" />
+                  <point x="2287.5833333333335" y="632.0" />
+                  <point x="2070.6311507936507" y="632.0" />
+                  <point x="52.55555555555566" y="126.5" />
+                </edge>
+                <edge source="DBMSi.TableRowRestriction" target="DBMSi.TableRowRestriction.Restriction">
+                  <point x="62.5" y="-113.0" />
+                  <point x="312.5" y="692.0" />
+                  <point x="279.3333333333335" y="692.0" />
+                  <point x="0.0" y="58.5" />
+                </edge>
+                <edge source="DBMSi.HashTable" target="DBMSi.Table">
+                  <point x="-219.33333333333326" y="-383.0" />
+                  <point x="888.5833333333337" y="1606.0" />
+                  <point x="801.5000000000002" y="1606.0" />
+                  <point x="0.0" y="315.5" />
+                </edge>
+                <edge source="Menu" target="DBMSi.AVLTree">
+                  <point x="11.416666666666686" y="-18.0" />
+                  <point x="1458.3333333333335" y="2432.0" />
+                  <point x="1785.916666666667" y="2432.0" />
+                  <point x="0.0" y="383.0" />
+                </edge>
+                <edge source="DBMSi.HashTable.UpdateNode" target="DBMSi.HashTable">
+                  <point x="88.0" y="31.5" />
+                  <point x="1376.0000000000002" y="1626.0" />
+                  <point x="1327.2500000000002" y="1626.0" />
+                  <point x="219.33333333333326" y="-383.0" />
+                </edge>
+                <edge source="DBMSi.AVLTree" target="DBMSi.TableDataStructure">
+                  <point x="-54.83333333333337" y="-383.0" />
+                  <point x="1731.0833333333335" y="1626.0" />
+                  <point x="1755.0833333333335" y="1626.0" />
+                  <point x="1755.0833333333335" y="652.0" />
+                  <point x="1440.825595238095" y="652.0" />
+                  <point x="50.25" y="207.5" />
+                </edge>
+                <edge source="DataBaseManagamentSimulator" target="DBMSi.Table">
+                  <point x="-85.33333333333326" y="-72.5" />
+                  <point x="1327.3333333333335" y="2533.0" />
+                  <point x="169.54970238095257" y="2533.0" />
+                  <point x="169.54970238095257" y="1626.0" />
+                  <point x="576.3000000000004" y="1626.0" />
+                  <point x="-225.19999999999982" y="315.5" />
+                </edge>
+                <edge source="DBMSi.AVLTree.AVLNode" target="DBMSi.AVLTree">
+                  <point x="102.33333333333326" y="113.0" />
+                  <point x="2021.4166666666667" y="1626.0" />
+                  <point x="2060.083333333334" y="1626.0" />
+                  <point x="274.1666666666668" y="-383.0" />
+                </edge>
+                <edge source="DBMSi.HashTable" target="DBMSi.TableRow">
+                  <point x="0.0" y="-383.0" />
+                  <point x="1107.916666666667" y="672.0" />
+                  <point x="1860.4089285714285" y="672.0" />
+                  <point x="-157.66666666666663" y="126.5" />
+                </edge>
+                <edge source="Menu" target="DBMSi.HashTable">
+                  <point x="-11.416666666666657" y="-18.0" />
+                  <point x="1435.5000000000002" y="2432.0" />
+                  <point x="1107.916666666667" y="2432.0" />
+                  <point x="0.0" y="383.0" />
+                </edge>
+                <edge source="DBMSi.Table" target="DBMSi.TableRow">
+                  <point x="140.75" y="-315.5" />
+                  <point x="942.2500000000002" y="662.0" />
+                  <point x="1807.8533730158729" y="662.0" />
+                  <point x="-210.22222222222217" y="126.5" />
+                </edge>
+                <edge source="DBMSi.TwoThreeTree" target="DBMSi.TableDataStructure">
+                  <point x="-248.79999999999995" y="-356.0" />
+                  <point x="2285.867559523809" y="1626.0" />
+                  <point x="2083.0833333333335" y="1626.0" />
+                  <point x="2083.0833333333335" y="642.0" />
+                  <point x="1541.325595238095" y="642.0" />
+                  <point x="150.75" y="207.5" />
+                </edge>
+                <edge source="DBMSi.TwoThreeTree" target="DBMSi.TableRow">
+                  <point x="248.79999999999995" y="-356.0" />
+                  <point x="2783.4675595238095" y="1626.0" />
+                  <point x="2880.0833333333335" y="1626.0" />
+                  <point x="2880.0833333333335" y="612.0" />
+                  <point x="2175.7422619047616" y="612.0" />
+                  <point x="157.66666666666652" y="126.5" />
+                </edge>
+                <edge source="Menu" target="DBMSi.TableRow">
+                  <point x="57.083333333333314" y="-18.0" />
+                  <point x="1504.0000000000002" y="2452.0" />
+                  <point x="2900.1675595238094" y="2452.0" />
+                  <point x="2900.1675595238094" y="602.0" />
+                  <point x="2228.297817460317" y="602.0" />
+                  <point x="210.22222222222217" y="126.5" />
+                </edge>
+                <edge source="DBMSi.HashTable" target="DBMSi.DataType">
+                  <point x="292.44444444444434" y="-383.0" />
+                  <point x="1400.3611111111113" y="1626.0" />
+                  <point x="1512.7500000000002" y="1626.0" />
+                  <point x="-72.75" y="153.5" />
+                </edge>
+                <edge source="DBMSi.AVLTree.AVLNode" target="DBMSi.TableRow">
+                  <point x="-76.75" y="-113.0" />
+                  <point x="1842.3333333333335" y="692.0" />
+                  <point x="1965.5200396825394" y="692.0" />
+                  <point x="-52.55555555555566" y="126.5" />
+                </edge>
+                <edge source="DBMSi.HashTable" target="DBMSi.TableDataStructure">
+                  <point x="-73.11111111111109" y="-383.0" />
+                  <point x="1034.8055555555559" y="1626.0" />
+                  <point x="1093.5000000000002" y="1626.0" />
+                  <point x="1093.5000000000002" y="652.0" />
+                  <point x="1340.325595238095" y="652.0" />
+                  <point x="-50.25" y="207.5" />
+                </edge>
+                <edge source="DBMSi.Table" target="DBMSi.TableDataStructure">
+                  <point x="-140.75" y="-315.5" />
+                  <point x="660.7500000000002" y="642.0" />
+                  <point x="1239.825595238095" y="642.0" />
+                  <point x="-150.75" y="207.5" />
+                </edge>
+                <edge source="DBMSi.TableRowRestriction.Restriction" target="DBMSi.TableRowRestriction.RestrictionType">
+                  <point x="0.0" y="-58.5" />
+                  <point x="279.3333333333335" y="142.0" />
+                  <point x="270.3333333333335" y="142.0" />
+                  <point x="40.25" y="58.5" />
+                </edge>
+                <edge source="Main" target="DataBaseManagamentSimulator">
+                  <point x="0.0" y="-31.5" />
+                  <point x="0.0" y="72.5" />
+                </edge>
+                <edge source="DBMSi.TableRowRestriction.RestrictionType" target="DBMSi.TableRowRestriction">
+                  <point x="-40.25" y="58.5" />
+                  <point x="189.83333333333348" y="142.0" />
+                  <point x="180.83333333333348" y="142.0" />
+                  <point x="180.83333333333348" y="692.0" />
+                  <point x="62.5" y="692.0" />
+                  <point x="-187.5" y="-113.0" />
+                </edge>
+                <edge source="DataBaseManagamentSimulator" target="Menu">
+                  <point x="85.33333333333326" y="-72.5" />
+                  <point x="1498.0" y="2533.0" />
+                  <point x="1481.166666666667" y="2533.0" />
+                  <point x="34.25" y="18.0" />
+                </edge>
+                <edge source="DBMSi.TwoThreeTree" target="DBMSi.TwoThreeTree.Nodo">
+                  <point x="0.0" y="-356.0" />
+                  <point x="2534.6675595238094" y="1626.0" />
+                  <point x="2481.5833333333335" y="1626.0" />
+                  <point x="0.0" y="437.0" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="818.8571428571429" y="2302.8571428571427" />
+              <SelectedNodes>
+                <node>Menu</node>
+              </SelectedNodes>
+              <Categories>
+                <Category>Fields</Category>
+                <Category>Methods</Category>
+                <Category>Inner Classes</Category>
+              </Categories>
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
             </state>
           </provider>
         </entry>
@@ -74,7 +341,7 @@
       <file leaf-file-name="DatabaseInput.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DBMSi/DatabaseInput.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
+            <state relative-caret-position="549">
               <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
               <folding>
                 <element signature="method#readIndexColumnName#0;class#DatabaseInput#0" expanded="false" />
@@ -113,14 +380,13 @@
       <file leaf-file-name="TwoThreeTree.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DBMSi/TwoThreeTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="524" column="0" lean-forward="true" selection-start-line="524" selection-start-column="0" selection-end-line="524" selection-end-column="0" />
+            <state relative-caret-position="298">
+              <caret line="277" column="76" lean-forward="true" selection-start-line="277" selection-start-column="76" selection-end-line="277" selection-end-column="76" />
               <folding>
                 <element signature="method#setIndex#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#guardarHijos#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#hadValue#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#select#1;class#TwoThreeTree#0" expanded="false" />
-                <element signature="method#remove#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#delete3nodo#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#delete2nodo#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#goDown#0;class#TwoThreeTree#0" expanded="false" />
@@ -132,18 +398,18 @@
                 <element signature="method#sameValue#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#copy#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#deleteSon#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-                <element signature="e#22257#22258#0" expanded="true" />
-                <element signature="e#22290#22291#0" expanded="true" />
+                <element signature="e#22585#22586#0" expanded="true" />
+                <element signature="e#22618#22619#0" expanded="true" />
                 <element signature="method#setLv#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#setBv#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-                <element signature="e#22655#22656#0" expanded="true" />
-                <element signature="e#22692#22693#0" expanded="true" />
+                <element signature="e#22983#22984#0" expanded="true" />
+                <element signature="e#23020#23021#0" expanded="true" />
                 <element signature="method#setLn#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#setMn#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#setBn#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
                 <element signature="method#deleteSons#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-                <element signature="e#23630#23631#0" expanded="true" />
-                <element signature="e#23664#23665#0" expanded="true" />
+                <element signature="e#23958#23959#0" expanded="true" />
+                <element signature="e#23992#23993#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -152,65 +418,9 @@
       <file leaf-file-name="TableDataStructure.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DBMSi/TableDataStructure.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="692">
-              <caret line="82" column="4" lean-forward="false" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="70" />
+            <state relative-caret-position="494">
+              <caret line="92" column="31" lean-forward="false" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AVLTree.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DBMSi/AVLTree.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="451" column="20" lean-forward="true" selection-start-line="451" selection-start-column="20" selection-end-line="451" selection-end-column="20" />
-              <folding>
-                <element signature="method#add#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#select#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#update#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#remove#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#getData#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#rowsToCSV#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#nodeCount#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#insert#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#selectPreorder#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#delete#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#delete#1;class#AVLTree#0" expanded="false" />
-                <element signature="method#killNode#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#searchNode#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#searchNodeByIndex#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#minNode#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#rotateLeft#0;class#AVLTree#0" expanded="false" />
-                <element signature="method#rotateRight#0;class#AVLTree#0" expanded="false" />
-                <element signature="e#12876#12877#0" expanded="true" />
-                <element signature="e#12903#12904#0" expanded="true" />
-                <element signature="method#balanceTree#0;class#AVLTree#0" expanded="false" />
-                <element signature="class#AVLNode#0;class#AVLTree#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HashTable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DBMSi/HashTable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="238" column="3" lean-forward="true" selection-start-line="238" selection-start-column="3" selection-end-line="240" selection-end-column="5" />
-              <folding>
-                <element signature="method#HashTable#0;class#HashTable#0" expanded="false" />
-                <element signature="method#add#0;class#HashTable#0" expanded="false" />
-                <element signature="method#select#0;class#HashTable#0" expanded="false" />
-                <element signature="e#7199#7200#0" expanded="true" />
-                <element signature="e#7226#7227#0" expanded="true" />
-                <element signature="method#remove#0;class#HashTable#0" expanded="false" />
-                <element signature="method#hashi#0;class#HashTable#0" expanded="false" />
-                <element signature="method#hashi#1;class#HashTable#0" expanded="false" />
-                <element signature="method#hashi1#1;class#HashTable#0" expanded="false" />
-                <element signature="method#hashi2#1;class#HashTable#0" expanded="false" />
-                <element signature="method#checkCapacity#0;class#HashTable#0" expanded="false" />
-                <element signature="class#UpdateNode#0;class#HashTable#0" expanded="false" />
-                <element signature="method#main#0;class#HashTable#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -218,8 +428,8 @@
       <file leaf-file-name="Table.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DBMSi/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+            <state relative-caret-position="320">
+              <caret line="207" column="33" lean-forward="false" selection-start-line="207" selection-start-column="33" selection-end-line="207" selection-end-column="33" />
               <folding>
                 <element signature="method#importCSV#0;class#Table#0" expanded="false" />
                 <element signature="method#toString#0;class#Table#0" expanded="false" />
@@ -263,9 +473,10 @@
       <find>getLv</find>
       <find>null, null</find>
       <find>sc.nextInt()</find>
-      <find>Size</find>
       <find>GoToRaiz</find>
       <find>update</find>
+      <find>Size</find>
+      <find>remove</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -412,6 +623,118 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jorti\Desktop\PAED_DBMSi\Practica2_PAED_DBMSi" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/DBMSi/AVLTree.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/DBMSi/HashTable.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/DBMSi/TableDataStructure.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -874,7 +1197,7 @@
       <workItem from="1500773484354" duration="13211000" />
       <workItem from="1500787678299" duration="1996000" />
       <workItem from="1500803847250" duration="7585000" />
-      <workItem from="1500814951865" duration="4018000" />
+      <workItem from="1500814951865" duration="6707000" />
     </task>
     <task id="LOCAL-00001" summary="Tabla de Hash: funciones `add`, `remove` y `size` implementadas.">
       <created>1500544517271</created>
@@ -904,11 +1227,18 @@
       <option name="project" value="LOCAL" />
       <updated>1500803871624</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Falta por implementar las funcions getHistoricalData de HashTable y AVLTree">
+      <created>1500819019731</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1500819019731</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78592000" />
+    <option name="totallyTimeSpent" value="81281000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
@@ -957,18 +1287,11 @@
     <MESSAGE value="Update de Tabla de Hash terminado" />
     <MESSAGE value="Funciones de hash implementadas" />
     <MESSAGE value="Todo lo mio" />
-    <option name="LAST_COMMIT_MESSAGE" value="Todo lo mio" />
+    <MESSAGE value="Falta por implementar las funcions getHistoricalData de HashTable y AVLTree" />
+    <option name="LAST_COMMIT_MESSAGE" value="Falta por implementar las funcions getHistoricalData de HashTable y AVLTree" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/DBMSi/TwoThreeTree.java</url>
-          <line>238</line>
-          <properties class="DBMSi.TwoThreeTree" method="update" />
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="36" />
     </breakpoint-manager>
     <watches-manager>
@@ -982,77 +1305,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Menu/Menu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2970">
-          <caret line="170" column="31" lean-forward="false" selection-start-line="170" selection-start-column="31" selection-end-line="170" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#createTable#0;class#Menu#0" expanded="false" />
-            <element signature="method#newColumn#0;class#Menu#0" expanded="false" />
-            <element signature="method#checkName#0;class#Menu#0" expanded="false" />
-            <element signature="method#selectIndex#0;class#Menu#0" expanded="false" />
-            <element signature="method#manageTable#0;class#Menu#0" expanded="false" />
-            <element signature="method#updateRow#0;class#Menu#0" expanded="false" />
-            <element signature="method#listTables#0;class#Menu#0" expanded="false" />
-            <element signature="method#checkTables#0;class#Menu#0" expanded="false" />
-            <element signature="method#insert#0;class#Menu#0" expanded="false" />
-            <element signature="method#setInfo#0;class#Menu#0" expanded="false" />
-            <element signature="method#showRow#0;class#Menu#0" expanded="false" />
-            <element signature="method#selectMenu#0;class#Menu#0" expanded="false" />
-            <element signature="method#newCondition#0;class#Menu#0" expanded="false" />
-            <element signature="method#importData#0;class#Menu#0" expanded="false" />
-            <element signature="method#exportData#0;class#Menu#0" expanded="false" />
-            <element signature="method#visualitzeTable#0;class#Menu#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataBaseManagamentSimulator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="41" column="35" lean-forward="false" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DBMSi/TwoThreeTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#setIndex#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#guardarHijos#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#hadValue#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#select#1;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#remove#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#delete3nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#delete2nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#goDown#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#getData#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#getData#1;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#Nodo#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#Nodo#1;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#nextToStudy#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#sameValue#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#copy#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#deleteSon#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="e#22257#22258#0" expanded="true" />
-            <element signature="e#22290#22291#0" expanded="true" />
-            <element signature="method#setLv#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#setBv#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="e#22655#22656#0" expanded="true" />
-            <element signature="e#22692#22693#0" expanded="true" />
-            <element signature="method#setLn#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#setMn#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#setBn#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#deleteSons#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="e#23630#23631#0" expanded="true" />
-            <element signature="e#23664#23665#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DBMSi/TableDataStructure.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
@@ -1181,7 +1433,6 @@
             <element signature="method#newColumn#0;class#Menu#0" expanded="false" />
             <element signature="method#checkName#0;class#Menu#0" expanded="false" />
             <element signature="method#selectIndex#0;class#Menu#0" expanded="false" />
-            <element signature="method#manageTable#0;class#Menu#0" expanded="false" />
             <element signature="method#updateRow#0;class#Menu#0" expanded="false" />
             <element signature="method#listTables#0;class#Menu#0" expanded="false" />
             <element signature="method#checkTables#0;class#Menu#0" expanded="false" />
@@ -1193,6 +1444,7 @@
             <element signature="method#importData#0;class#Menu#0" expanded="false" />
             <element signature="method#exportData#0;class#Menu#0" expanded="false" />
             <element signature="method#visualitzeTable#0;class#Menu#0" expanded="false" />
+            <element signature="method#showTables#0;class#Menu#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1225,7 +1477,6 @@
             <element signature="method#newColumn#0;class#Menu#0" expanded="false" />
             <element signature="method#checkName#0;class#Menu#0" expanded="false" />
             <element signature="method#selectIndex#0;class#Menu#0" expanded="false" />
-            <element signature="method#manageTable#0;class#Menu#0" expanded="false" />
             <element signature="method#updateRow#0;class#Menu#0" expanded="false" />
             <element signature="method#listTables#0;class#Menu#0" expanded="false" />
             <element signature="method#checkTables#0;class#Menu#0" expanded="false" />
@@ -1237,6 +1488,7 @@
             <element signature="method#importData#0;class#Menu#0" expanded="false" />
             <element signature="method#exportData#0;class#Menu#0" expanded="false" />
             <element signature="method#visualitzeTable#0;class#Menu#0" expanded="false" />
+            <element signature="method#showTables#0;class#Menu#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1409,14 +1661,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DBMSi/TableDataStructure.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="82" column="4" lean-forward="false" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DBMSi/HashTable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1425,8 +1669,8 @@
             <element signature="method#HashTable#0;class#HashTable#0" expanded="false" />
             <element signature="method#add#0;class#HashTable#0" expanded="false" />
             <element signature="method#select#0;class#HashTable#0" expanded="false" />
-            <element signature="e#7199#7200#0" expanded="true" />
-            <element signature="e#7226#7227#0" expanded="true" />
+            <element signature="e#7579#7580#0" expanded="false" />
+            <element signature="e#9588#9589#0" expanded="false" />
             <element signature="method#remove#0;class#HashTable#0" expanded="false" />
             <element signature="method#hashi#0;class#HashTable#0" expanded="false" />
             <element signature="method#hashi#1;class#HashTable#0" expanded="false" />
@@ -1461,8 +1705,8 @@
             <element signature="method#minNode#0;class#AVLTree#0" expanded="false" />
             <element signature="method#rotateLeft#0;class#AVLTree#0" expanded="false" />
             <element signature="method#rotateRight#0;class#AVLTree#0" expanded="false" />
-            <element signature="e#12876#12877#0" expanded="true" />
-            <element signature="e#12903#12904#0" expanded="true" />
+            <element signature="e#13160#13161#0" expanded="false" />
+            <element signature="e#13834#13835#0" expanded="false" />
             <element signature="method#balanceTree#0;class#AVLTree#0" expanded="false" />
             <element signature="class#AVLNode#0;class#AVLTree#0" expanded="false" />
           </folding>
@@ -1477,16 +1721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DBMSi/DatabaseInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-          <folding>
-            <element signature="method#readIndexColumnName#0;class#DatabaseInput#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DBMSi/TableRow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1495,19 +1729,6 @@
             <element signature="e#779#780#0" expanded="true" />
             <element signature="e#1123#1124#0" expanded="true" />
             <element signature="e#1165#1166#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DBMSi/Table.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-          <folding>
-            <element signature="method#importCSV#0;class#Table#0" expanded="false" />
-            <element signature="method#toString#0;class#Table#0" expanded="false" />
-            <element signature="e#8996#8997#0" expanded="true" />
-            <element signature="e#9053#9054#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1535,16 +1756,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/DBMSi/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="207" column="33" lean-forward="false" selection-start-line="207" selection-start-column="33" selection-end-line="207" selection-end-column="33" />
+          <folding>
+            <element signature="method#importCSV#0;class#Table#0" expanded="false" />
+            <element signature="method#toString#0;class#Table#0" expanded="false" />
+            <element signature="e#8996#8997#0" expanded="true" />
+            <element signature="e#9053#9054#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DBMSi/TableDataStructure.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="92" column="31" lean-forward="false" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DBMSi/DatabaseInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+          <folding>
+            <element signature="method#readIndexColumnName#0;class#DatabaseInput#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/DBMSi/TwoThreeTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="524" column="0" lean-forward="true" selection-start-line="524" selection-start-column="0" selection-end-line="524" selection-end-column="0" />
+        <state relative-caret-position="298">
+          <caret line="277" column="76" lean-forward="true" selection-start-line="277" selection-start-column="76" selection-end-line="277" selection-end-column="76" />
           <folding>
             <element signature="method#setIndex#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#guardarHijos#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#hadValue#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#select#1;class#TwoThreeTree#0" expanded="false" />
-            <element signature="method#remove#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#delete3nodo#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#delete2nodo#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#goDown#0;class#TwoThreeTree#0" expanded="false" />
@@ -1556,33 +1807,340 @@
             <element signature="method#sameValue#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#copy#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#deleteSon#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="e#22257#22258#0" expanded="true" />
-            <element signature="e#22290#22291#0" expanded="true" />
+            <element signature="e#22585#22586#0" expanded="true" />
+            <element signature="e#22618#22619#0" expanded="true" />
             <element signature="method#setLv#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#setBv#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="e#22655#22656#0" expanded="true" />
-            <element signature="e#22692#22693#0" expanded="true" />
+            <element signature="e#22983#22984#0" expanded="true" />
+            <element signature="e#23020#23021#0" expanded="true" />
             <element signature="method#setLn#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#setMn#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#setBn#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
             <element signature="method#deleteSons#0;class#Nodo#0;class#TwoThreeTree#0" expanded="false" />
-            <element signature="e#23630#23631#0" expanded="true" />
-            <element signature="e#23664#23665#0" expanded="true" />
+            <element signature="e#23958#23959#0" expanded="true" />
+            <element signature="e#23992#23993#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/Menu.Menu">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>Menu.Menu</OriginalElement>
+          <nodes>
+            <node x="" y="">Menu.Menu</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="39.0" y="18.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/Menu">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>Menu</OriginalElement>
+          <nodes>
+            <node x="" y="">Menu.Menu</node>
+            <node x="" y="">Menu.Screen</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="42.5" y="58.5" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="1259.0" y="2861.0">com</node>
+            <node x="506.0" y="2861.0">netscape</node>
+            <node x="1440.0000000000002" y="995.5">DBMSi.DataType</node>
+            <node x="1456.916666666667" y="1646.0">DBMSi.AVLTree</node>
+            <node x="520.0000000000002" y="833.5">DBMSi.Table</node>
+            <node x="1773.0" y="2861.0">sun</node>
+            <node x="2223.6675595238094" y="1673.0">DBMSi.TwoThreeTree</node>
+            <node x="149.58333333333348" y="0.0">DBMSi.TableRowRestriction.RestrictionType</node>
+            <node x="1433.0" y="2861.0">java</node>
+            <node x="1080.0" y="2861.0">javax</node>
+            <node x="0.0" y="1036.0">DBMSi.TableRowRestriction</node>
+            <node x="1378.416666666667" y="2472.0">Menu</node>
+            <node x="896.0" y="2861.0">javafx</node>
+            <node x="1189.575595238095" y="167.0">DBMSi.TableDataStructure</node>
+            <node x="710.0" y="2861.0">oracle</node>
+            <node x="1605.0" y="2861.0">org</node>
+            <node x="0.0" y="2861.0">DBMSi.DatabaseInput</node>
+            <node x="778.916666666667" y="1646.0">DBMSi.HashTable</node>
+            <node x="2093.5833333333335" y="712.0">DBMSi.TwoThreeTree.Nodo</node>
+            <node x="294.0" y="2861.0">META-INF</node>
+            <node x="1940.0" y="2861.0">jdk</node>
+            <node x="1156.0000000000002" y="1117.5">DBMSi.HashTable.UpdateNode</node>
+            <node x="1284.666666666667" y="2558.0">DataBaseManagamentSimulator</node>
+            <node x="1765.5833333333335" y="1036.0">DBMSi.AVLTree.AVLNode</node>
+            <node x="1781.575595238095" y="248.0">DBMSi.TableRow</node>
+            <node x="1318.666666666667" y="2753.0">Main</node>
+            <node x="191.33333333333348" y="316.0">DBMSi.TableRowRestriction.Restriction</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="DBMSi.TableRowRestriction.Restriction" target="DBMSi.TableRowRestriction">
+              <point x="58.66666666666674" y="58.5" />
+              <point x="338.0000000000002" y="692.0" />
+              <point x="437.5" y="692.0" />
+              <point x="187.5" y="-113.0" />
+            </edge>
+            <edge source="DBMSi.AVLTree" target="DBMSi.Table">
+              <point x="-274.16666666666674" y="-383.0" />
+              <point x="1511.7500000000002" y="1616.0" />
+              <point x="1026.7" y="1616.0" />
+              <point x="225.19999999999982" y="315.5" />
+            </edge>
+            <edge source="Menu" target="DBMSi.TableRowRestriction">
+              <point x="-57.083333333333314" y="-18.0" />
+              <point x="1389.8333333333335" y="2452.0" />
+              <point x="186.00803571428605" y="2452.0" />
+              <point x="186.00803571428605" y="1616.0" />
+              <point x="125.0" y="1616.0" />
+              <point x="-125.0" y="113.0" />
+            </edge>
+            <edge source="DBMSi.TwoThreeTree.Nodo" target="DBMSi.TwoThreeTree">
+              <point x="258.66666666666674" y="437.0" />
+              <point x="2740.25" y="1626.0" />
+              <point x="2659.0675595238095" y="1626.0" />
+              <point x="124.40000000000009" y="-356.0" />
+            </edge>
+            <edge source="DBMSi.HashTable" target="DBMSi.HashTable.UpdateNode">
+              <point x="73.11111111111109" y="-383.0" />
+              <point x="1181.027777777778" y="1626.0" />
+              <point x="1200.0000000000002" y="1626.0" />
+              <point x="-88.0" y="31.5" />
+            </edge>
+            <edge source="DBMSi.HashTable" target="DBMSi.TableRowRestriction">
+              <point x="-292.44444444444434" y="-383.0" />
+              <point x="815.4722222222226" y="1616.0" />
+              <point x="375.0" y="1616.0" />
+              <point x="125.0" y="113.0" />
+            </edge>
+            <edge source="DBMSi.AVLTree" target="DBMSi.DataType">
+              <point x="-164.50000000000006" y="-383.0" />
+              <point x="1621.416666666667" y="1626.0" />
+              <point x="1658.2500000000002" y="1626.0" />
+              <point x="72.75" y="153.5" />
+            </edge>
+            <edge source="Menu" target="DBMSi.Table">
+              <point x="-34.25" y="-18.0" />
+              <point x="1412.666666666667" y="2442.0" />
+              <point x="627.5442460317461" y="2442.0" />
+              <point x="627.5442460317461" y="1626.0" />
+              <point x="688.9000000000003" y="1626.0" />
+              <point x="-112.59999999999991" y="315.5" />
+            </edge>
+            <edge source="Menu" target="DBMSi.TwoThreeTree">
+              <point x="34.25" y="-18.0" />
+              <point x="1481.166666666667" y="2442.0" />
+              <point x="2534.6675595238094" y="2442.0" />
+              <point x="0.0" y="356.0" />
+            </edge>
+            <edge source="DBMSi.AVLTree" target="DBMSi.AVLTree.AVLNode">
+              <point x="54.833333333333314" y="-383.0" />
+              <point x="1840.7500000000002" y="1626.0" />
+              <point x="1816.7500000000002" y="1626.0" />
+              <point x="-102.33333333333331" y="113.0" />
+            </edge>
+            <edge source="DBMSi.HashTable.UpdateNode" target="DBMSi.TableRow">
+              <point x="0.0" y="-31.5" />
+              <point x="1288.0000000000002" y="682.0" />
+              <point x="1912.9644841269842" y="682.0" />
+              <point x="-105.11111111111109" y="126.5" />
+            </edge>
+            <edge source="DBMSi.TwoThreeTree.Nodo" target="DBMSi.TableRow">
+              <point x="-194.0" y="-437.0" />
+              <point x="2287.5833333333335" y="632.0" />
+              <point x="2070.6311507936507" y="632.0" />
+              <point x="52.55555555555566" y="126.5" />
+            </edge>
+            <edge source="DBMSi.TableRowRestriction" target="DBMSi.TableRowRestriction.Restriction">
+              <point x="62.5" y="-113.0" />
+              <point x="312.5" y="692.0" />
+              <point x="279.3333333333335" y="692.0" />
+              <point x="0.0" y="58.5" />
+            </edge>
+            <edge source="DBMSi.HashTable" target="DBMSi.Table">
+              <point x="-219.33333333333326" y="-383.0" />
+              <point x="888.5833333333337" y="1606.0" />
+              <point x="801.5000000000002" y="1606.0" />
+              <point x="0.0" y="315.5" />
+            </edge>
+            <edge source="Menu" target="DBMSi.AVLTree">
+              <point x="11.416666666666686" y="-18.0" />
+              <point x="1458.3333333333335" y="2432.0" />
+              <point x="1785.916666666667" y="2432.0" />
+              <point x="0.0" y="383.0" />
+            </edge>
+            <edge source="DBMSi.HashTable.UpdateNode" target="DBMSi.HashTable">
+              <point x="88.0" y="31.5" />
+              <point x="1376.0000000000002" y="1626.0" />
+              <point x="1327.2500000000002" y="1626.0" />
+              <point x="219.33333333333326" y="-383.0" />
+            </edge>
+            <edge source="DBMSi.AVLTree" target="DBMSi.TableDataStructure">
+              <point x="-54.83333333333337" y="-383.0" />
+              <point x="1731.0833333333335" y="1626.0" />
+              <point x="1755.0833333333335" y="1626.0" />
+              <point x="1755.0833333333335" y="652.0" />
+              <point x="1440.825595238095" y="652.0" />
+              <point x="50.25" y="207.5" />
+            </edge>
+            <edge source="DataBaseManagamentSimulator" target="DBMSi.Table">
+              <point x="-85.33333333333326" y="-72.5" />
+              <point x="1327.3333333333335" y="2533.0" />
+              <point x="169.54970238095257" y="2533.0" />
+              <point x="169.54970238095257" y="1626.0" />
+              <point x="576.3000000000004" y="1626.0" />
+              <point x="-225.19999999999982" y="315.5" />
+            </edge>
+            <edge source="DBMSi.AVLTree.AVLNode" target="DBMSi.AVLTree">
+              <point x="102.33333333333326" y="113.0" />
+              <point x="2021.4166666666667" y="1626.0" />
+              <point x="2060.083333333334" y="1626.0" />
+              <point x="274.1666666666668" y="-383.0" />
+            </edge>
+            <edge source="DBMSi.HashTable" target="DBMSi.TableRow">
+              <point x="0.0" y="-383.0" />
+              <point x="1107.916666666667" y="672.0" />
+              <point x="1860.4089285714285" y="672.0" />
+              <point x="-157.66666666666663" y="126.5" />
+            </edge>
+            <edge source="Menu" target="DBMSi.HashTable">
+              <point x="-11.416666666666657" y="-18.0" />
+              <point x="1435.5000000000002" y="2432.0" />
+              <point x="1107.916666666667" y="2432.0" />
+              <point x="0.0" y="383.0" />
+            </edge>
+            <edge source="DBMSi.Table" target="DBMSi.TableRow">
+              <point x="140.75" y="-315.5" />
+              <point x="942.2500000000002" y="662.0" />
+              <point x="1807.8533730158729" y="662.0" />
+              <point x="-210.22222222222217" y="126.5" />
+            </edge>
+            <edge source="DBMSi.TwoThreeTree" target="DBMSi.TableDataStructure">
+              <point x="-248.79999999999995" y="-356.0" />
+              <point x="2285.867559523809" y="1626.0" />
+              <point x="2083.0833333333335" y="1626.0" />
+              <point x="2083.0833333333335" y="642.0" />
+              <point x="1541.325595238095" y="642.0" />
+              <point x="150.75" y="207.5" />
+            </edge>
+            <edge source="DBMSi.TwoThreeTree" target="DBMSi.TableRow">
+              <point x="248.79999999999995" y="-356.0" />
+              <point x="2783.4675595238095" y="1626.0" />
+              <point x="2880.0833333333335" y="1626.0" />
+              <point x="2880.0833333333335" y="612.0" />
+              <point x="2175.7422619047616" y="612.0" />
+              <point x="157.66666666666652" y="126.5" />
+            </edge>
+            <edge source="Menu" target="DBMSi.TableRow">
+              <point x="57.083333333333314" y="-18.0" />
+              <point x="1504.0000000000002" y="2452.0" />
+              <point x="2900.1675595238094" y="2452.0" />
+              <point x="2900.1675595238094" y="602.0" />
+              <point x="2228.297817460317" y="602.0" />
+              <point x="210.22222222222217" y="126.5" />
+            </edge>
+            <edge source="DBMSi.HashTable" target="DBMSi.DataType">
+              <point x="292.44444444444434" y="-383.0" />
+              <point x="1400.3611111111113" y="1626.0" />
+              <point x="1512.7500000000002" y="1626.0" />
+              <point x="-72.75" y="153.5" />
+            </edge>
+            <edge source="DBMSi.AVLTree.AVLNode" target="DBMSi.TableRow">
+              <point x="-76.75" y="-113.0" />
+              <point x="1842.3333333333335" y="692.0" />
+              <point x="1965.5200396825394" y="692.0" />
+              <point x="-52.55555555555566" y="126.5" />
+            </edge>
+            <edge source="DBMSi.HashTable" target="DBMSi.TableDataStructure">
+              <point x="-73.11111111111109" y="-383.0" />
+              <point x="1034.8055555555559" y="1626.0" />
+              <point x="1093.5000000000002" y="1626.0" />
+              <point x="1093.5000000000002" y="652.0" />
+              <point x="1340.325595238095" y="652.0" />
+              <point x="-50.25" y="207.5" />
+            </edge>
+            <edge source="DBMSi.Table" target="DBMSi.TableDataStructure">
+              <point x="-140.75" y="-315.5" />
+              <point x="660.7500000000002" y="642.0" />
+              <point x="1239.825595238095" y="642.0" />
+              <point x="-150.75" y="207.5" />
+            </edge>
+            <edge source="DBMSi.TableRowRestriction.Restriction" target="DBMSi.TableRowRestriction.RestrictionType">
+              <point x="0.0" y="-58.5" />
+              <point x="279.3333333333335" y="142.0" />
+              <point x="270.3333333333335" y="142.0" />
+              <point x="40.25" y="58.5" />
+            </edge>
+            <edge source="Main" target="DataBaseManagamentSimulator">
+              <point x="0.0" y="-31.5" />
+              <point x="0.0" y="72.5" />
+            </edge>
+            <edge source="DBMSi.TableRowRestriction.RestrictionType" target="DBMSi.TableRowRestriction">
+              <point x="-40.25" y="58.5" />
+              <point x="189.83333333333348" y="142.0" />
+              <point x="180.83333333333348" y="142.0" />
+              <point x="180.83333333333348" y="692.0" />
+              <point x="62.5" y="692.0" />
+              <point x="-187.5" y="-113.0" />
+            </edge>
+            <edge source="DataBaseManagamentSimulator" target="Menu">
+              <point x="85.33333333333326" y="-72.5" />
+              <point x="1498.0" y="2533.0" />
+              <point x="1481.166666666667" y="2533.0" />
+              <point x="34.25" y="18.0" />
+            </edge>
+            <edge source="DBMSi.TwoThreeTree" target="DBMSi.TwoThreeTree.Nodo">
+              <point x="0.0" y="-356.0" />
+              <point x="2534.6675595238094" y="1626.0" />
+              <point x="2481.5833333333335" y="1626.0" />
+              <point x="0.0" y="437.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="818.8571428571429" y="2302.8571428571427" />
+          <SelectedNodes>
+            <node>Menu</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+            <Category>Inner Classes</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Menu/Menu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="495" column="49" lean-forward="false" selection-start-line="495" selection-start-column="49" selection-end-line="495" selection-end-column="49" />
+        <state relative-caret-position="406">
+          <caret line="505" column="45" lean-forward="false" selection-start-line="505" selection-start-column="45" selection-end-line="505" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#createTable#0;class#Menu#0" expanded="false" />
             <element signature="method#newColumn#0;class#Menu#0" expanded="false" />
             <element signature="method#checkName#0;class#Menu#0" expanded="false" />
             <element signature="method#selectIndex#0;class#Menu#0" expanded="false" />
-            <element signature="method#manageTable#0;class#Menu#0" expanded="false" />
             <element signature="method#updateRow#0;class#Menu#0" expanded="false" />
             <element signature="method#listTables#0;class#Menu#0" expanded="false" />
             <element signature="method#checkTables#0;class#Menu#0" expanded="false" />
@@ -1594,6 +2152,7 @@
             <element signature="method#importData#0;class#Menu#0" expanded="false" />
             <element signature="method#exportData#0;class#Menu#0" expanded="false" />
             <element signature="method#visualitzeTable#0;class#Menu#0" expanded="false" />
+            <element signature="method#showTables#0;class#Menu#0" expanded="false" />
           </folding>
         </state>
       </provider>
