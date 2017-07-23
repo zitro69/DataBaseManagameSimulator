@@ -1,6 +1,8 @@
 package DBMSi;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Vector;
 
 /**
@@ -314,6 +316,109 @@ public class HashTable extends TableDataStructure {
     }
 
     /**
+     * Exporta la tabla que impementa esta estructura de datos a CSV
+     * @param outputFile Objeto fichero en el que se quiere guardar el CSV
+     * @return true si se ha podido exportar la tabla con exito
+     */
+    public boolean toCSV(File outputFile){
+        if(outputFile == null){
+            return false;
+        }
+
+        if(outputFile.canWrite()){
+
+            try{
+
+                PrintWriter pw = new PrintWriter(outputFile);
+                StringBuilder sb = new StringBuilder();
+                String auxString = "";
+
+                for(String cName : table.getColumnNames()){
+                    auxString += cName + ",";
+                }
+
+                sb.append(auxString.replaceAll(",$", "\n"));
+
+                for(TableRow row : rows){
+                    if(row == null) continue;
+
+                    auxString = row.toString();
+                    auxString = auxString.replaceAll(" +", ",");
+                    auxString += "\n";
+
+                    sb.append(auxString);
+                }
+
+                pw.write(sb.toString());
+                pw.close();
+
+                System.out.println(outputFile.getName()+" file created successfully with a total of "+size+" rows.");
+
+            }catch(IOException e){
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Inserta filas a esta tabla a partir de los datos extraidos del fichero CSV.
+     * Ignora todas aquellas filas que no tengan el formato correcto e inserta las demas.
+     * @param inputFile Fichero fuente de datos
+     * @return true si se ha podido llevar a cabo con exito
+     */
+    public boolean fromCSV(File inputFile){
+        if(inputFile == null){
+            return false;
+        }
+
+        if(inputFile.canRead()){
+
+            System.out.println("Loading file data...");
+
+            try {
+                int rowsInserted = 0;
+                Scanner sc = new Scanner(inputFile);
+                String auxLine;
+                String[] columns, values;
+
+                TableRow auxRow;
+
+                auxLine = sc.nextLine();
+                columns = auxLine.trim().split(",");
+
+                while(sc.hasNextLine()){
+                    auxLine = sc.nextLine();
+                    values = auxLine.trim().split(",");
+
+                    if(values.length != columns.length)
+                        continue;
+
+                    auxRow = new TableRow();
+                    for(int i = 0; i < values.length; i++){
+                        auxRow.addColumn(columns[i], values[i]);
+                    }
+
+                    if(table.addRow(auxRow))
+                        rowsInserted++;
+                }
+                System.out.println("Data loaded successfully. A total of "+rowsInserted+" new rows have been insterted into "+table.getName());
+                sc.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Comprueba si la tabla contiene una fila con el indice especificado
      * @param index Indice a buscar
      * @return true si existe
@@ -442,21 +547,20 @@ public class HashTable extends TableDataStructure {
     }
 
     public static void main(String[] args) {
-        HashTable htable = new HashTable(1);
-        Table people = new Table("People", htable);
-        htable.setTable(people);
+        HashTable table = new HashTable(1);
+        Table people = new Table("People", table);
+        table.setTable(people);
 
         people.addColumn("id", DataType.INT);
         people.addColumn("name", DataType.TEXT);
         people.addColumn("online", DataType.BOOLEAN);
 
+        people.setIndex("name");
 
         TableRow row = new TableRow();
         row.addColumn("id", 123);
         row.addColumn("name", "alex");
         row.addColumn("online", true);
-
-        people.setIndex("id");
 
         people.addRow(row);
 
@@ -466,7 +570,23 @@ public class HashTable extends TableDataStructure {
         row.addColumn("online", false);
 
         people.addRow(row);
+        people.selectRows(null);
 
+        System.out.println();
+        System.out.println();
+
+        people.removeRow("javi");
+        people.selectRows(null);
+
+        row = new TableRow();
+        row.addColumn("id", 321);
+        row.addColumn("name", "alex");
+        row.addColumn("online", true);
+
+        System.out.println();
+        System.out.println();
+
+        people.updateRow(row);
         people.selectRows(null);
 
     }

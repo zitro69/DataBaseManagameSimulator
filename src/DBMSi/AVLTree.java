@@ -1,5 +1,7 @@
 package DBMSi;
 
+import java.util.ArrayList;
+
 /**
  * Created by jorti on 20/07/2017.
  */
@@ -82,9 +84,11 @@ public class AVLTree extends TableDataStructure {
         }
 
         if(aux == null){
+            System.err.println("No existe ninguna fila con "+field+"="+row.getContent().get(field));
             return false;
         }
 
+        aux.oldData.add(aux.element);
         aux.element = row;
         aux.indexKey = row.getContent().get(index);
         return true;
@@ -285,6 +289,7 @@ public class AVLTree extends TableDataStructure {
 
             root.indexKey = aux.indexKey;
             root.element = aux.element;
+            root.oldData = aux.oldData;
 
             root.rightChild = delete(root.rightChild, aux.indexKey);
         }
@@ -493,6 +498,8 @@ public class AVLTree extends TableDataStructure {
      */
     private static class AVLNode{
         TableRow element;
+        ArrayList<TableRow> oldData;
+
         Object indexKey;
 
         AVLNode leftChild;
@@ -503,6 +510,7 @@ public class AVLTree extends TableDataStructure {
             element = e;
             indexKey = index;
             height = 1;
+            oldData = new ArrayList<>();
 
             leftChild = null;
             rightChild = null;
@@ -519,7 +527,7 @@ public class AVLTree extends TableDataStructure {
         people.addColumn("name", DataType.TEXT);
         people.addColumn("online", DataType.BOOLEAN);
 
-        people.setIndex("id");
+        people.setIndex("name");
 
         TableRow row = new TableRow();
         row.addColumn("id", 123);
@@ -539,7 +547,21 @@ public class AVLTree extends TableDataStructure {
         System.out.println();
         System.out.println();
 
-        people.removeRow(132);
+        people.removeRow("javi");
+        people.selectRows(null);
+
+        row = new TableRow();
+        row.addColumn("id", 321);
+        row.addColumn("name", "alex");
+        row.addColumn("online", true);
+
+        System.out.println();
+        System.out.println();
+
+        people.updateRow(row);
+
+        people.addColumn("test", DataType.TEXT);
+
         people.selectRows(null);
     }
 }
