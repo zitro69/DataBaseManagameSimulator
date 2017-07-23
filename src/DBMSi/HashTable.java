@@ -1,9 +1,6 @@
 package DBMSi;
 
-import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Vector;
 
 /**
  * Tabla de hash de redispersion que implementa el almacenamiento de
@@ -239,6 +236,10 @@ public class HashTable extends TableDataStructure {
         return true;
     }
 
+    public  ArrayList<TableRow> getHistoricalRow(TableRow tr){
+        return null;
+    }
+
     @Override
     protected boolean remove(String field, Object value) {
 
@@ -316,48 +317,13 @@ public class HashTable extends TableDataStructure {
     }
 
     @Override
-    public boolean toCSV(File outputFile){
-        if(outputFile == null){
-            return false;
+    public ArrayList<TableRow> getData () {
+        ArrayList<TableRow> data = new ArrayList<>();
+        for (TableRow row : rows) {
+            if (row == null) continue;
+            data.add(row);
         }
-
-        //if(outputFile.canWrite()){
-
-            try{
-
-                PrintWriter pw = new PrintWriter(outputFile);
-                StringBuilder sb = new StringBuilder();
-                String auxString = "";
-
-                for(String cName : table.getColumnNames()){
-                    auxString += cName + ",";
-                }
-
-                sb.append(auxString.replaceAll(",$", "\n"));
-
-                for(TableRow row : rows){
-                    if(row == null) continue;
-
-                    auxString = row.toString();
-                    auxString = auxString.replaceAll(" +", ",");
-                    auxString += "\n";
-
-                    sb.append(auxString);
-                }
-
-                pw.write(sb.toString());
-                pw.close();
-
-                System.out.println(outputFile.getName()+" file created successfully with a total of "+size+" rows.");
-
-            }catch(IOException e){
-                e.printStackTrace();
-                return false;
-            }
-            return true;
-        //}
-
-        //return false;
+        return data;
     }
 
     /**

@@ -220,13 +220,6 @@ public class Table {
      * Exporta la tabla a un archivo CSV
      * @return true si se ha exportado correctamente la informacion
      */
-    public boolean exportCSV(){
-
-        File f = new File(name+".csv");
-        f.setWritable(true);
-        return dataStructure.toCSV(f);
-
-    }
 
     /**
      * Importa filas a una tabla a partir de un archivo CommaSeparatedValues
@@ -303,5 +296,9 @@ public class Table {
 
     public long getSize() {
         return dataStructure.size();
+    }
+
+    public ArrayList<TableRow> getHistoricalRow(TableRow tr) {
+        return dataStructure.getHistoricalRow(tr);
     }
 }

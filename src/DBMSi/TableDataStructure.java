@@ -79,4 +79,6 @@ public abstract class TableDataStructure {
     protected abstract long size();
 
     protected abstract ArrayList<TableRow> getData();
+
+    public abstract ArrayList<TableRow> getHistoricalRow(TableRow tr);
 }

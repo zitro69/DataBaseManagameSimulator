@@ -89,8 +89,8 @@ public class TwoThreeTree extends TableDataStructure{
 
     private Nodo reasignarBV (Nodo hijo, Nodo padre){
         if (padre.getLv().compareTo(index, hijo.getLv()) >= 1) {
-            padre.setBv(padre.getLv());
-            padre.setLv(hijo.getLv());
+            padre.setBv(padre.getLv(), padre.getHlv());
+            padre.setLv(hijo.getLv(), hijo.getHlv());
             padre.setBn(padre.getMn());
             padre.getBn().setFather(padre);
             padre.setMn(hijo.getMn());
@@ -98,7 +98,7 @@ public class TwoThreeTree extends TableDataStructure{
             padre.setLn(hijo.getLn());
             padre.getLn().setFather(padre);
         } else {
-            padre.setBv(hijo.getLv());
+            padre.setBv(hijo.getLv(), hijo.getHlv());
             padre.setBn(hijo.getMn());
             padre.getBn().setFather(padre);
             padre.setMn(hijo.getLn());
@@ -154,7 +154,7 @@ public class TwoThreeTree extends TableDataStructure{
         auxpadre.copy(padre);
         if (hijo.getLv().compareTo(index,auxpadre.getBv()) >= 1){
             next = new Nodo (auxpadre.getBv(), auxpadre.getFather());
-            auxpadre.setBv(null);
+            auxpadre.setBv(null, new ArrayList<>());
             hijo.setFather(next);
             auxpadre.setFather(next);
             next.setLn(auxpadre);
@@ -162,18 +162,18 @@ public class TwoThreeTree extends TableDataStructure{
         } else {
             if (hijo.getLv().compareTo(index, auxpadre.getLv()) >= 1){
                 next = new Nodo (hijo.getLv(), auxpadre.getFather());
-                hijo.setLv(null);
-                hijo.setLv(auxpadre.getBv());
-                auxpadre.setBv(null);
+                hijo.setLv(null, new ArrayList<>());
+                hijo.setLv(auxpadre.getBv(), auxpadre.getHbv());
+                auxpadre.setBv(null, new ArrayList<>());
                 hijo.setFather(next);
                 auxpadre.setFather(next);
                 next.setLn(auxpadre);
                 next.setMn(hijo);
             } else {
                 next = new Nodo (auxpadre.getLv(), auxpadre.getFather());
-                auxpadre.setLv(null);
-                auxpadre.setLv(auxpadre.getBv());
-                auxpadre.setBv(null);
+                auxpadre.setLv(null, new ArrayList<>());
+                auxpadre.setLv(auxpadre.getBv(), auxpadre.getHbv());
+                auxpadre.setBv(null, new ArrayList<>());
                 hijo.setFather(next);
                 auxpadre.setFather(next);
                 next.setLn(hijo);
@@ -237,6 +237,19 @@ public class TwoThreeTree extends TableDataStructure{
      * @return      true si s'ha actualitzat, false si no s'ha trobat el valor previ de la fila en l'estructura.
      */
     protected boolean update(String field, TableRow row){
+        gotoRaiz();
+        Nodo toupdate = encontrado(raiz, field, row);
+        if (toupdate.getLv().compareTo(field, row) == 0){
+            ArrayList<TableRow> aux = toupdate.getHlv();
+            aux.add(row);
+            toupdate.setLv(row, aux);
+        } else if (toupdate.getBv().compareTo(field,row) == 0){
+            ArrayList<TableRow> aux = toupdate.getHbv();
+            aux.add(row);
+            toupdate.setBv(row, aux);
+        } else {
+            return false;
+        }
         return true;
     }
 
@@ -251,6 +264,10 @@ public class TwoThreeTree extends TableDataStructure{
      */
     protected boolean remove(String field, Object value){
         gotoRaiz();
+        if (raiz.getLv() == null){
+            Screen.error("The table is empty.");
+            return false;
+        }
         TableRow valuetr = new TableRow();
         valuetr.addColumn(field, value);
         Nodo delete = encontrado(raiz, field, valuetr);
@@ -259,12 +276,17 @@ public class TwoThreeTree extends TableDataStructure{
         }
         if (delete.getBv() != null){
             if (delete.getBv().compareTo(field, valuetr) == 0){
-                delete.setBv(null);
+                delete.setBv(null, new ArrayList<>());
             } else {
-                delete.setLv(delete.getBv());
-                delete.setBv(null);
+                delete.setLv(delete.getBv(), delete.getHbv());
+                delete.setBv(null, new ArrayList<>());
             }
         } else {
+            if (delete.getFather() == null){
+                delete.setLv(null, new ArrayList<>());
+                size--;
+                return true;
+            }
             if (delete.getFather().getBv() == null){
                 delete2nodo(delete);
             } else {
@@ -279,56 +301,56 @@ public class TwoThreeTree extends TableDataStructure{
     private void delete3nodo(Nodo delete) {
         if (delete.getFather().getLn() == delete){
             if (delete.getFather().getMn().getBv() != null){
-                delete.setLv(delete.getFather().getLv());
-                delete.getFather().setLv(delete.getFather().getMn().getLv());
-                delete.getFather().getMn().setLv(delete.getFather().getMn().getBv());
-                delete.getFather().getMn().setBv(null);
+                delete.setLv(delete.getFather().getLv(), delete.getFather().getHlv());
+                delete.getFather().setLv(delete.getFather().getMn().getLv(), delete.getFather().getMn().getHlv());
+                delete.getFather().getMn().setLv(delete.getFather().getMn().getBv(), delete.getFather().getMn().getHbv());
+                delete.getFather().getMn().setBv(null, new ArrayList<>());
             } else if (delete.getFather().getBn().getBv() != null) {
-                delete.setLv(delete.getFather().getLv());
-                delete.getFather().setLv(delete.getFather().getMn().getLv());
-                delete.getFather().getMn().setLv(delete.getFather().getMn().getBv());
-                delete.getFather().getMn().setBv(delete.getFather().getBv());
-                delete.getFather().setBv(delete.getFather().getBn().getLv());
-                delete.getFather().getBn().setLv(delete.getFather().getBn().getBv());
-                delete.getFather().getBn().setBv(null);
+                delete.setLv(delete.getFather().getLv(), delete.getFather().getHlv());
+                delete.getFather().setLv(delete.getFather().getMn().getLv(), delete.getFather().getMn().getHlv());
+                delete.getFather().getMn().setLv(delete.getFather().getMn().getBv(), delete.getFather().getMn().getHbv());
+                delete.getFather().getMn().setBv(delete.getFather().getBv(), delete.getFather().getHbv());
+                delete.getFather().setBv(delete.getFather().getBn().getLv(), delete.getFather().getBn().getHlv());
+                delete.getFather().getBn().setLv(delete.getFather().getBn().getBv(), delete.getFather().getBn().getHbv());
+                delete.getFather().getBn().setBv(null, new ArrayList<>());
             } else {
-                delete.setLv(delete.getFather().getLv());
-                delete.getFather().setLv(delete.getFather().getMn().getLv());
-                delete.getFather().getMn().setLv(delete.getFather().getBv());
-                delete.getFather().getMn().setBv(delete.getFather().getBn().getLv());
-                delete.getFather().setBv(null);
+                delete.setLv(delete.getFather().getLv(), delete.getFather().getHlv());
+                delete.getFather().setLv(delete.getFather().getMn().getLv(), delete.getFather().getMn().getHlv());
+                delete.getFather().getMn().setLv(delete.getFather().getBv(), delete.getFather().getHbv());
+                delete.getFather().getMn().setBv(delete.getFather().getBn().getLv(), delete.getFather().getBn().getHlv());
+                delete.getFather().setBv(null, new ArrayList<>());
                 delete.getFather().setBn(null);
             }
         } else if (delete.getFather().getMn() == delete){
             if (delete.getFather().getLn().getBv() != null){
-                delete.setLv(delete.getFather().getLv());
-                delete.getFather().setLv(delete.getFather().getLn().getBv());
-                delete.getFather().getLn().setBv(null);
+                delete.setLv(delete.getFather().getLv(), delete.getFather().getHlv());
+                delete.getFather().setLv(delete.getFather().getLn().getBv(), delete.getFather().getLn().getHbv());
+                delete.getFather().getLn().setBv(null, new ArrayList<>());
             } else if (delete.getFather().getBn().getBv() != null) {
-                delete.setLv(delete.getFather().getBv());
-                delete.getFather().setLv(delete.getFather().getBn().getLv());
-                delete.getFather().getBn().setLv(delete.getFather().getBn().getBv());
-                delete.getFather().getBn().setBv(null);
+                delete.setLv(delete.getFather().getBv(), delete.getFather().getHbv());
+                delete.getFather().setLv(delete.getFather().getBn().getLv(), delete.getFather().getBn().getHlv());
+                delete.getFather().getBn().setLv(delete.getFather().getBn().getBv(), delete.getFather().getBn().getHbv());
+                delete.getFather().getBn().setBv(null, new ArrayList<>());
             } else {
-                delete.getFather().getMn().setLv(delete.getFather().getBv());
-                delete.getFather().getMn().setBv(delete.getFather().getBn().getLv());
-                delete.getFather().setBv(null);
+                delete.getFather().getMn().setLv(delete.getFather().getBv(), delete.getFather().getHbv());
+                delete.getFather().getMn().setBv(delete.getFather().getBn().getLv(), delete.getFather().getBn().getHlv());
+                delete.getFather().setBv(null, new ArrayList<>());
                 delete.getFather().setBn(null);
             }
         } else {
             if (delete.getFather().getMn().getBv() != null){
-                delete.setLv(delete.getFather().getBv());
-                delete.getFather().setBv(delete.getFather().getMn().getBv());
-                delete.getFather().getMn().setBv(null);
+                delete.setLv(delete.getFather().getBv(), delete.getFather().getHbv());
+                delete.getFather().setBv(delete.getFather().getMn().getBv(), delete.getFather().getMn().getHbv());
+                delete.getFather().getMn().setBv(null, new ArrayList<>());
             } else if (delete.getFather().getLn().getBv() != null) {
-                delete.setLv(delete.getFather().getBv());
-                delete.getFather().setBv(delete.getFather().getMn().getBv());
-                delete.getFather().getMn().setBv(delete.getFather().getLv());
-                delete.getFather().setLv(delete.getFather().getBn().getBv());
-                delete.getFather().getLn().setBv(null);
+                delete.setLv(delete.getFather().getBv(), delete.getFather().getHbv());
+                delete.getFather().setBv(delete.getFather().getMn().getBv(), delete.getFather().getMn().getHbv());
+                delete.getFather().getMn().setBv(delete.getFather().getLv(), delete.getFather().getHlv());
+                delete.getFather().setLv(delete.getFather().getBn().getBv(), delete.getFather().getBn().getHbv());
+                delete.getFather().getLn().setBv(null, new ArrayList<>());
             } else {
-                delete.getFather().getMn().setBv(delete.getFather().getBv());
-                delete.getFather().setBv(null);
+                delete.getFather().getMn().setBv(delete.getFather().getBv(), delete.getFather().getHbv());
+                delete.getFather().setBv(null, new ArrayList<>());
                 delete.getFather().setBn(null);
             }
 
@@ -338,23 +360,23 @@ public class TwoThreeTree extends TableDataStructure{
     private void delete2nodo(Nodo delete) {
         if (delete.getFather().getLn() == delete){
             if (delete.getFather().getMn().getBv() == null){
-                delete.getFather().setBv(delete.getFather().getMn().getLv());
+                delete.getFather().setBv(delete.getFather().getMn().getLv(), delete.getFather().getMn().getHlv());
                 delete.getFather().deleteSons();
             } else {
-                delete.setLv(delete.getFather().getLv());
-                delete.getFather().setLv(delete.getFather().getMn().getLv());
-                delete.getFather().getMn().setLv(delete.getFather().getMn().getBv());
-                delete.getFather().getMn().setBv(null);
+                delete.setLv(delete.getFather().getLv(), delete.getFather().getHlv());
+                delete.getFather().setLv(delete.getFather().getMn().getLv(), delete.getFather().getMn().getHlv());
+                delete.getFather().getMn().setLv(delete.getFather().getMn().getBv(), delete.getFather().getMn().getHbv());
+                delete.getFather().getMn().setBv(null, new ArrayList<>());
             }
         } else {
             if (delete.getFather().getLn().getBv() == null){
-                delete.getFather().setBv(delete.getFather().getLv());
-                delete.getFather().setLv(delete.getFather().getLn().getLv());
+                delete.getFather().setBv(delete.getFather().getLv(), delete.getFather().getHlv());
+                delete.getFather().setLv(delete.getFather().getLn().getLv(), delete.getFather().getLn().getHlv());
                 delete.getFather().deleteSons();
             } else {
-                delete.setLv(delete.getFather().getLv());
-                delete.getFather().setLv(delete.getFather().getMn().getLv());
-                delete.getFather().getLn().setBv(null);
+                delete.setLv(delete.getFather().getLv(), delete.getFather().getHlv());
+                delete.getFather().setLv(delete.getFather().getMn().getLv(), delete.getFather().getMn().getHlv());
+                delete.getFather().getLn().setBv(null, new ArrayList<>());
             }
         }
     }
@@ -364,21 +386,21 @@ public class TwoThreeTree extends TableDataStructure{
         if (delete.getLv().compareTo(index,valuetr) == 0){
             aux = delete.getLv();
             if (delete.getLn().getBv() != null) {
-                delete.setLv(delete.getLn().getBv());
-                delete.getLn().setBv(aux);
+                delete.setLv(delete.getLn().getBv(), delete.getLn().getHbv());
+                delete.getLn().setBv(aux, delete.getHlv());
             } else {
-                delete.setLv(delete.getLn().getLv());
-                delete.getLn().setLv(aux);
+                delete.setLv(delete.getLn().getLv(), delete.getLn().getHlv());
+                delete.getLn().setLv(aux, delete.getHlv());
             }
             return delete.getLn();
         } else {
             aux = delete.getBv();
             if (delete.getMn().getBv() != null) {
-                delete.setBv(delete.getMn().getBv());
-                delete.getMn().setBv(aux);
+                delete.setBv(delete.getMn().getBv(), delete.getMn().getHbv());
+                delete.getMn().setBv(aux, delete.getHbv());
             } else {
-                delete.setBv(delete.getMn().getLv());
-                delete.getMn().setLv(aux);
+                delete.setBv(delete.getMn().getLv(), delete.getMn().getHlv());
+                delete.getMn().setLv(aux, delete.getHbv());
             }
             return delete.getMn();
         }
@@ -440,6 +462,16 @@ public class TwoThreeTree extends TableDataStructure{
         return data;
     }
 
+    public ArrayList<TableRow> getHistoricalRow (TableRow tr){
+        gotoRaiz();
+        Nodo encontrado = encontrado(raiz, index, tr);
+        if (encontrado.getLv().compareTo(index, tr) == 0){
+            return encontrado.getHlv();
+        } else {
+            return encontrado.getHbv();
+        }
+    }
+
 
     //Nodo de representació del arbol 2-3, clase anidad
     private class Nodo {
@@ -451,6 +483,11 @@ public class TwoThreeTree extends TableDataStructure{
 
         private TableRow lv;
         private TableRow bv;
+
+        //Valores historicos
+
+        private ArrayList<TableRow> hlv;
+        private ArrayList<TableRow> hbv;
 
         //Nodos padres e hijos
 
@@ -469,13 +506,18 @@ public class TwoThreeTree extends TableDataStructure{
             ln = null;
             mn = null;
             bn = null;
+            hlv = new ArrayList<>();
+            hbv = new ArrayList<>();
         }
 
         public Nodo (TableRow littlevalue, Nodo father){
             hadsons = false;
             bv = null;
             this.lv = littlevalue;
+            hlv = new ArrayList<>();
+            hlv.add(lv);
             this.father = father;
+            hbv = new ArrayList<>();
             ln = null;
             mn = null;
             bn = null;
@@ -519,11 +561,15 @@ public class TwoThreeTree extends TableDataStructure{
         public boolean addTableRow(TableRow tr) {
             if (lv == null){
                 lv = tr;
+                hlv.add(tr);
                 return true;
             } else if (bv == null) {
                 if (lv.compareTo(index, tr) <= -1) {
                     bv = tr;
+                    hbv.add(tr);
                 } else {
+                    hbv = hlv;
+                    hlv.add(tr);
                     bv = lv;
                     lv = tr;
                 }
@@ -562,16 +608,18 @@ public class TwoThreeTree extends TableDataStructure{
             return lv;
         }
 
-        public void setLv(TableRow lv) {
+        public void setLv(TableRow lv, ArrayList<TableRow> hlv) {
             this.lv = lv;
+            this.hlv = hlv;
         }
 
         public TableRow getBv() {
             return bv;
         }
 
-        public void setBv(TableRow bv) {
+        public void setBv(TableRow bv, ArrayList<TableRow> hbv) {
             this.bv = bv;
+            this.hbv = hbv;
         }
 
         public Nodo getFather() {
@@ -620,6 +668,14 @@ public class TwoThreeTree extends TableDataStructure{
             mn = null;
             bn = null;
             hadsons = false;
+        }
+
+        public ArrayList<TableRow> getHlv() {
+            return hlv;
+        }
+
+        public ArrayList<TableRow> getHbv() {
+            return hbv;
         }
     }
 }

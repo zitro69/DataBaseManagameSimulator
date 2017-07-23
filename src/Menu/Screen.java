@@ -160,4 +160,12 @@ public interface Screen {
     static void numberRows(Table table) {
         System.out.println("\t\nNumber of rows in the table: " + table.getSize() + "\n");
     }
+
+    static void modify(String s) {
+        System.out.println("Do you want to modify the column \'" + s + "\'? [Y/N]" );
+    }
+
+    static void rowModified(Table t) {
+        System.out.println("Row modified. Updating table " + t.getName() + " with the changes done.");
+    }
 }

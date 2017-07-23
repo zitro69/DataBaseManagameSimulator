@@ -39,7 +39,7 @@ public class Menu {
         }
         //Introducción de daatos en la estructura
         int value = 0;
-        while (value < 1 || value > 3){
+        while (value < 1 || value > 4){
             Screen.structureOptions();
             try {
                 value = sc.nextInt();
@@ -202,6 +202,7 @@ public class Menu {
                 } catch (InputMismatchException ime){
                     option = 0;
                 }
+                sc.nextLine();
                 switch (option){
                     case 1: //Insert
                         if (!insert(table)) Screen.error("Can't insert the value in the table");
@@ -228,6 +229,7 @@ public class Menu {
                         }
                         break;
                     case 4: //Update row
+                        updateRow(table);
                         break;
                     case 5: //Remove row by index
                         Object o = showRow(table);
@@ -267,6 +269,38 @@ public class Menu {
                 }
             }
         }
+    }
+
+    private void updateRow(Table table) {
+        TableRow tr = new TableRow();
+        Object o = DatabaseInput.readColumnValue(table.getColumnType(table.getIndex()),
+                table.getIndex());
+        tr.addColumn(table.getIndex(), o);
+        for (int i = 0; i < table.getColumnNames().size(); i++) {
+            if (!(table.getIndex().equals(table.getColumnNames().get(i)))){
+                Screen.modify(table.getColumnNames().get(i));
+                boolean next = false;
+                while (!next) {
+                    String comf = sc.nextLine();
+                    comf = comf.toUpperCase();
+                    if (comf.equals("Y")) {
+                        o = DatabaseInput.readColumnValue(table.getColumnType(table.getColumnNames().get(i)),
+                                table.getColumnNames().get(i));
+                        tr.addColumn(table.getColumnNames().get(i), o);
+                        next = true;
+                    } else if (comf.equals("N")) {
+                        Screen.string("Value don't changed.");
+                        next = true;
+                    } else {
+                        Screen.error("Incorrect option.");
+                        Screen.string("Enter a new option [Y/N].");
+                        next = false;
+                    }
+                }
+            }
+        }
+        table.updateRow(tr);
+        Screen.rowModified(table);
     }
 
     /**
@@ -403,8 +437,8 @@ public class Menu {
             BufferedWriter bw = new BufferedWriter(new FileWriter(table.getName()+".csv"));
             for (int j = 0; j < table.getColumnNames().size(); j++){
                 bw.write(table.getColumnNames().get(j) + ",");
-                bw.write("\n");
             }
+            bw.write("\n");
             for (int i = 0; i < data.size(); i++){
                 for (int j = 0; j < table.getColumnNames().size(); j++){
                     bw.write(data.get(i).getContent().get(table.getColumnNames().get(j)) + ",");
@@ -420,6 +454,7 @@ public class Menu {
     public void visualitzeTable(ArrayList<Table> dbmsi) {
         if (dbmsi.size() == 0){
             Screen.error("No tables in the program.");
+            return;
         }
         for (int i = 0; i < dbmsi.size(); i++){
             Screen.nameTable(dbmsi.get(i));
@@ -434,4 +469,54 @@ public class Menu {
             Screen.numberRows(dbmsi.get(i));
         }
     }
+
+    public void visualitzeHistoricalTable(ArrayList<Table> dbmsi) {
+        if (dbmsi.size() == 0){
+            Screen.error("No tables in the program.");
+            return;
+        }
+        showTables(dbmsi);
+        ArrayList<TableRow> values = new ArrayList<>();
+        Screen.string("Select one table:");
+        int table = (sc.nextInt()-1);
+        sc.nextLine();
+        if (table >= 0 && table < dbmsi.size()){
+            Screen.string("What historial row do you want see?\nWrite the index:");
+            String row = sc.nextLine();
+            TableRow tr = new TableRow();
+            tr.addColumn(dbmsi.get(table).getIndex(), DatabaseInput.readValue(dbmsi.get(table).getColumnType(
+                    dbmsi.get(table).getIndex()), row));
+           values = dbmsi.get(table).getHistoricalRow(tr);
+           Screen.guiones();
+           for (int i = 0; i < dbmsi.get(table).getColumnNames().size(); i++){
+               System.out.print(dbmsi.get(table).getColumnNames().get(i) + "\t");
+           }
+           System.out.println();
+           Screen.guiones();
+           for (int i = values.size(); i > 0; i--){
+               for (int j = 0; j < dbmsi.get(table).getColumnNames().size(); j++){
+                   System.out.print(values.get(i).getContent().get(dbmsi.get(table).getColumnNames().get(j)) + "\t");
+               }
+               System.out.println();
+           }
+            Screen.guiones();
+        } else {
+            return;
+        }
+    }
+    private void showTables (ArrayList<Table> dbmsi){
+        Collections.sort(dbmsi, (Table t1, Table t2)->{
+            if (t1.getName().charAt(0) > t2.getName().charAt(0)) return 1;
+            else if (t1.getName().charAt(0) < t2.getName().charAt(0)) return -1;
+            return 0;
+        });
+        for (int i = 0; i < dbmsi.size(); i++){
+            Screen.guiones();
+            Screen.string((i+1) + ". \tTable:" + dbmsi.get(i).getName());
+            Screen.string("\tRows:" +dbmsi.get(i).getRowsNumber());
+            Screen.guiones();
+        }
+    }
+
+
 }
