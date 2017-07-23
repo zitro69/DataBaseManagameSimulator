@@ -1,7 +1,6 @@
 package DBMSi;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  * Tabla de hash de redispersion que implementa el almacenamiento de
@@ -439,6 +438,11 @@ public class HashTable extends TableDataStructure {
 
     private static class UpdateNode{
         ArrayList<TableRow> oldData;
+    }
+
+    @Override
+    protected ArrayList<TableRow> getData() {
+        return null;
     }
 
     public static void main(String[] args) {

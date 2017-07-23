@@ -237,4 +237,11 @@ public class Table {
         return sb.toString();
     }
 
+    public ArrayList<TableRow> getData() {
+        return dataStructure.getData();
+    }
+
+    public long getSize() {
+        return dataStructure.size();
+    }
 }

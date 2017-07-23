@@ -68,6 +68,44 @@ public class DatabaseInput {
         }
     }
 
+    public static Object readValue(DataType dataType, String value) throws NumberFormatException {
+
+        switch (dataType) {
+
+            case BOOLEAN:
+
+                return Boolean.parseBoolean(value); // basura de mètode
+
+            case INT:
+
+                return Integer.parseInt(value);
+
+            case LONG:
+
+                return Long.parseLong(value);
+
+            case FLOAT:
+
+                return Float.parseFloat(value);
+
+            case DOUBLE:
+
+                return Double.parseDouble(value);
+
+            case CHAR:
+
+                String text = value;   // ens curem en salut amb els \n
+                return text.isEmpty()? '\0' : text.charAt(0);
+
+            case TEXT:
+
+                return value;
+
+            default:
+                throw new IllegalArgumentException("This data type is not supported by the System.");
+        }
+    }
+
     /**
      * S'encarrega d'obtenir el nom de la columna que serà índex de la taula.
      *

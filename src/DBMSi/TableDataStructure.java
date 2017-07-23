@@ -1,5 +1,7 @@
 package DBMSi;
 
+import java.util.ArrayList;
+
 /**
  * Created by Albertpv on 15/01/17.
  *
@@ -22,7 +24,6 @@ public abstract class TableDataStructure {
      * @return El nom de l'índex.
      */
     protected String getIndex() {
-
         return index;
     }
 
@@ -32,7 +33,6 @@ public abstract class TableDataStructure {
      * @param field El nom del camp que serà l'índex.
      */
     protected void setIndex(String field) {
-
         this.index = field;
     }
 
@@ -77,4 +77,6 @@ public abstract class TableDataStructure {
      * @return El total d'elements que hi ha guardats en l'estructura.
      */
     protected abstract long size();
+
+    protected abstract ArrayList<TableRow> getData();
 }

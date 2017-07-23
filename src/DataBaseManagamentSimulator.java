@@ -45,6 +45,7 @@ public class DataBaseManagamentSimulator {
                     menu.manageTable(dbmsi);
                     break;
                 case 3: //Visualizar Tablas
+                    menu.visualitzeTable(dbmsi);
                     break;
                 case 4: //Visualizar el historico de la información
                     break;

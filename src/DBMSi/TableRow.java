@@ -94,8 +94,6 @@ public class TableRow {
     //      s'utilitza entre files de la mateixa taula mai hi haurà cap problema.
     public int compareTo(String field, TableRow otherTable) {
 
-        System.out.println("compare of " + this.toString() + "\n"
-            + "with " + otherTable.toString() + " by field: " + field);
         if (!content.containsKey(field))
             throw new UnsupportedOperationException("Aquest objecte no conté el camp [" + field + "].");
 
@@ -104,7 +102,6 @@ public class TableRow {
 
         int res =  getCompareResult(thisObject, other);
 
-        System.out.println("compareTo result: " + res);
         return res;
     }
 

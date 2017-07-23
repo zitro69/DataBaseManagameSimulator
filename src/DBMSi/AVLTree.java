@@ -1,5 +1,7 @@
 package DBMSi;
 
+import java.util.ArrayList;
+
 /**
  * Created by jorti on 20/07/2017.
  */
@@ -415,6 +417,11 @@ public class AVLTree extends TableDataStructure {
         leftChild.height = Math.max(height(leftChild.leftChild), height(leftChild.rightChild)) + 1;
 
         return leftChild;
+    }
+
+    @Override
+    protected ArrayList<TableRow> getData() {
+        return null;
     }
 
     /**

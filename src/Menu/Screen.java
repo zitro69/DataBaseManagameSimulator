@@ -1,15 +1,14 @@
 package Menu;
 
 import DBMSi.Table;
+import DBMSi.TableRow;
 
 /**
  * Created by Javier Ortiz on 19/07/2017.
  * Interfaz para mostrar la información por pantalla.
  */
 public interface Screen {
-    /**
-     * Printa el menú principal del programa por pantalla.
-     */
+
     static void mainMenu(){
         System.out.println("-- Welcome to BDMSi --");
         System.out.println("\t1. Create Table");
@@ -20,24 +19,15 @@ public interface Screen {
         System.out.print("Select an option: ");
     }
 
-    /**
-     * Remarca un error.
-     * @param s     Error a mostrar por pantalla
-     */
     static void error (String s){
         s = s.toUpperCase();
         System.out.println("Error: " + s);
     }
 
-    /**
-     * Muestra una string por pantalla.
-     * @param s     String a mostrar
-     */
     static void string(String s) {
         System.out.println(s);
     }
 
-    //Funciones que muestra cosas por pantalla
 
     static void name() {
         System.out.println("Enter name for the table: ");
@@ -96,5 +86,78 @@ public interface Screen {
         System.out.println("\t6. Import from .csv");
         System.out.println("\t7. Export to .csv");
         System.out.println("\t8. Main menu.");
+    }
+
+    static void repeatValue() {
+        System.out.println("The row is in the table. To update the data, you must select update the row.");
+    }
+
+    static void showTR(TableRow tr) {
+        System.out.println(tr.toString());
+    }
+
+    static void selectMenu(Table t) {
+        System.out.println("---- SELECT FROM " + t.getName() + " ----");
+        System.out.println("1. Stablish Condition");
+        System.out.println("2. Execute select");
+        System.out.println("3. Exit");
+    }
+
+    static void whatColumn() {
+        System.out.println("Column?");
+    }
+
+    static void sureDelete() {
+        System.out.println("Are you sure you want to delete this row? [Y/N]");
+    }
+
+    static void notDeleted() {
+        System.out.println("The row wasn't delete.");
+    }
+
+    static void deleted() {
+        System.out.println("The row deleted.");
+    }
+
+    static void importCSV(Table t) {
+        System.out.println("--- CSV Import for table " + t.getName() + " ---");
+    }
+
+    static void nameCSV () {
+        System.out.println("Enter the name of the CSV file:");
+    }
+
+    static void waitingCSV (){
+        System.out.println("Loading file data...");
+    }
+
+    static void succesfullCSV (Table t, long newrows){
+        System.out.println("Data loaded succefully. A total of " + newrows + " new rows have been inserted" +
+                " into " + t.getName() + ".");
+    }
+
+    static void unsuccesfullCSV (String name){
+        System.out.println("Unsuccesfull data load from " + name + " CSV file.");
+    }
+
+    static void generateCSV(Table table) {
+        System.out.println("Generating CSV file for talbe " + table.getName() + "...");
+    }
+
+    static void unsuccesfullWriteCSV() {
+        System.out.println("Error writting CSV file.");
+    }
+
+    static void nameTable(Table table) {
+        System.out.println("\nTable " + table.getName());
+    }
+
+    static void guiones() {
+        System.out.println("----------------------------------------------");
+
+    }
+
+    static void numberRows(Table table) {
+        System.out.println("\t\nNumber of rows in the table: " + table.getSize() + "\n");
     }
 }

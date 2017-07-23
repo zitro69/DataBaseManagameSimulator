@@ -2,6 +2,7 @@ package Menu;
 
 import DBMSi.*;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
@@ -139,7 +140,7 @@ public class Menu {
             return true;
         } else {
             for (int i = 0; i < dbmsi.size(); i++){
-                if (dbmsi.get(i).getName() == nom) return true;
+                if (dbmsi.get(i).getName().equals(nom)) return true;
             }
         }
         return false;
@@ -167,6 +168,7 @@ public class Menu {
                 for (int i = 0; i < indexs.size(); i++) {
                     if (column.equals(indexs.get(i))) {
                         found = true;
+                        System.out.println(indexs.get(i));
                         t.setIndex(indexs.get(i));
                         break;
                     }
@@ -198,17 +200,58 @@ public class Menu {
                     case 1: //Insert
                         if (!insert(table)) Screen.error("Can't insert the value in the table");
                         break;
-                    case 2: //Show row by index
+                    case 2: //Show by index
+                        showRow(table);
                         break;
                     case 3: //Select
+                        int value = 0;
+                        TableRowRestriction trr = new TableRowRestriction();
+                        while (value != 3){
+                            value = selectMenu(table);
+                            switch (value){
+                                case 1:
+                                    newCondition (trr, table);
+                                    break;
+                                case 2:
+                                    table.toString();
+                                    table.selectRows(trr);
+                                    break;
+                                case 3:
+                                    break;
+                            }
+                        }
                         break;
                     case 4: //Update row
                         break;
                     case 5: //Remove row by index
+                        Object o = showRow(table);
+                        boolean correct = true;
+                        while (correct) {
+                            Screen.sureDelete();
+                            sc.nextLine();
+                            String conf = sc.nextLine();
+                            conf = conf.toUpperCase();
+                            if (conf.equals("Y")) {
+                                correct = false;
+                                table.removeRow(o);
+                                Screen.deleted();
+                            } else if (conf.equals("N")) {
+                                correct = false;
+                                Screen.notDeleted();
+                            } else {
+                                Screen.error("Incorrect value");
+                            }
+                        }
                         break;
-                    case 6: //Import from csv
+                    case 6:
+                        Screen.importCSV(table);
+                        sc.nextLine();
+                        Screen.nameCSV();
+                        String archivo = sc.nextLine();
+                        importData(table, archivo);
                         break;
-                    case 7: //export to csv
+                    case 7:
+                        exportData(table);
                         break;
                     case 8: //Main menu
                         break;
@@ -271,12 +314,118 @@ public class Menu {
         return t.addRow(tr);
     }
 
-
-    public void setInfo(Table t, TableRow tr) {
+    private void setInfo(Table t, TableRow tr) {
         for (int i = 0; i < t.getColumnNames().size(); i++){
             tr.addColumn(t.getColumnNames().get(i), DatabaseInput.readColumnValue(t.getColumnType(
                     t.getColumnNames().get(i)), t.getColumnNames().get(i)
             ));
+        }
+    }
+
+    private Object showRow (Table t){
+        TableRowRestriction trr = new TableRowRestriction();
+        Object o = DatabaseInput.readColumnValue(t.getColumnType(t.getIndex()), t.getIndex());
+        trr.addRestriction(t.getIndex(), o, 2);
+        System.out.println(t.toString());
+        t.selectRows(trr);
+        return o;
+    }
+
+    private int selectMenu (Table t){
+        Screen.selectMenu(t);
+        int value = sc.nextInt();
+        sc.nextLine();
+        return value;
+
+    }
+
+    private void newCondition(TableRowRestriction trr, Table t) {
+        Screen.whatColumn();
+        String column = sc.nextLine();
+        boolean trobat = false;
+        for (int i = 0; i < t.getColumnNames().size(); i++){
+            if (t.getColumnNames().get(i).equals(column)){
+                trobat = true;
+            }
+        }
+        if (trobat){
+            Object a = DatabaseInput.readColumnValue(t.getColumnType(column), column);
+            trr.addRestriction(column, a,DatabaseInput.readRestrictionType(a));
+        } else {
+            Screen.error("The column introducced don't exist.");
+        }
+    }
+
+    private void importData(Table table, String archivo) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(archivo));
+            String columnnames[] = br.readLine().split(",");
+            long contador = 0;
+            for (int i = 0; i < columnnames.length; i++){
+                if (table.getColumnType(columnnames[i]) == null){
+                    br.close();
+                    Screen.unsuccesfullCSV(archivo);
+                    return;
+                }
+            }
+            String tr;
+            while ((tr = br.readLine()) != null){
+                String value[] = tr.split(",");
+                TableRow newvalue = new TableRow();
+                for (int i = 0; i < columnnames.length; i++){
+                    newvalue.addColumn(columnnames[i], DatabaseInput.readValue(table.getColumnType(columnnames[i]),
+                            value[i]));
+                }
+                table.addRow(newvalue);
+                contador++;
+            }
+            Screen.succesfullCSV(table, contador);
+            br.close();
+        } catch (FileNotFoundException fnfe){
+            Screen.unsuccesfullCSV(archivo);
+            Screen.error("The file don't exists.");
+        } catch (IOException ioe){
+            Screen.unsuccesfullCSV(archivo);
+            Screen.error("Invalid data in the file: " + archivo);
+        }
+    }
+
+    private void exportData (Table table){
+        Screen.generateCSV(table);
+        ArrayList<TableRow> data = table.getData();
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter(table.getName()+".csv"));
+            for (int j = 0; j < table.getColumnNames().size(); j++){
+                bw.write(table.getColumnNames().get(j) + ",");
+                bw.write("\n");
+            }
+            for (int i = 0; i < data.size(); i++){
+                for (int j = 0; j < table.getColumnNames().size(); j++){
+                    bw.write(data.get(i).getContent().get(table.getColumnNames().get(j)) + ",");
+                }
+                bw.write("\n");
+            }
+            bw.close();
+        } catch (IOException ioe){
+            Screen.unsuccesfullWriteCSV();
+        }
+    }
+
+    public void visualitzeTable(ArrayList<Table> dbmsi) {
+        if (dbmsi.size() == 0){
+            Screen.error("No tables in the program.");
+        }
+        for (int i = 0; i < dbmsi.size(); i++){
+            Screen.nameTable(dbmsi.get(i));
+            Screen.guiones();
+            Screen.string(String.format("%10s %10s", "Column", "DataType"));
+            Screen.guiones();
+            for (int j = 0; j < dbmsi.get(i).getColumnNames().size(); j++){
+                Screen.string(String.format("%10s %10s", dbmsi.get(i).getColumnNames().get(j),
+                        (dbmsi.get(i).getColumnType(dbmsi.get(i).getColumnNames().get(j)))));
+            }
+            Screen.guiones();
+            Screen.numberRows(dbmsi.get(i));
         }
     }
 }
