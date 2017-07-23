@@ -1,6 +1,7 @@
 package DBMSi;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Tabla de hash de redispersion que implementa el almacenamiento de
@@ -183,8 +184,10 @@ public class HashTable extends TableDataStructure {
 
                 updates.get(position).oldData.add(rows.get(position));
                 rows.set(position, row);
+                hasUpdates = true;
+                updateCount++;
                 return true;
-            }else{
+            }else if(indexType == DataType.TEXT){
 
                 String key = (String) row.getContent().get(field);
                 int position = -1;
@@ -210,6 +213,8 @@ public class HashTable extends TableDataStructure {
                 updates.get(position).oldData.add(rows.get(position));
                 rows.set(position, row);
                 return true;
+            }else{
+                return false;
             }
         }else{
             int position;
@@ -236,7 +241,68 @@ public class HashTable extends TableDataStructure {
         return true;
     }
 
+    /**
+     * @param tr Fila con el valor del índice de la fila cuyo historial de cambios se desea recuperar
+     * @return null si no se encuentra la fila. Coleccion de filas en caso contrario.
+     */
     public  ArrayList<TableRow> getHistoricalRow(TableRow tr){
+
+        ArrayList<TableRow> historic, auxOldData;
+
+        if(size == 0){
+            System.err.println("Tabla \""+table.getName()+"\" vacía. No hay datos históricos para la fila.");
+            return null;
+        }
+
+        int i, position = -1;
+
+        if(indexType == DataType.INT){
+            int key = (int) tr.getContent().get(index);
+
+            for(i = 0; i < capacity; i++){
+                position = hashi(hashVersion, key, i);
+                if(position == -1) return null;
+                if(rows.get(position) == null) continue;
+                if(rows.get(position).getContent().get(index) == tr.getContent().get(index)){
+                    break;
+                }
+            }
+
+            if(i == capacity-1 && rows.get(position).getContent().get(index) != tr.getContent().get(index)) {
+                return null;
+            }
+
+        }else if(indexType == DataType.TEXT){
+            String key = (String) tr.getContent().get(index);
+
+            for(i = 0; i < capacity; i++){
+                position = hashi(hashVersion, key, i);
+                if(position == -1) return null;
+                if(rows.get(position) == null) continue;
+                if(rows.get(position).getContent().get(index).equals(tr.getContent().get(index))){
+                    break;
+                }
+            }
+
+            if(i == capacity-1 && !rows.get(position).getContent().get(index).equals(tr.getContent().get(index))) {
+                return null;
+            }
+        }else{
+            return null;
+        }
+
+        if(position != -1){
+            historic = new ArrayList<>();
+            historic.add(rows.get(position));
+
+            if(updates.get(position).oldData != null && updates.get(position).oldData.size() > 0) {
+                auxOldData = new ArrayList<>(updates.get(position).oldData);
+                Collections.reverse(auxOldData);
+                historic.addAll(auxOldData);
+            }
+            return historic;
+        }
+
         return null;
     }
 
@@ -398,9 +464,10 @@ public class HashTable extends TableDataStructure {
      */
     private int hashi1(String key, int i){
         int hash = 0;
+        int length = key.length();
 
-        for(int j = 0; 2-j >= 0; j++)
-            hash += (int)key.charAt(j) * Math.pow(27, 2-j);
+        for(int j = length-3; j < length; j++)
+            hash += (int)key.charAt(j) * Math.pow(27, j);
 
         return (hash * (int)Math.pow(i, 2))%capacity;
     }
@@ -413,9 +480,10 @@ public class HashTable extends TableDataStructure {
      */
     private int hashi2(String key, int i){
         int hash = 0;
+        int length = key.length();
 
-        for(int j = 0; 2-j >= 0; j++)
-            hash += (int)key.charAt(j) * Math.pow(27, 2-j);
+        for(int j = length-3; j < length; j++)
+            hash += (int)key.charAt(j) * Math.pow(27, j);
 
         return (hash +(i*(8681-(hash/8681))))%capacity;
     }

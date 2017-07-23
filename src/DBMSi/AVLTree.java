@@ -1,6 +1,7 @@
 package DBMSi;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by jorti on 20/07/2017.
@@ -91,6 +92,8 @@ public class AVLTree extends TableDataStructure {
         aux.oldData.add(aux.element);
         aux.element = row;
         aux.indexKey = row.getContent().get(index);
+        hasUpdates = true;
+        updateCount++;
         return true;
     }
 
@@ -448,8 +451,34 @@ public class AVLTree extends TableDataStructure {
         return leftChild;
     }
 
+    /**
+     * @param tr Fila con el valor del índice de la fila cuyo historial de cambios se desea recuperar
+     * @return null si no se encuentra la fila. Coleccion de filas en caso contrario.
+     */
     public  ArrayList<TableRow> getHistoricalRow(TableRow tr){
-        return null;
+
+        ArrayList<TableRow> historic, auxOldData;
+
+        if(size == 0){
+            System.err.println("Tabla \""+table.getName()+"\" vacía. No hay datos históricos para la fila.");
+            return null;
+        }
+
+        AVLNode aux = searchNodeByIndex(root, tr.getContent().get(index));
+
+        if(aux == null){
+            return null;
+        }
+
+        historic = new ArrayList<>();
+        historic.add(aux.element);
+
+        if(aux.oldData != null && aux.oldData.size() > 0) {
+            auxOldData = new ArrayList<>(aux.oldData);
+            Collections.reverse(auxOldData);
+            historic.addAll(auxOldData);
+        }
+        return historic;
     }
 
     /**

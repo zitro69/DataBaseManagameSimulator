@@ -19,6 +19,25 @@ public abstract class TableDataStructure {
      */
     protected String index;
 
+    /**
+     * Indica si se han actualizado filas de esta tabla
+     */
+    protected boolean hasUpdates;
+
+    /**
+     * Numero de actualizaciones que s ehan hecho sobre esta tabla
+     */
+    protected int updateCount;
+
+    /**
+     * @return Numero de actualizaciones que s ehan hecho sobre esta tabla
+     */
+    protected int getUpdateCount(){return updateCount;}
+
+    /**
+     * @return true si se han actualizado filas de esta tabla
+     */
+    protected boolean hasUpdates(){return hasUpdates;}
 
     /**
      * @return El nom de l'índex.
