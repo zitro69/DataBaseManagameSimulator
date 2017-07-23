@@ -1,5 +1,7 @@
 package DBMSi;
 
+import java.io.File;
+
 /**
  * Created by jorti on 20/07/2017.
  */
@@ -75,5 +77,15 @@ public class TwoThreeTree extends TableDataStructure{
      */
     protected long size(){
         return 10;
+    }
+
+    @Override
+    protected boolean toCSV(File outputFile) {
+        return false;
+    }
+
+    @Override
+    protected boolean fromCSV(File inputFile) {
+        return false;
     }
 }

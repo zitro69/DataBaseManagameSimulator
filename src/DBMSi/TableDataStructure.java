@@ -1,5 +1,7 @@
 package DBMSi;
 
+import java.io.File;
+
 /**
  * Created by Albertpv on 15/01/17.
  *
@@ -77,4 +79,18 @@ public abstract class TableDataStructure {
      * @return El total d'elements que hi ha guardats en l'estructura.
      */
     protected abstract long size();
+
+    /**
+     * Exporta las filas de la tabla a un archivo CommaSeparatedValues
+     * @param outputFile Fichero de salida del CSV
+     * @return falso si se ha producido algun error al exportar
+     */
+    protected abstract boolean toCSV(File outputFile);
+
+    /**
+     * Importa filas a una tabla a partir de un archivo CommaSeparatedValues
+     * @param inputFile archivo fuente de filas
+     * @return falso si se ha producido algun error que haya impedido importar los datos
+     */
+    protected abstract boolean fromCSV(File inputFile);
 }

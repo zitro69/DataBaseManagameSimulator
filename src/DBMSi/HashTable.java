@@ -315,17 +315,13 @@ public class HashTable extends TableDataStructure {
         return size;
     }
 
-    /**
-     * Exporta la tabla que impementa esta estructura de datos a CSV
-     * @param outputFile Objeto fichero en el que se quiere guardar el CSV
-     * @return true si se ha podido exportar la tabla con exito
-     */
+    @Override
     public boolean toCSV(File outputFile){
         if(outputFile == null){
             return false;
         }
 
-        if(outputFile.canWrite()){
+        //if(outputFile.canWrite()){
 
             try{
 
@@ -359,23 +355,18 @@ public class HashTable extends TableDataStructure {
                 return false;
             }
             return true;
-        }
+        //}
 
-        return false;
+        //return false;
     }
 
-    /**
-     * Inserta filas a esta tabla a partir de los datos extraidos del fichero CSV.
-     * Ignora todas aquellas filas que no tengan el formato correcto e inserta las demas.
-     * @param inputFile Fichero fuente de datos
-     * @return true si se ha podido llevar a cabo con exito
-     */
+    @Override
     public boolean fromCSV(File inputFile){
         if(inputFile == null){
             return false;
         }
 
-        if(inputFile.canRead()){
+        //if(inputFile.canRead()){
 
             System.out.println("Loading file data...");
 
@@ -392,7 +383,7 @@ public class HashTable extends TableDataStructure {
 
                 while(sc.hasNextLine()){
                     auxLine = sc.nextLine();
-                    values = auxLine.trim().split(",");
+                    values = auxLine.split(",");
 
                     if(values.length != columns.length)
                         continue;
@@ -413,9 +404,9 @@ public class HashTable extends TableDataStructure {
                 return false;
             }
             return true;
-        }
+        //}
 
-        return false;
+        //return false;
     }
 
     /**
@@ -557,37 +548,13 @@ public class HashTable extends TableDataStructure {
 
         people.setIndex("name");
 
-        TableRow row = new TableRow();
-        row.addColumn("id", 123);
-        row.addColumn("name", "alex");
-        row.addColumn("online", true);
+        System.out.println();
+        System.out.println();
 
-        people.addRow(row);
+        people.addColumn("test", DataType.TEXT);
 
-        row = new TableRow();
-        row.addColumn("id", 132);
-        row.addColumn("name", "javi");
-        row.addColumn("online", false);
+        people.importCSV("People.csv");
 
-        people.addRow(row);
         people.selectRows(null);
-
-        System.out.println();
-        System.out.println();
-
-        people.removeRow("javi");
-        people.selectRows(null);
-
-        row = new TableRow();
-        row.addColumn("id", 321);
-        row.addColumn("name", "alex");
-        row.addColumn("online", true);
-
-        System.out.println();
-        System.out.println();
-
-        people.updateRow(row);
-        people.selectRows(null);
-
     }
 }

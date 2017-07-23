@@ -1,5 +1,6 @@
 package DBMSi;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -212,6 +213,27 @@ public class Table {
     public long getRowsNumber() {
 
         return dataStructure.size();
+    }
+
+    /**
+     * Exporta la tabla a un archivo CSV
+     * @return true si se ha exportado correctamente la informacion
+     */
+    public boolean exportCSV(){
+
+        File f = new File(name+".csv");
+        f.setWritable(true);
+        return dataStructure.toCSV(f);
+
+    }
+
+    /**
+     * Importa filas a la tabla desde un archivo CSV
+     * @param fileName Nombre/ruta del archivo
+     * @return true sis e ha importado correctamente la informacion
+     */
+    public boolean importCSV(String fileName){
+        return dataStructure.fromCSV(new File(fileName));
     }
 
     @Override

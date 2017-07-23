@@ -1,5 +1,6 @@
 package DBMSi;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -117,6 +118,16 @@ public class AVLTree extends TableDataStructure {
     @Override
     protected long size(){
         return this.size;
+    }
+
+    @Override
+    protected boolean toCSV(File outputFile) {
+        return false;
+    }
+
+    @Override
+    protected boolean fromCSV(File inputFile) {
+        return false;
     }
 
     /**
@@ -563,5 +574,7 @@ public class AVLTree extends TableDataStructure {
         people.addColumn("test", DataType.TEXT);
 
         people.selectRows(null);
+
+        people.exportCSV();
     }
 }
