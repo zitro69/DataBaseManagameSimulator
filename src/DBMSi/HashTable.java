@@ -139,8 +139,6 @@ public class HashTable extends TableDataStructure {
     @Override
     protected void select(TableRowRestriction restrictions) {
 
-        System.out.println(table.toString());
-
         for(TableRow row : rows){
             if(row != null && (restrictions == null || restrictions.test(row))){
                 System.out.println(row.toString());
@@ -192,12 +190,6 @@ public class HashTable extends TableDataStructure {
                     updates.get(position).oldData = new ArrayList<>();
                 }
 
-                /*for (int j = 0; j < t.getColumnNames().size(); j++){
-                    Object o = null;
-                    if (row.compareTo(t.getColumnNames().get(j), o) == 0){
-                        row.addColumn(t.getColumnNames().get(j), rows.get(position).getContent().get(t.getColumnNames().get(j)));
-                    }
-                }*/
                 updates.get(position).oldData.add(rows.get(position));
                 rows.set(position, row);
                 hasUpdates = true;
@@ -226,12 +218,6 @@ public class HashTable extends TableDataStructure {
                     updates.get(position).oldData = new ArrayList<>();
                 }
 
-                /*for (int j = 0; j < t.getColumnNames().size(); j++){
-                    Object o = null;
-                    if (row.compareTo(t.getColumnNames().get(j), o) == 0){
-                        row.addColumn(t.getColumnNames().get(j), rows.get(position).getContent().get(t.getColumnNames().get(j)));
-                    }
-                }*/
                 updates.get(position).oldData.add(rows.get(position));
                 rows.set(position, row);
                 return true;
@@ -251,13 +237,6 @@ public class HashTable extends TableDataStructure {
                         updates.set(position, new UpdateNode());
                         updates.get(position).oldData = new ArrayList<>();
                     }
-
-                    /*for (int j = 0; j < t.getColumnNames().size(); j++){
-                        Object o = null;
-                        if (row.compareTo(t.getColumnNames().get(j), o) == 0){
-                            row.addColumn(t.getColumnNames().get(j), rows.get(position).getContent().get(t.getColumnNames().get(j)));
-                        }
-                    }*/
 
                     updates.get(position).oldData.add(e);
                     rows.set(position, row);
@@ -324,7 +303,7 @@ public class HashTable extends TableDataStructure {
             historic = new ArrayList<>();
             historic.add(rows.get(position));
 
-            if(updates.get(position) != null && updates.get(position).oldData != null && updates.get(position).oldData.size() > 0) {
+            if(updates.get(position).oldData != null && updates.get(position).oldData.size() > 0) {
                 auxOldData = new ArrayList<>(updates.get(position).oldData);
                 Collections.reverse(auxOldData);
                 historic.addAll(auxOldData);

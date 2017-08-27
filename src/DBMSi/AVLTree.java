@@ -61,8 +61,6 @@ public class AVLTree extends TableDataStructure {
     @Override
     protected void select(TableRowRestriction restrictions){
 
-        System.out.println(table.toString());
-
         selectPreorder(root, restrictions);
 
     }
@@ -104,12 +102,7 @@ public class AVLTree extends TableDataStructure {
             System.err.println("No existe ninguna fila con "+field+"="+row.getContent().get(field));
             return false;
         }
-        for (int i = 0; i < t.getColumnNames().size(); i++){
-            Object o = null;
-            if (row.compareTo(t.getColumnNames().get(i), o) == 0){
-                row.addColumn(t.getColumnNames().get(i), aux.getElement().getContent().get(t.getColumnNames()));
-            }
-        }
+        
         aux.oldData.add(aux.element);
         aux.element = row;
         aux.indexKey = row.getContent().get(index);
