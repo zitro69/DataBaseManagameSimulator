@@ -324,7 +324,7 @@ public class HashTable extends TableDataStructure {
             historic = new ArrayList<>();
             historic.add(rows.get(position));
 
-            if(updates.get(position).oldData != null && updates.get(position).oldData.size() > 0) {
+            if(updates.get(position) != null && updates.get(position).oldData != null && updates.get(position).oldData.size() > 0) {
                 auxOldData = new ArrayList<>(updates.get(position).oldData);
                 Collections.reverse(auxOldData);
                 historic.addAll(auxOldData);
