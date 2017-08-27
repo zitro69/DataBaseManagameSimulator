@@ -60,23 +60,28 @@ public class TableRow {
     private int getCompareResult(Object obj1, Object obj2) {
         int result = 0;
 
-        if (obj1 instanceof Boolean)
-            result = ((Boolean) obj1).compareTo((Boolean) obj2);
+        try {
+            if (obj1 instanceof Boolean)
+                result = ((Boolean) obj1).compareTo((Boolean) obj2);
 
-        else if (obj1 instanceof Integer)
-            result = ((Integer) obj1).compareTo((Integer) obj2);
+            else if (obj1 instanceof Integer)
+                result = ((Integer) obj1).compareTo((Integer) obj2);
 
-        else if (obj1 instanceof Long)
-            result = ((Long) obj1).compareTo((Long) obj2);
+            else if (obj1 instanceof Long)
+                result = ((Long) obj1).compareTo((Long) obj2);
 
-        else if (obj1 instanceof Float)
-            result = ((Float) obj1).compareTo((Float) obj2);
+            else if (obj1 instanceof Float)
+                result = ((Float) obj1).compareTo((Float) obj2);
 
-        else if (obj1 instanceof Character)
-            result = ((Character) obj1).compareTo((Character) obj2);
+            else if (obj1 instanceof Character)
+                result = ((Character) obj1).compareTo((Character) obj2);
 
-        else if (obj1 instanceof String) {
-            result = ((String) obj1).compareTo((String) obj2);
+            else if (obj1 instanceof String) {
+                result = ((String) obj1).compareTo((String) obj2);
+            }
+        } catch (NullPointerException npe){
+            result = 0;
+            return result;
         }
 
         return result;

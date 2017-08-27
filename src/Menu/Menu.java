@@ -282,10 +282,19 @@ public class Menu {
      * @param table     table a la que pertenece la casilla.
      */
     private void updateRow(Table table) {
-        TableRow tr = new TableRow();
         Object o = DatabaseInput.readColumnValue(table.getColumnType(table.getIndex()),
                 table.getIndex());
-        tr.addColumn(table.getIndex(), o);
+        //Buscar objeto
+        TableRowRestriction trr = new TableRowRestriction();
+        trr.addRestriction(table.getIndex(), o, 2);
+        TableRow tr = table.getTableRow(trr);
+        if (tr == null){
+            Screen.error("The ID with this value don't exist");
+            return;
+        }
+        //Crear nuevo tr
+        TableRow updatedtr = new TableRow();
+        updatedtr.addColumn(table.getIndex(), o);
         for (int i = 0; i < table.getColumnNames().size(); i++) {
             if (!(table.getIndex().equals(table.getColumnNames().get(i)))){
                 Screen.modify(table.getColumnNames().get(i));
@@ -296,10 +305,11 @@ public class Menu {
                     if (comf.equals("Y")) {
                         o = DatabaseInput.readColumnValue(table.getColumnType(table.getColumnNames().get(i)),
                                 table.getColumnNames().get(i));
-                        tr.addColumn(table.getColumnNames().get(i), o);
+                        updatedtr.addColumn(table.getColumnNames().get(i), o);
                         next = true;
                     } else if (comf.equals("N")) {
                         Screen.string("Value don't changed.");
+                        updatedtr.addColumn(table.getColumnNames().get(i), tr.getContent().get(table.getColumnNames().get(i)));
                         next = true;
                     } else {
                         Screen.error("Incorrect option.");
@@ -309,7 +319,8 @@ public class Menu {
                 }
             }
         }
-        if (table.updateRow(tr)){
+        //Sustituir antiguo TR
+        if (table.updateRow(updatedtr)){
             Screen.rowModified(table);
         } else {
             Screen.error("The index doesn't exist. We can't update the row.");

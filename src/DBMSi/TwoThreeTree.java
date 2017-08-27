@@ -255,10 +255,39 @@ public class TwoThreeTree extends TableDataStructure{
         }
     }
 
+    @Override
+    protected TableRow getTableRow (TableRowRestriction res){
+        gotoRaiz();
+        return getValue(res, raiz);
+    }
+
+    private TableRow getValue (TableRowRestriction res, Nodo n){
+        if (raiz != null){
+            if (raiz.getLv() != null) {
+                if (res.test(raiz.getLv())) {
+                    return (raiz.getLv());
+                }
+            }
+            if (raiz.getBv() != null) {
+                if (res.test(raiz.getBv())) {
+                    return (raiz.getBv());
+                }
+            }
+            select(res,raiz.getLn());
+            select(res,raiz.getMn());
+            select(res, raiz.getBn());
+        }
+        return null;
+    }
+
 
     @Override
-    protected boolean update(String field, TableRow row){
+    protected boolean update(String field, TableRow row, Table t){
         gotoRaiz();
+        if (size == 0){
+            Screen.error("The table is empty.");
+            return false;
+        }
         Nodo toupdate = encontrado(raiz, field, row);
         if (toupdate == null){
             return false;

@@ -20,7 +20,7 @@ public class HashTable extends TableDataStructure {
      * Capacidad inicial de almacenamiento de la tabla
      * (Numero primo)
      */
-    private static final int INITIAL_CAPACITY = 8689;
+    private static final int INITIAL_CAPACITY = 112358;
 
     /**
      * Capacidad actual de la tabla
@@ -151,7 +151,17 @@ public class HashTable extends TableDataStructure {
     }
 
     @Override
-    protected boolean update(String field, TableRow row) {
+    protected TableRow getTableRow (TableRowRestriction restrictions){
+        for(TableRow row : rows){
+            if(row != null && (restrictions == null || restrictions.test(row))){
+                return row;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    protected boolean update(String field, TableRow row, Table t) {
 
         if(size == 0){
             System.err.println("Tabla \""+table.getName()+"\" vacía. No puede actualizarse ninguna fila.");
@@ -182,6 +192,12 @@ public class HashTable extends TableDataStructure {
                     updates.get(position).oldData = new ArrayList<>();
                 }
 
+                for (int j = 0; j < t.getColumnNames().size(); j++){
+                    Object o = null;
+                    if (row.compareTo(t.getColumnNames().get(i), o) == 0){
+                        row.addColumn(t.getColumnNames().get(i), rows.get(position).getContent().get(t.getColumnNames()));
+                    }
+                }
                 updates.get(position).oldData.add(rows.get(position));
                 rows.set(position, row);
                 hasUpdates = true;
@@ -210,6 +226,12 @@ public class HashTable extends TableDataStructure {
                     updates.get(position).oldData = new ArrayList<>();
                 }
 
+                for (int j = 0; j < t.getColumnNames().size(); j++){
+                    Object o = null;
+                    if (row.compareTo(t.getColumnNames().get(i), o) == 0){
+                        row.addColumn(t.getColumnNames().get(i), rows.get(position).getContent().get(t.getColumnNames()));
+                    }
+                }
                 updates.get(position).oldData.add(rows.get(position));
                 rows.set(position, row);
                 return true;

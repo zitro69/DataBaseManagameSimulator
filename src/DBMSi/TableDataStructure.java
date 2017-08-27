@@ -79,7 +79,7 @@ public abstract class TableDataStructure {
      *
      * @return      true si s'ha actualitzat, false si no s'ha trobat el valor previ de la fila en l'estructura.
      */
-    protected abstract boolean update(String field, TableRow row);
+    protected abstract boolean update(String field, TableRow row, Table t);
 
     /**
      * Si existeix el valor en l'estructura, en la columna especificada, llavors
@@ -96,6 +96,8 @@ public abstract class TableDataStructure {
      * @return El total d'elements que hi ha guardats en l'estructura.
      */
     protected abstract long size();
+
+    protected abstract TableRow getTableRow (TableRowRestriction trr);
 
     /**
      * @return Devuelve todos los datos de la estructura de datos

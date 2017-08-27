@@ -190,7 +190,7 @@ public class Table {
 
     public boolean updateRow(TableRow row) {
 
-        return dataStructure.update(dataStructure.getIndex(), row);
+        return dataStructure.update(dataStructure.getIndex(), row, this);
     }
 
 
@@ -265,6 +265,10 @@ public class Table {
             return false;
         }
         return true;
+    }
+
+    public TableRow getTableRow (TableRowRestriction trr){
+        return dataStructure.getTableRow(trr);
     }
 
     @Override

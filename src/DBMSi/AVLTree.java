@@ -68,7 +68,23 @@ public class AVLTree extends TableDataStructure {
     }
 
     @Override
-    protected boolean update(String field, TableRow row){
+    protected TableRow getTableRow (TableRowRestriction res){
+        return getPreoorder (root, res);
+    }
+
+    private TableRow getPreoorder (AVLNode root, TableRowRestriction res){
+        if(root != null){
+            if(res == null || res.test(root.element)) {
+                return (root.element);
+            }
+            selectPreorder(root.leftChild, res);
+            selectPreorder(root.rightChild, res);
+        }
+        return null;
+    }
+
+    @Override
+    protected boolean update(String field, TableRow row, Table t){
 
         if(size == 0){
             System.err.println("Tabla \""+table.getName()+"\" vacía. No puede actualizarse ninguna fila.");
@@ -88,7 +104,12 @@ public class AVLTree extends TableDataStructure {
             System.err.println("No existe ninguna fila con "+field+"="+row.getContent().get(field));
             return false;
         }
-
+        for (int i = 0; i < t.getColumnNames().size(); i++){
+            Object o = null;
+            if (row.compareTo(t.getColumnNames().get(i), o) == 0){
+                row.addColumn(t.getColumnNames().get(i), aux.getElement().getContent().get(t.getColumnNames()));
+            }
+        }
         aux.oldData.add(aux.element);
         aux.element = row;
         aux.indexKey = row.getContent().get(index);
