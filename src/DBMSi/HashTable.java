@@ -192,12 +192,12 @@ public class HashTable extends TableDataStructure {
                     updates.get(position).oldData = new ArrayList<>();
                 }
 
-                for (int j = 0; j < t.getColumnNames().size(); j++){
+                /*for (int j = 0; j < t.getColumnNames().size(); j++){
                     Object o = null;
-                    if (row.compareTo(t.getColumnNames().get(i), o) == 0){
-                        row.addColumn(t.getColumnNames().get(i), rows.get(position).getContent().get(t.getColumnNames()));
+                    if (row.compareTo(t.getColumnNames().get(j), o) == 0){
+                        row.addColumn(t.getColumnNames().get(j), rows.get(position).getContent().get(t.getColumnNames().get(j)));
                     }
-                }
+                }*/
                 updates.get(position).oldData.add(rows.get(position));
                 rows.set(position, row);
                 hasUpdates = true;
@@ -226,12 +226,12 @@ public class HashTable extends TableDataStructure {
                     updates.get(position).oldData = new ArrayList<>();
                 }
 
-                for (int j = 0; j < t.getColumnNames().size(); j++){
+                /*for (int j = 0; j < t.getColumnNames().size(); j++){
                     Object o = null;
-                    if (row.compareTo(t.getColumnNames().get(i), o) == 0){
-                        row.addColumn(t.getColumnNames().get(i), rows.get(position).getContent().get(t.getColumnNames()));
+                    if (row.compareTo(t.getColumnNames().get(j), o) == 0){
+                        row.addColumn(t.getColumnNames().get(j), rows.get(position).getContent().get(t.getColumnNames().get(j)));
                     }
-                }
+                }*/
                 updates.get(position).oldData.add(rows.get(position));
                 rows.set(position, row);
                 return true;
@@ -251,6 +251,13 @@ public class HashTable extends TableDataStructure {
                         updates.set(position, new UpdateNode());
                         updates.get(position).oldData = new ArrayList<>();
                     }
+
+                    /*for (int j = 0; j < t.getColumnNames().size(); j++){
+                        Object o = null;
+                        if (row.compareTo(t.getColumnNames().get(j), o) == 0){
+                            row.addColumn(t.getColumnNames().get(j), rows.get(position).getContent().get(t.getColumnNames().get(j)));
+                        }
+                    }*/
 
                     updates.get(position).oldData.add(e);
                     rows.set(position, row);
