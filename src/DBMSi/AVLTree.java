@@ -70,6 +70,12 @@ public class AVLTree extends TableDataStructure {
         return getPreoorder (root, res);
     }
 
+    /**
+     * Hace un get de una fila de la tabla con pre-orden
+     * @param root
+     * @param res
+     * @return
+     */
     private TableRow getPreoorder (AVLNode root, TableRowRestriction res){
         if(root != null){
             if(res == null || res.test(root.element)) {
